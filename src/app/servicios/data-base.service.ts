@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Usuarios } from '../models/usuarios';
 import { Articulos } from '../models/articulos.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class DataBaseService {
   formData : Usuarios  
   list : Usuarios[];
   articulo : Articulos[];
-  readonly rootURL = "http://localhost:49945/api"
+  rootURL:string = "http://localhost:49945/api"
 
   // url= {
   //        user:'DESKTOP-M4CABEP',
@@ -33,8 +34,8 @@ export class DataBaseService {
 
 
 
-  // leer():Observable<Usuarios[]>{
-  //    return this.http.get<Usuarios[]>('rootURL'+'/Usuarios')
-  // }
+   leerArticulos():Observable<Articulos[]>{
+      return this.http.get<Articulos[]>(this.rootURL+'/Articulos')
+    }
 }
 
