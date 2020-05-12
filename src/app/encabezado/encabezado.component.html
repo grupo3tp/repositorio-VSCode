@@ -1,0 +1,62 @@
+<div>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#ffffff">
+      <a  class="navbar-brand" href="/">
+        
+        <!-- <img class="img" src="assets/logo2.jpg"  width="80" height="60"> -->
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="navbar-brand" href=""></a>
+              <a class="navbar-brand" routerLink="/nueva-acta">Nueva Acta</a>
+            </li>
+            
+            <li class="nav-item dropdown" dropdown>
+              <a class="navbar-brand dropdown-toggle" routerLink="#navbarNavAltMarkup" dropdownToggle id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                ABM
+              </a>
+              <div class="dropdown-menu" *dropdownMenu aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" routerLink="/marca">Marcas</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/articulos">Articulos</a> 
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/tipo">Tipo</a> 
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/sector">Sector</a>  
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/equipos">Equipos</a>  
+              </div>   
+            </li>
+
+            <li class="nav-item dropdown" dropdown>
+              <a class="navbar-brand dropdown-toggle" routerLink="#navbarNavAltMarkup" dropdownToggle id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Listados
+              </a>
+              <div class="dropdown-menu" *dropdownMenu aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" routerLink="/por-sector">Por Sector</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/por-articulo">Por Articulo</a>   
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/por-ubicacion">Por Ubicación</a>   
+              </div>
+            </li>
+
+            <li class="nav-item">
+              <a class="navbar-brand" routerLink="/">Compras</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="navbar-brand" href="#">Reservas</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="navbar-brand" routerLink="/">Usuarios</a>
+            </li>
+          </ul>  
+        </div>
+        <button class="btn">Cerrar Sesión</button>
+    </nav>
+</div>

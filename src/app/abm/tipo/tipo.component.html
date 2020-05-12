@@ -1,0 +1,29 @@
+<body>
+    <div class="container mt-5">    
+        <h1>Tipo</h1>
+        <div class="row justify-content-center">
+            <div class="col-sm-9" *ngIf="!esAgregar">  
+                <select name="" id=""  class="form-control">
+                    <option value="">El tipo viene de base de dato</option>
+                </select>
+            </div>
+            <div class="col-sm-9" *ngIf="esAgregar">
+                <input type="text" class="form-control" placeholder="Agregar Tipo....">
+            </div> 
+        </div>      
+    </div>
+    <div class="container mt-5"> 
+        <div class="row justify-content-center">
+            <div class="col-sm-4">
+                <button *ngIf="!esAgregar" class="btn btn-primary" (click)='agregarMarca()'>AgregarTipo</button>
+                <button *ngIf="esAgregar" class="btn btn-primary" (click)='agregar()'>Agregar</button>
+            </div>
+            <div class="col-sm-4">
+                <button *ngIf="!esAgregar" (click)="modificar()" class="btn btn-primary">Modificar</button>  
+            </div>
+            <div class="col-auto"></div>
+                <button *ngIf="!esAgregar" (click)="eliminar()" class="btn btn-danger">Eliminar</button>
+                <button *ngIf="esAgregar" (click)="atras()" class="btn btn-danger">Atras</button>
+        </div>
+    </div>
+</body>

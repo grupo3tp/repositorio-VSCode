@@ -1,0 +1,133 @@
+<body>
+    <div  class="container mt-5">
+        <div class="imagen">
+            
+            <h1 class='text-center'>Acta de entrega</h1>    
+            
+        </div>       
+    
+        <div class="row mt-3">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="">Fecha:</label>
+                    <input type="datetime" disabled class="form-control" [ngModel]="fechaActual | date: 'dd/MM/yyyy'" >
+                </div>
+            </div>
+    
+            <div class="col-sm-2"> </div>
+    
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="">Transporte:</label>
+                    <select name="" id=""  class="form-control">
+                        <option value="">viene de base de datos</option>       
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+    
+        <div class="row ">
+            <div class="col-sm-1"></div>
+            <div class="form-group col-sm-4">
+                <label for="">Origen:</label>
+                <select name="" id="color"  class="form-control">
+                    <option value="">Deposito</option>
+                    <option value="">viene de base de datos</option>       
+                </select>
+            </div>
+            <div class="col-sm-2"> </div>
+            <div class="form-group col-sm-4">
+                <label for="">Destino:</label>
+                <select name="" id=""  class="form-control">
+                    <option value="">algun lugar del mundo</option>
+                    <option value="">viene de base de datos</option>       
+                </select>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+
+        <div class="row justify-content-center">
+            <form (submit)="addContacto(contacto)" class="col-2"  >           
+                <div class="form-group">
+                    <label for="">Contacto:  </label>
+                    <input type="text" class="form-control" #contacto>
+                </div>
+            </form>
+            
+            <div class="form-group col-8">
+                <label for="">Observaciones: </label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+            </div>
+        
+        </div>
+    
+        <div class="row justify-content-between">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label for="">Serial:</label>
+                    <select *ngFor="let art of service.articulo"  class="form-control">
+                        <option value="">{{art.id_Art}}</option>
+                        <option value="">viene de base de datos</option>       
+                    </select>
+                </div>
+            </div>
+    
+            <div  class="col-sm-7 mt-2">
+                <div class="form-group">
+                    <label for=""></label>
+                    <input type="text" class="form-control" [ngModel]="textPrueba" disabled>
+                </div>
+            </div>
+            
+            <div class="col-sm-1 ">
+                <label for=""></label>
+                <button (click)="agregar()" class="btn btn-link"><img class="img"  src="https://previews.123rf.com/images/sarahdesign/sarahdesign1509/sarahdesign150900358/44516307-bot%C3%B3n-de-la-cruz-icono-agregar.jpg"></button>     
+            </div>
+            <div class="col-sm-1"></div>
+        </div>  
+    
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-2">
+                <input type="text"  class="form-control">         
+            </div>
+    
+            <div class="col-sm-7">
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-2">
+                <input type="text"  class="form-control">         
+            </div>
+    
+            <div class="col-sm-7">
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+        
+        <div class="row mt-5">
+    
+            <div class="col align-self-start">
+                <button class="btn btn-primary">Confirmar Movimiento</button> 
+            </div>
+    
+            <div class="col align-self-center"></div>
+    
+            
+            <div class="col-auto mr-auto">
+                <button class="btn btn-primary">Descargar PDF</button> 
+            </div>  
+    
+        </div>
+        
+    </div>
+    
+</body>
