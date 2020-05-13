@@ -11,7 +11,7 @@ export class PorUbicacionComponent implements OnInit {
   constructor(public variableInyectada : DataBaseService) { }
 
   ngOnInit(): void {
-    this.variableInyectada.refreshList();
+    
   }
 
 }
