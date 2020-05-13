@@ -6,46 +6,6 @@
         <h3>Bienvenido, por favor ingrese sus datos</h3>
     </div>
 
-
-
-    <div class="user" *ngFor="let user of variableInyectada.list">
-      <label for="">Origen:</label>
-      <select name="" id="color"  class="form-control">
-          <option value="">{{user.Nombre_Usuario}}</option>
-               
-      </select>
-    </div>
-  
-    
-    <!-- <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">   
-      <div>
-        <label for="">nombres usuarios</label>
-        <input type="text" name="Nombre" #Nombre="ngModel" class="form-control" [(ngModel)]="variableInyectada.formData.Nombre_Usuario">
-      </div>
-      <div>
-        <label for="">usuario</label>
-        <input type="text" name="User" #User="ngModel" class="form-control" [(ngModel)]="variableInyectada.formData.Usuario">
-      </div>
-      <div >
-        <button type="submit" class="btn btn-primary">agregar usuario</button>
-      </div>
-    </form> -->
-
-    <table>
-      <tr *ngFor="let user of variableInyectada.list">
-        <td>[{{user.Id_Usuario}}]{{user.Nombre_Usuario}}</td>
-      </tr>
-
-    </table>
-   
-    
-     <!-- <div  *ngFor="let user of variableInyectada.list">
-       <label for="">traeme algo por favor</label>
-      <select  name="" id="color"  class="form-control">
-          <option value="">{{user.Nombre_Usuario}}</option>     
-      </select>
-   </div> -->
-      
     <form [formGroup]='formularioLogin' autocomplete="off">
       <div class="row">
         <div class="col-sm-3"></div>
@@ -74,7 +34,7 @@
       </form>
 
       <div *ngIf="!datosCorrectos" class="alert alert-warning" role="alert">
-       {{textoError }}
+       {{textoError}}
       </div>
 
    
