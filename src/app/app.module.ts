@@ -19,6 +19,10 @@ import { PorSectorComponent } from './listados/por-sector/por-sector.component';
 import { PorArticuloComponent } from './listados/por-articulo/por-articulo.component';
 import { PorUbicacionComponent } from './listados/por-ubicacion/por-ubicacion.component';
 import { TipoComponent } from './abm/tipo/tipo.component';
+import { HomeComponent } from './home/home.component';
+import { ReservaComponent } from './reserva/reserva.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
+import { ComprasComponent } from './compras/compras.component';
 
 
 @NgModule({
@@ -35,6 +39,10 @@ import { TipoComponent } from './abm/tipo/tipo.component';
     PorArticuloComponent,
     PorUbicacionComponent,
     TipoComponent,
+    HomeComponent,
+    ReservaComponent,
+    UsuariosComponent,
+    ComprasComponent,
     
     
   ],
