@@ -8,14 +8,14 @@
     
         <div class="row mt-3">
             <div class="col-sm-1"></div>
-            <div class="col-sm-4">
+            <div class="col-sm-2">
                 <div class="form-group">
                     <label for="">Fecha:</label>
                     <input type="datetime" disabled class="form-control" [ngModel]="fechaActual | date: 'dd/MM/yyyy'" >
                 </div>
             </div>
     
-            <div class="col-sm-2"> </div>
+            <div class="col-sm-4"> </div>
     
             <div class="col-sm-4">
                 <div class="form-group">
@@ -28,39 +28,38 @@
             <div class="col-sm-1"></div>
         </div>
     
-        <div class="row ">
-            <div class="col-sm-1"></div>
-            <div class="form-group col-sm-4">
+        <div class="row justify-content-center">
+           
+            <div class="form-group col-lg-10">
                 <label for="">Origen:</label>
                 <select name="" id="color"  class="form-control">
                     <option value="">Deposito</option>
                     <option value="">viene de base de datos</option>       
                 </select>
             </div>
-            <div class="col-sm-2"> </div>
-            <div class="form-group col-sm-4">
+           
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="form-group col-lg-10">
                 <label for="">Destino:</label>
                 <select name="" id=""  class="form-control">
                     <option value="">algun lugar del mundo</option>
                     <option value="">viene de base de datos</option>       
                 </select>
             </div>
-            <div class="col-sm-1"></div>
         </div>
 
-        <div class="row justify-content-center">
-            <form (submit)="addContacto(contacto)" class="col-2"  >           
-                <div class="form-group">
+        <div class="row justify-content-center">          
+                <div class="form-group col-2">
                     <label for="">Contacto:  </label>
                     <input type="text" class="form-control" #contacto>
                 </div>
-            </form>
             
             <div class="form-group col-8">
                 <label for="">Observaciones: </label>
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
-            </div>
-        
+            </div>        
         </div>
     
         <div class="row justify-content-between" >

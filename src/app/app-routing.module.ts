@@ -9,10 +9,14 @@ import { PorSectorComponent } from './listados/por-sector/por-sector.component';
 import { PorArticuloComponent } from './listados/por-articulo/por-articulo.component';
 import { PorUbicacionComponent } from './listados/por-ubicacion/por-ubicacion.component';
 import { TipoComponent } from './abm/tipo/tipo.component';
+import { HomeComponent } from './home/home.component';
+import { ReservaComponent } from './reserva/reserva.component';
+import { ComprasComponent } from './compras/compras.component';
 
 
 
 const routes: Routes = [
+  {path: '' , component: HomeComponent},
   {path: 'nueva-acta', component: NuevaActaComponent},
   {path: 'marca', component: MarcasComponent},
   {path: 'articulos',component: ArticulosComponent},
@@ -21,8 +25,10 @@ const routes: Routes = [
   {path: 'tipo', component:TipoComponent},
   {path: 'por-sector' , component:PorSectorComponent},
   {path: 'por-articulo', component:PorArticuloComponent},
-  {path: 'por-ubicacion', component:PorUbicacionComponent}
-
+  {path: 'por-ubicacion', component:PorUbicacionComponent},
+  {path: 'reserva', component: ReservaComponent},
+  {path: 'usuarios', component:ReservaComponent},
+  {path: 'compras', component:ComprasComponent}
 ];
 
 @NgModule({
