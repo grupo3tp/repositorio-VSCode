@@ -23,11 +23,8 @@ import { HomeComponent } from './home/home.component';
 import { ReservaComponent } from './reserva/reserva.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { ComprasComponent } from './compras/compras.component';
-<<<<<<< HEAD
 import { ArticulosRotosComponent } from './listados/articulos-rotos/articulos-rotos.component';
 import { HistorialArticulosComponent } from './historial-articulos/historial-articulos.component';
-=======
->>>>>>> 416d7f301a3ee9d0e85fdf9885d62a6505167e5d
 
 
 @NgModule({
@@ -48,11 +45,8 @@ import { HistorialArticulosComponent } from './historial-articulos/historial-art
     ReservaComponent,
     UsuariosComponent,
     ComprasComponent,
-<<<<<<< HEAD
     ArticulosRotosComponent,
     HistorialArticulosComponent,
-=======
->>>>>>> 416d7f301a3ee9d0e85fdf9885d62a6505167e5d
     
     
   ],
