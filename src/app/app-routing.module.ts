@@ -12,9 +12,12 @@ import { TipoComponent } from './abm/tipo/tipo.component';
 import { HomeComponent } from './home/home.component';
 import { ReservaComponent } from './reserva/reserva.component';
 import { ComprasComponent } from './compras/compras.component';
+<<<<<<< HEAD
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { ArticulosRotosComponent } from './listados/articulos-rotos/articulos-rotos.component';
 import { HistorialArticulosComponent } from './historial-articulos/historial-articulos.component';
+=======
+>>>>>>> 416d7f301a3ee9d0e85fdf9885d62a6505167e5d
 
 
 
@@ -30,10 +33,15 @@ const routes: Routes = [
   {path: 'por-articulo', component:PorArticuloComponent},
   {path: 'por-ubicacion', component:PorUbicacionComponent},
   {path: 'reserva', component: ReservaComponent},
+<<<<<<< HEAD
   {path: 'usuarios', component:UsuariosComponent},
   {path: 'compras', component:ComprasComponent},
   {path: 'rotos', component:ArticulosRotosComponent},
   {path: 'historial',component:HistorialArticulosComponent},
+=======
+  {path: 'usuarios', component:ReservaComponent},
+  {path: 'compras', component:ComprasComponent}
+>>>>>>> 416d7f301a3ee9d0e85fdf9885d62a6505167e5d
 ];
 
 @NgModule({
