@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class ComprasComponent implements OnInit {
 
   constructor() { }
-
+  fechaActual:Date = new Date()
   ngOnInit(): void {
   }
 

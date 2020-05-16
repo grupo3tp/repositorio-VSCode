@@ -12,6 +12,9 @@ import { TipoComponent } from './abm/tipo/tipo.component';
 import { HomeComponent } from './home/home.component';
 import { ReservaComponent } from './reserva/reserva.component';
 import { ComprasComponent } from './compras/compras.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
+import { ArticulosRotosComponent } from './listados/articulos-rotos/articulos-rotos.component';
+import { HistorialArticulosComponent } from './historial-articulos/historial-articulos.component';
 
 
 
@@ -27,8 +30,10 @@ const routes: Routes = [
   {path: 'por-articulo', component:PorArticuloComponent},
   {path: 'por-ubicacion', component:PorUbicacionComponent},
   {path: 'reserva', component: ReservaComponent},
-  {path: 'usuarios', component:ReservaComponent},
-  {path: 'compras', component:ComprasComponent}
+  {path: 'usuarios', component:UsuariosComponent},
+  {path: 'compras', component:ComprasComponent},
+  {path: 'rotos', component:ArticulosRotosComponent},
+  {path: 'historial',component:HistorialArticulosComponent},
 ];
 
 @NgModule({

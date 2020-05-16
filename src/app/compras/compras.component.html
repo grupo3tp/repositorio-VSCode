@@ -1,1 +1,35 @@
-<p>compras works!</p>
+<body>
+    <div class="container mt-5">
+        <div class="form-group row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label for="">Fecha:</label>
+                    <input type="datetime" disabled class="form-control" [ngModel]="fechaActual | date: 'dd/MM/yyyy'" >
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="form-group col-lg-10">
+                <label>Orden de compra:</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="form-group col-lg-10">
+                <label>Proveedor:</label>
+                <select name="" id=""  class="form-control">
+                    <option value="">el proveedor viene de base de datos</option>       
+                </select>
+            </div>
+            <div class="form-group col-lg-10">
+                <label>Observaciones:</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-1"></div>
+            <div class="col-lg-2">
+                <button class="btn btn-primary btn-block">Cargar</button>
+            </div>
+        </div>
+    </div>
+</body>

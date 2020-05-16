@@ -23,6 +23,8 @@ import { HomeComponent } from './home/home.component';
 import { ReservaComponent } from './reserva/reserva.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { ComprasComponent } from './compras/compras.component';
+import { ArticulosRotosComponent } from './listados/articulos-rotos/articulos-rotos.component';
+import { HistorialArticulosComponent } from './historial-articulos/historial-articulos.component';
 
 
 @NgModule({
@@ -43,6 +45,8 @@ import { ComprasComponent } from './compras/compras.component';
     ReservaComponent,
     UsuariosComponent,
     ComprasComponent,
+    ArticulosRotosComponent,
+    HistorialArticulosComponent,
     
     
   ],
