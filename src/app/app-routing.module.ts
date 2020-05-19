@@ -15,6 +15,7 @@ import { ComprasComponent } from './compras/compras.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { ArticulosRotosComponent } from './listados/articulos-rotos/articulos-rotos.component';
 import { HistorialArticulosComponent } from './historial-articulos/historial-articulos.component';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -34,6 +35,7 @@ const routes: Routes = [
   {path: 'compras', component:ComprasComponent},
   {path: 'rotos', component:ArticulosRotosComponent},
   {path: 'historial',component:HistorialArticulosComponent},
+  {path: 'login', component:LoginComponent},
 ];
 
 @NgModule({

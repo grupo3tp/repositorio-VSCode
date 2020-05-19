@@ -60,6 +60,7 @@ import { HistorialArticulosComponent } from './historial-articulos/historial-art
     FormsModule,
     HttpClientModule,
     
+    
   ],
   providers: [
     DataBaseService

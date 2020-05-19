@@ -12,7 +12,9 @@ export class LoginComponent implements OnInit {
   formularioLogin: FormGroup
   datosCorrectos: boolean = true;
   textoError:string="";
-  usuario:Array<Usuarios>=new Array<Usuarios>();
+  usuario: Usuarios = new Usuarios;
+  Dni:string;
+  Pass: string;
   constructor(private creadorFormulario: FormBuilder, public variableInyectada: DataBaseService) { }
 
   ngOnInit(): void {
@@ -23,20 +25,38 @@ export class LoginComponent implements OnInit {
       password: ['',Validators.required]
     });
    
+    this.usuario.login=true
+  }
+
+  dni(dni:string){
+    this.Dni = dni
+  }
+
+  pass(pass:string){
+    this.Pass = pass
   }
 
 
   ingresar(){
     if(this.formularioLogin.valid)
     {
-      this.datosCorrectos=true;
-  
+     
+      if(this.Dni == "11223344" && this.Pass == "123456" ){
+        console.log("usuario y contraseña correctas")
+        
+        this.datosCorrectos=true;
+        this.usuario.login=true;
+      }else
+      {
+        this.datosCorrectos=false;
+        this.variableInyectada.login=false;
+        this.textoError = 'por favor, revise que los datos sean correctos'
+      }
+
     }
-    else
-    {
-      this.datosCorrectos=false;
-      this.textoError = 'por favor, revise que los datos sean correctos'
-    }
+
+   
+
 
     
     
