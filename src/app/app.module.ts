@@ -25,7 +25,7 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { ComprasComponent } from './compras/compras.component';
 import { ArticulosRotosComponent } from './listados/articulos-rotos/articulos-rotos.component';
 import { HistorialArticulosComponent } from './historial-articulos/historial-articulos.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 @NgModule({
   declarations: [
@@ -47,7 +47,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ComprasComponent,
     ArticulosRotosComponent,
     HistorialArticulosComponent,
-    FontAwesomeModule,
+    
     
   ],
   imports: [
@@ -59,6 +59,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    
     
   ],
   providers: [
