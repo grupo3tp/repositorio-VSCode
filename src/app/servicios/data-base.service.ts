@@ -8,10 +8,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DataBaseService {
-
+  login: boolean;
   formData : Usuarios  
   list : Usuarios[];
   articulo : Articulos[];
+  user: Usuarios
   rootURL:string = "http://localhost:49945/api"
 
   // url= {
@@ -32,10 +33,13 @@ export class DataBaseService {
     .toPromise().then(res => this.articulo = res as Articulos[]);
   }
 
+  log(login){
+    this.user.login = login
+  }
 
 
-   leerArticulos():Observable<Articulos[]>{
+  leerArticulos():Observable<Articulos[]>{
       return this.http.get<Articulos[]>(this.rootURL+'/Articulos')
-    }
+  }
 }
 

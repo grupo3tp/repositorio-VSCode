@@ -1,4 +1,9 @@
- <app-encabezado></app-encabezado>  
-
-  <!-- <app-login></app-login>     -->
-<router-outlet></router-outlet>
+ <div *ngIf="log">
+  <app-encabezado></app-encabezado>
+  <router-outlet></router-outlet>
+ </div>
+ 
+  
+  <app-login *ngIf="!log"></app-login> 
+ 
+ 

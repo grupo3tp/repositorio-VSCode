@@ -57,11 +57,14 @@ $secondary-color: #232425;
 $transition-duration: 600ms;
 $transition-delay: $transition-duration;
 
-$sidebar-transition: $transition-duration opacity $transition-delay, $transition-duration visibility $transition-delay;
+$sidebar-transition: $transition-duration opacity 
+$transition-delay, $transition-duration visibility 
+$transition-delay;
 
 .navbar {
   background-color: $secondary-color ;
 }
+
 
 [data-component='sidebar'] {
   
