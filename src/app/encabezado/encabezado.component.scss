@@ -6,13 +6,9 @@ $padding-1: 5px;
 $padding-2: 15px;
 $padding-3: 25px;
 $padding-4: 35px;
-$padding-5: 45px;
 
-$spacer-1: $spacer * 1;
+
 $spacer-2: $spacer * 2;
-$spacer-3: $spacer * 3;
-$spacer-4: $spacer * 5;
-$spacer-5: $spacer * 7;
 
 
 
@@ -35,15 +31,6 @@ $spacer-5: $spacer * 7;
 }
 
 
-.mt-1 {
-	margin-top: $spacer-1 !important;
-}
-
-
-.mx-1 {
-	margin-left: $spacer-1 !important;
-	margin-right: $spacer-1 !important;
-}
 
 
 
@@ -80,12 +67,12 @@ $transition-delay;
     width: 48px;
     top: 40px;
     overflow: hidden;
-    transition: width .5s;
+    transition: width .0s;
     a {
       color: #fff;
     }
     i {
-      font-size: 24px;
+      font-size: 12px;
     }
     span {
       font-size: 14px;
@@ -106,7 +93,7 @@ $transition-delay;
     }
   }
   .first-menu:hover {
-    width: 130px;
+    width: 150px;
   }
 
   .list-group-item {
@@ -117,7 +104,7 @@ $transition-delay;
   //blue menu
   .submenu {
     position: fixed;
-    left: 130px;
+    left: 150px;
     width: 150px;
     top: 40px;
     background-color: $primary-color;
