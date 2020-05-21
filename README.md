@@ -11,9 +11,9 @@ en la terminal CMD vaya a la raiz donde va a estra el proyecto y ejecute el coma
 ## ng new (nombre a gusto) 
 
 cuando pregunte por routing le dan yes
- y el compilador selleccionar [scss].
+ y el compilador seleccionar [scss].
 
-en la carpeta creada agrege los archivos que descargo de aqui y ejecute el VSCode
+## en la carpeta creada agrege los archivos que descargo de aqui, reemplace los que estan y ejecute el VSCode
 
 requiere de paquete de Bootstrap, inicie la terminal y ejecute el comando:
 
