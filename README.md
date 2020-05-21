@@ -1,27 +1,38 @@
-# Grupo3
+# TC Ordenado
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.7.
 
-## Development server
+pasos para instalacion y uso del sistema:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+requiere tener instalado VSCode
 
-## Code scaffolding
+en la terminal CMD vaya a la raiz donde va a estra el proyecto y ejecute el comando
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+ng new (nombre a gusto) 
 
-## Build
+cuando pregunte por routing le dan yes
+ y el compilador selleccionar [scss].
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+en la carpeta creada agrege los archivos que descargo de aqui y ejecute el VSCode
 
-## Running unit tests
+requiere de paquete de Bootstrap, inicie la terminal y ejecute el comando:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+npm install bootstrap
 
-## Running end-to-end tests
+en el archivo  angular.json busque el primer "Styles":[src/styles.scss] y le agregamos:
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+"node_modules/bootstrap/dist/css/bootstrap.min.css"
 
-## Further help
+quedando asi:
+"styles": [
+       "src/styles.scss",
+        "node_modules/bootstrap/dist/css/bootstrap.min.css"
+],
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+luego instalamos el paquete para utilizar los componenetes de bootstrap que tengan javascript:
+
+npm i ngx_bootstrap --save
+
+
+
+
