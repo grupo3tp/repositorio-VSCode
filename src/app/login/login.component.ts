@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
       }else
       {
         this.datosCorrectos=false;
-        this.variableInyectada.login=false;
+        
         this.textoError = 'por favor, revise que los datos sean correctos'
       }
 
