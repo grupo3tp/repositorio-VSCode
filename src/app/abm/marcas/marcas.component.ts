@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Marca } from 'src/app/models/marca';
+import { DataBaseService } from 'src/app/servicios/data-base.service';
 
 @Component({
   selector: 'app-marcas',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MarcasComponent implements OnInit {
   esAgregar:boolean = false;
-  constructor() { }
+  marcas : Array<Marca> = new Array<Marca>();
+  constructor(public service:DataBaseService) { }
 
   ngOnInit(): void {
+    this.service.leerMarca().subscribe((articulosDesdeApi) =>{
+      this.marcas= articulosDesdeApi;
+      
+     })
   }
 
   agregar(){

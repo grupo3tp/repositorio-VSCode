@@ -5,7 +5,8 @@
            
             <div class="col-sm-9" *ngIf="!esAgregar">  
                 <select name="" id=""  class="form-control">
-                    <option value="">la marca viene de base de dato</option>
+                    <option [value]="null">seleccione una marca...</option>
+                    <option *ngFor="let marca of marcas" [value]="marca.id_Marca">{{marca.Detalle}}</option>
                 </select>
             </div>
             <div class="col-sm-9" *ngIf="esAgregar">
