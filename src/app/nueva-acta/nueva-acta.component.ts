@@ -11,7 +11,6 @@ import { Articulos } from '../models/articulos.model';
 })
 export class NuevaActaComponent implements OnInit { 
   fechaActual:Date = new Date()
-  textPrueba:string = "Scanner Kodak ScanMate 1550"
   articulos : Array<Articulos> = new Array<Articulos>(); 
   nombreArticulo : string
   constructor( public service : DataBaseService) { }
