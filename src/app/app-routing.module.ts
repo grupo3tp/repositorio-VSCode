@@ -16,6 +16,7 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { ArticulosRotosComponent } from './listados/articulos-rotos/articulos-rotos.component';
 import { HistorialArticulosComponent } from './historial-articulos/historial-articulos.component';
 import { LoginComponent } from './login/login.component';
+import { Error404Component } from './error404/error404.component';
 
 
 
@@ -36,6 +37,7 @@ const routes: Routes = [
   {path: 'rotos', component:ArticulosRotosComponent},
   {path: 'historial',component:HistorialArticulosComponent},
   {path: 'login', component:LoginComponent},
+  {path: '**', component:Error404Component},
 ];
 
 @NgModule({

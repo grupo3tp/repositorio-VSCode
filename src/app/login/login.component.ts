@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DataBaseService } from '../servicios/data-base.service';
 import { Usuarios } from '../models/usuarios';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
   usuario: Usuarios = new Usuarios;
   Dni:string;
   Pass: string;
-  constructor(private creadorFormulario: FormBuilder, public variableInyectada: DataBaseService) { }
+  constructor(private creadorFormulario: FormBuilder, public variableInyectada: DataBaseService, public router: Router) { }
 
   ngOnInit(): void {
   
@@ -46,6 +47,7 @@ export class LoginComponent implements OnInit {
         
         this.datosCorrectos=true;
         this.usuario.login=true;
+        this.router.navigateByUrl('/');
       }else
       {
         this.datosCorrectos=false;

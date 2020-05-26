@@ -26,9 +26,7 @@ export class MarcasComponent implements OnInit {
     this.formularioMarcas = this.fbGenerador.group({
       Detalle: ['', Validators.required]
     })
-
-
-
+    
     this.service.leerMarca().subscribe((articulosDesdeApi) =>{
       this.marcas= articulosDesdeApi;
       
