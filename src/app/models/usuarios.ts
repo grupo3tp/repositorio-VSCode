@@ -5,7 +5,4 @@ export class Usuarios{
      Usuario:string 
      Pass :string 
      Nivel_Seguridad :number
-     login:boolean = true
-
-
-}
+   }

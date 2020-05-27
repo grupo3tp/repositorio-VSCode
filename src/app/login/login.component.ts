@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DataBaseService } from '../servicios/data-base.service';
 import { Usuarios } from '../models/usuarios';
@@ -12,6 +12,8 @@ import {Router} from '@angular/router'
 export class LoginComponent implements OnInit {
   formularioLogin: FormGroup
   datosCorrectos: boolean = true;
+  @Output()  datos = new EventEmitter();
+ 
   textoError:string="";
   usuario: Usuarios = new Usuarios;
   Dni:string;
@@ -26,7 +28,7 @@ export class LoginComponent implements OnInit {
       password: ['',Validators.required]
     });
    
-    this.usuario.login=true
+  
   }
 
   dni(dni:string){
@@ -46,8 +48,9 @@ export class LoginComponent implements OnInit {
         console.log("usuario y contraseña correctas")
         
         this.datosCorrectos=true;
-        this.usuario.login=true;
-        this.router.navigateByUrl('/');
+        this.datos.emit(this.datosCorrectos);
+      
+        
       }else
       {
         this.datosCorrectos=false;

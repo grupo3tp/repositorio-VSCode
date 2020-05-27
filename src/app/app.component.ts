@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DataBaseService } from './servicios/data-base.service';
 import { Usuarios } from './models/usuarios';
 
@@ -10,20 +10,22 @@ import { Usuarios } from './models/usuarios';
 })
 export class AppComponent {
   title = 'TC Ordenado';
-  log: boolean ;
+  datos:boolean 
   user:Usuarios = new Usuarios
 
 
   constructor(public service:DataBaseService){
     
-    this.log = this.user.login;
+   
     
   
   }
   ngOnInit(): void{
-    
+    this.datos;
   }
- 
+  cambioif(event){
+    this.datos=event
+  }
 
 
 }

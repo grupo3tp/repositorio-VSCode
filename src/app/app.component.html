@@ -1,9 +1,11 @@
- <div *ngIf="log">
-  <app-encabezado></app-encabezado>
+ <div *ngIf="datos; else showLogin">
+  <app-encabezado (cambio)="cambioif($event)"></app-encabezado>
   <router-outlet></router-outlet>
  </div>
  
+  <ng-template #showLogin>
+    <app-login (datos)="cambioif($event)"></app-login> 
+  </ng-template>
   
-  <app-login *ngIf="!log"></app-login> 
  
  
