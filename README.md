@@ -33,6 +33,12 @@ luego instalamos el paquete para utilizar los componenetes de bootstrap que teng
 
 ## npm i ngx_bootstrap --save
 
+para cargar los cookies
+
+##  npm install ngx-cookie-service --save
+
+
+
 
 
 
