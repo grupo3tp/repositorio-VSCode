@@ -34,7 +34,7 @@ const routes: Routes = [
   {path: 'reserva', component: ReservaComponent},
   {path: 'usuarios', component:UsuariosComponent},
   {path: 'compras', component:ComprasComponent},
-  {path: 'rotos', component:ArticulosRotosComponent},
+  {path: 'articulos-rotos', component:ArticulosRotosComponent},
   {path: 'historial',component:HistorialArticulosComponent},
   {path: 'login', component:LoginComponent},
   {path: '**', component:Error404Component},
