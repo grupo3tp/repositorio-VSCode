@@ -21,9 +21,11 @@ export class AppComponent {
   
   }
   ngOnInit(): void{
-    
+
+    console.log(this.service.getToken())
     if(this.service.getToken()==true){
       this.datos=true;
+      
     }
     
       

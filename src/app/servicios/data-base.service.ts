@@ -23,7 +23,7 @@ export class DataBaseService {
     this.cookies.set("token", token);
   }
   getToken():boolean {
-    return (this.cookies.get("token") != null);
+    return (this.cookies.check("token"));
   }
   logout() {
     this.cookies.delete('token');
