@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DataBaseService } from '../servicios/data-base.service';
 import { Usuarios } from '../models/usuarios';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-login',
@@ -11,11 +12,13 @@ import { Usuarios } from '../models/usuarios';
 export class LoginComponent implements OnInit {
   formularioLogin: FormGroup
   datosCorrectos: boolean = true;
+  @Output()  datos = new EventEmitter();
+ 
   textoError:string="";
   usuario: Usuarios = new Usuarios;
   Dni:string;
   Pass: string;
-  constructor(private creadorFormulario: FormBuilder, public variableInyectada: DataBaseService) { }
+  constructor(private creadorFormulario: FormBuilder, public variableInyectada: DataBaseService, public router: Router) { }
 
   ngOnInit(): void {
   
@@ -25,7 +28,7 @@ export class LoginComponent implements OnInit {
       password: ['',Validators.required]
     });
    
-    this.usuario.login=true
+  
   }
 
   dni(dni:string){
@@ -45,11 +48,13 @@ export class LoginComponent implements OnInit {
         console.log("usuario y contraseña correctas")
         
         this.datosCorrectos=true;
-        this.usuario.login=true;
+        this.datos.emit(this.datosCorrectos);
+      
+        
       }else
       {
         this.datosCorrectos=false;
-        this.variableInyectada.login=false;
+        
         this.textoError = 'por favor, revise que los datos sean correctos'
       }
 

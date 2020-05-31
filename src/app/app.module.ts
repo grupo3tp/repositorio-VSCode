@@ -25,6 +25,7 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { ComprasComponent } from './compras/compras.component';
 import { ArticulosRotosComponent } from './listados/articulos-rotos/articulos-rotos.component';
 import { HistorialArticulosComponent } from './historial-articulos/historial-articulos.component';
+import { Error404Component } from './error404/error404.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { HistorialArticulosComponent } from './historial-articulos/historial-art
     ComprasComponent,
     ArticulosRotosComponent,
     HistorialArticulosComponent,
+    Error404Component,
     
     
   ],

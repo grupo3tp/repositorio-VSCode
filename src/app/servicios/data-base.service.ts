@@ -1,45 +1,38 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Usuarios } from '../models/usuarios';
 import { Articulos } from '../models/articulos.model';
 import { Observable } from 'rxjs';
+import { Marca } from '../models/marca';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataBaseService {
-  login: boolean;
-  formData : Usuarios  
-  list : Usuarios[];
-  articulo : Articulos[];
-  user: Usuarios
-  rootURL:string = "http://localhost:49945/api"
+ 
+  URL:string = "http://localhost:3300/api"
+  
 
-  // url= {
-  //        user:'DESKTOP-M4CABEP',
-  //        password:'',
-  //        server: 'DESKTOP-M4CABEP\SQLEXPRESS',
-  //        database:'patrimonio',
-  //    };
- // url='DESKTOP-M4CABEP\SQLEXPRESS';
   constructor(private http : HttpClient) { }
 
-  postUsuarios(formData : Usuarios){
-   return this.http.post(this.rootURL+'/Usuarios', formData);
-  }
-
-  refreshList(){
-    this.http.get(this.rootURL+'/Articulos')
-    .toPromise().then(res => this.articulo = res as Articulos[]);
-  }
-
-  log(login){
-    this.user.login = login
-  }
-
-
-  leerArticulos():Observable<Articulos[]>{
-      return this.http.get<Articulos[]>(this.rootURL+'/Articulos')
+  leerArticulos():Observable<Articulos[]>
+  {
+      return this.http.get<Articulos[]>(this.URL+'/articulos')
+  };
+  leerMarca():Observable<Marca[]>
+  {
+    return this.http.get<Marca[]>(this.URL+'/marca')
+  };
+  GuardarMarca(marca:Marca) : Observable<Marca>
+  {
+    return this.http.post<Marca>(this.URL+'/marca', marca)
+  };
+  ActualizarMarca(marca:Marca, id:number)
+  {
+    return this.http.put<Marca>(this.URL+'/marca/'+id, marca);
+  };
+  EliminarMarca(id:number)
+  {
+    return this.http.delete<any>(this.URL+'/marca/'+id)
   }
 }
 

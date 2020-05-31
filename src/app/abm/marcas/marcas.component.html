@@ -3,28 +3,44 @@
         <h1>Marca</h1>
        <div class="row justify-content-center">
            
-            <div class="col-sm-9" *ngIf="!esAgregar">  
-                <select name="" id=""  class="form-control">
-                    <option value="">la marca viene de base de dato</option>
+            <div  class="form-group" class="col-sm-9" *ngIf="!esAgregar">  
+                <select (change)="marcaID($event.target.value)"  name="" id=""  class="form-control">
+                    <option [value]="null">seleccione una marca...</option>
+                    <option *ngFor="let marca of marcas" [value]="marca.id_Marca">{{marca.Detalle}}</option>
                 </select>
             </div>
-            <div class="col-sm-9" *ngIf="esAgregar">
-                <input type="text" class="form-control" placeholder="Agregar Marca....">
-            </div>   
+            <form [formGroup]="formularioMarcas" class="col-sm-9">
+                <div class="form-group" *ngIf="esAgregar">
+                    <input type="text" class="form-control" formControlName="Detalle" placeholder="Agregar Marca....">
+                    <div *ngIf="formularioMarcas.controls['Detalle'].invalid && formularioMarcas.controls['Detalle'].dirty" class="alert alert-danger" role="alert">
+                       <samp *ngIf="formularioMarcas.controls['Detalle'].errors.required"> La marca es requerida!</samp>
+                    </div> 
+                </div> 
+            </form>
+            <form [formGroup]="formularioMarcas" class="col-sm-9">
+                <div class="form-group" *ngIf="esModificar">
+                    <input type="text" class="form-control" [(ngModel)]="nombreMarca" formControlName="Detalle">
+                    <div *ngIf="formularioMarcas.controls['Detalle'].invalid && formularioMarcas.controls['Detalle'].dirty" class="alert alert-danger" role="alert">
+                       <samp *ngIf="formularioMarcas.controls['Detalle'].errors.required"> La marca es requerida!</samp>
+                    </div> 
+                </div> 
+            </form>
        </div>
     </div>
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-sm-4">
-                <button *ngIf="!esAgregar" class="btn btn-primary" (click)='agregarMarca()'>AgregarMarca</button>
-                <button *ngIf="esAgregar" class="btn btn-primary" (click)='agregar()'>Agregar</button>
+                <button *ngIf="!esAgregar && !esModificar" class="btn btn-primary" (click)='agregarMarca()'>AgregarMarca</button>
+                <button *ngIf="esAgregar" class="btn btn-primary" [disabled]="!formularioMarcas.valid" (click)='agregar()'>Agregar</button>
+                <button *ngIf="!esAgregar && esModificar" class="btn btn-primary" [disabled]="!formularioMarcas.valid" (click)='actualizarMarca()'>Actualizar</button>
             </div>
             <div class="col-sm-4">
-                 <button *ngIf="!esAgregar" (click)="modificar()" class="btn btn-primary">Modificar</button>  
+                 <button *ngIf="!esAgregar && !esModificar"  (click)="modificar()" class="btn btn-primary">Modificar</button>  
             </div>
             <div class="col-auto"></div>
-            <button *ngIf="!esAgregar" (click)="eliminar()" class="btn btn-danger">Eliminar</button>
+            <button *ngIf="!esAgregar && !esModificar" [disabled]="!esEliminar" (click)="eliminar()" class="btn btn-danger">Eliminar</button>
             <button *ngIf="esAgregar" (click)="atras()" class="btn btn-danger">Atras</button>
+            <button *ngIf="!esAgregar && esModificar" (click)="atras()" class="btn btn-danger">Atras</button>
             
         </div>
     </div>
