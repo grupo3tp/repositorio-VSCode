@@ -21,7 +21,14 @@ export class AppComponent {
   
   }
   ngOnInit(): void{
-    this.datos;
+
+    console.log(this.service.getToken())
+    if(this.service.getToken()==true){
+      this.datos=true;
+      
+    }
+    
+      
   }
   cambioif(event){
     this.datos=event

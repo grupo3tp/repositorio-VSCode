@@ -15,56 +15,58 @@ export class LoginComponent implements OnInit {
   @Output()  datos = new EventEmitter();
  
   textoError:string="";
-  usuario: Usuarios = new Usuarios;
-  Dni:string;
+  Usuario:string;
   Pass: string;
-  constructor(private creadorFormulario: FormBuilder, public variableInyectada: DataBaseService, public router: Router) { }
+  constructor(private creadorFormulario: FormBuilder, public service: DataBaseService, public router: Router) { }
 
   ngOnInit(): void {
-  
 
     this.formularioLogin=this.creadorFormulario.group({
-      dni: ['',Validators.required],
+      usuario: ['',Validators.required],
       password: ['',Validators.required]
     });
    
+    
   
   }
 
-  dni(dni:string){
-    this.Dni = dni
-  }
 
-  pass(pass:string){
-    this.Pass = pass
-  }
-
-
-  ingresar(){
-    if(this.formularioLogin.valid)
-    {
+  // ingresar(){
+  //   if(this.formularioLogin.valid)
+  //   {
      
-      if(this.Dni == "11223344" && this.Pass == "123456" ){
-        console.log("usuario y contraseña correctas")
+  //     if(this.Usuario == "11223344" && this.Pass == "123456" ){
+  //       console.log("usuario y contraseña correctas")
         
-        this.datosCorrectos=true;
-        this.datos.emit(this.datosCorrectos);
+  //       this.datosCorrectos=true;
+  //       this.datos.emit(this.datosCorrectos);
       
         
-      }else
-      {
-        this.datosCorrectos=false;
+  //     }else
+  //     {
+  //       this.datosCorrectos=false;
         
-        this.textoError = 'por favor, revise que los datos sean correctos'
-      }
+  //       this.textoError = 'por favor, revise que los datos sean correctos'
+  //     }
+  //   } 
+  // }
 
+  login() 
+  {
+    const user = {Usuario: this.Usuario, Pass: this.Pass};
+    this.service.login(user).subscribe( data => {
+      console.log(data);
+      this.service.setToken(data.token);
+      this.datosCorrectos=true;
+      this.datos.emit(this.datosCorrectos);
+      console.log("usuario y contraseña correctas")
+    },
+    error => {
+      console.log(error);
+      this.datosCorrectos=false;
+      this.textoError = 'por favor, revise que los datos sean correctos'
     }
-
-   
-
-
-    
-    
+    );
   }
 
 }
