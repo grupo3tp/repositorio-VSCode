@@ -19,16 +19,6 @@ requiere de paquete de Bootstrap, inicie la terminal y ejecute el comando:
 
 ## npm install bootstrap
 
-en el archivo  angular.json busque el primer "Styles":[src/styles.scss] y le agregamos:
-
-"node_modules/bootstrap/dist/css/bootstrap.min.css"
-
-quedando asi:
-"styles": [
-       "src/styles.scss",
-        "node_modules/bootstrap/dist/css/bootstrap.min.css"
-],
-
 luego instalamos el paquete para utilizar los componenetes de bootstrap que tengan javascript:
 
 ## npm i ngx_bootstrap --save
