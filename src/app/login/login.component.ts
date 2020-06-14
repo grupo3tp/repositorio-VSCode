@@ -55,7 +55,6 @@ export class LoginComponent implements OnInit {
   {
     const user = {Usuario: this.Usuario, Pass: this.Pass};
     this.service.login(user).subscribe( data => {
-      console.log(data);
       this.service.setToken(data.token);
       this.datosCorrectos=true;
       this.datos.emit(this.datosCorrectos);
@@ -64,7 +63,7 @@ export class LoginComponent implements OnInit {
     error => {
       console.log(error);
       this.datosCorrectos=false;
-      this.textoError = 'por favor, revise que los datos sean correctos'
+      this.textoError =error.error.errorMessage
     }
     );
   }
