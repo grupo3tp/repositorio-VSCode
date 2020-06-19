@@ -20,8 +20,9 @@
             <div class="col-sm-4">
                 <div class="form-group">
                     <label for="">Transporte:</label>
-                    <select name="" id=""  class="form-control">
-                        <option value="">viene de base de datos</option>       
+                    <select (change)="transporteID($event.target.value)"  class="form-control">
+                        <option [value]="null">seleccione un Transporte...</option> 
+                        <option *ngFor="let trans of transporte"  value={{trans.Transporta}}>{{trans.Transporta}}</option>       
                     </select>
                 </div>
             </div>
@@ -32,9 +33,9 @@
            
             <div class="form-group col-lg-10">
                 <label for="">Origen:</label>
-                <select name="" id="color"  class="form-control">
-                    <option value="">Deposito</option>
-                    <option value="">viene de base de datos</option>       
+                <select (change)="origenID($event.target.value)"  class="form-control">
+                    <option [value]="null">seleccione un origen</option> 
+                    <option  *ngFor="let sec of sector"  value={{sec.Detalle}}>{{sec.Detalle}}</option>      
                 </select>
             </div>
            
@@ -43,23 +44,25 @@
         <div class="row justify-content-center">
             <div class="form-group col-lg-10">
                 <label for="">Destino:</label>
-                <select name="" id=""  class="form-control">
-                    <option value="">algun lugar del mundo</option>
-                    <option value="">viene de base de datos</option>       
+                <select (change)="destinoID($event.target.value)" class="form-control">
+                    <option [value]="null">seleccione Destino...</option> 
+                    <option *ngFor="let sec of sector" value={{sec.Detalle}}>{{sec.Detalle}}</option>       
                 </select>
             </div>
         </div>
 
-        <div class="row justify-content-center">          
-                <div class="form-group col-2">
-                    <label for="">Contacto:  </label>
-                    <input type="text" class="form-control" #contacto>
-                </div>
+        <div class="row ">
+            <div class="col-1"></div>         
+            <div class="form-group col-2">
+                <label for="">Contacto:  </label>
+                <input (input)="contacto($event.target.value)" type="text" class="form-control">
+            </div>
             
             <div class="form-group col-8">
                 <label for="">Observaciones: </label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
-            </div>        
+                <textarea (input)="Observaciones($event.target.value)" class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+            </div> 
+                   
         </div>
     
         <div class="row justify-content-between" >
@@ -83,31 +86,21 @@
             
             <div class="col-sm-1 ">
                 <label for=""></label>
-                <button (click)="agregar()" class="btn btn-link"><img class="img"  src="https://previews.123rf.com/images/sarahdesign/sarahdesign1509/sarahdesign150900358/44516307-bot%C3%B3n-de-la-cruz-icono-agregar.jpg"></button>     
+                <button (click)="agregar()" class="btn1 btn-link"><i class="fas fa-plus fa-3x"></i></button>     
             </div>
             <div class="col-sm-1"></div>
         </div>  
     
-        <div class="row">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-2">
-                <input type="text"  class="form-control">         
-            </div>
+        <div class="row" *ngFor="let item of artElegidos; let i = index">
+            <div class="col-sm-3"></div>
     
             <div class="col-sm-7">
-                <input type="text" class="form-control">
+                <input  name="art" [ngModel]="artElegidos[i]" class="form-control"disabled>
             </div>
-            <div class="col-sm-2"></div>
-        </div>
-    
-        <div class="row">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-2">
-                <input type="text"  class="form-control">         
-            </div>
-    
-            <div class="col-sm-7">
-                <input type="text" class="form-control">
+
+            <div class="col-sm-1">
+                <label for=""></label>
+                <button (click)="eliminar(i)" class="btn2 btn-link"><i class="fas fa-trash-alt"></i></button>     
             </div>
             <div class="col-sm-1"></div>
         </div>

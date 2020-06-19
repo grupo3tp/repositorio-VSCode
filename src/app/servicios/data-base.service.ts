@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Articulos } from '../models/articulos.model';
 import { Observable } from 'rxjs';
 import { Marca } from '../models/marca';
+import {Transporte} from '../models/transporte';
+import {Sector} from '../models/sector';
 import { CookieService } from "ngx-cookie-service";
 
 @Injectable({
@@ -28,11 +30,14 @@ export class DataBaseService {
   logout() {
     this.cookies.delete('token');
   }
+  //----------fin login
 
   leerArticulos():Observable<Articulos[]>
   {
       return this.http.get<Articulos[]>(this.URL+'/articulos')
   };
+  //----------------fin articulos
+
   leerMarca():Observable<Marca[]>
   {
     return this.http.get<Marca[]>(this.URL+'/marca')
@@ -47,7 +52,33 @@ export class DataBaseService {
   };
   EliminarMarca(id:number)
   {
-    return this.http.delete<any>(this.URL+'/marca/'+id)
+    return this.http.delete<Marca>(this.URL+'/marca/'+id)
   }
+  //------------------ fin marca
+
+  leerSector():Observable<Sector[]>
+  {
+    return this.http.get<[]>(this.URL+'/sector')
+  };
+  GuardarSector(sector:Sector) : Observable<Sector>
+  {
+    return this.http.post<Sector>(this.URL+'/sector', sector)
+  };
+  ActualizarSector(sector:Sector, id:number)
+  {
+    return this.http.put<Sector>(this.URL+'/sector/'+id, sector);
+  };
+  EliminarSector(id:number)
+  {
+    return this.http.delete<Sector>(this.URL+'/sector/'+id)
+  }
+  //-------------- fin sector
+
+  leerTransporte():Observable<Transporte[]>
+  {
+      return this.http.get<Transporte[]>(this.URL+'/transporte')
+  };
+  //----------------fin articulos
+
 }
 
