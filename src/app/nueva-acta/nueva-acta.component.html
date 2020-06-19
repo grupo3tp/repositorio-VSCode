@@ -10,12 +10,19 @@
             <div class="col-sm-1"></div>
             <div class="col-sm-2">
                 <div class="form-group">
+                    <label for="">Acta Nº:</label>
+                    <input type="datetime" disabled class="form-control" >
+                </div>
+            </div>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-2">
+                <div class="form-group">
                     <label for="">Fecha:</label>
                     <input type="datetime" disabled class="form-control" [ngModel]="fechaActual | date: 'dd/MM/yyyy'" >
                 </div>
             </div>
-    
-            <div class="col-sm-4"> </div>
+            <div class="col-sm-1"></div>
+           
     
             <div class="col-sm-4">
                 <div class="form-group">
@@ -108,10 +115,12 @@
         <div class="row mt-5">
     
             <div class="col align-self-start">
-                <button class="btn btn-primary">Confirmar Movimiento</button> 
+                <button (click)="confirmarMov()" class="btn btn-primary">Confirmar Movimiento</button> 
             </div>
     
-            <div class="col align-self-center"></div>
+            <div class="col align-self-center">
+                <button class="btn btn-primary">Nueva Acta</button> 
+            </div>
     
             
             <div class="col-auto mr-auto">

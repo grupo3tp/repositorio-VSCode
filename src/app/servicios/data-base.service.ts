@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Marca } from '../models/marca';
 import {Transporte} from '../models/transporte';
 import {Sector} from '../models/sector';
+import {Usuarios} from '../models/usuarios'
 import { CookieService } from "ngx-cookie-service";
 
 @Injectable({
@@ -20,6 +21,9 @@ export class DataBaseService {
   login(user: any): Observable<any> {
     console.log(user)
     return this.http.post(this.URL+"/autentificacion", user);
+  }
+  logintoken(token: any): Observable<any> {
+    return this.http.post(this.URL+"/authtoken",token)
   }
   setToken(token: string) {
     this.cookies.set("token", token);
@@ -79,6 +83,20 @@ export class DataBaseService {
       return this.http.get<Transporte[]>(this.URL+'/transporte')
   };
   //----------------fin articulos
+
+  leerUsuarios():Observable<Usuarios[]>
+  {
+    return this.http.get<[]>(this.URL+'/usuarios')
+  };
+  GuardarUsuarios(user:Usuarios) : Observable<Usuarios>
+  {
+    return this.http.post<Usuarios>(this.URL+'/usuarios', user)
+  };
+  EliminarUsuarios(id:number)
+  {
+    return this.http.delete<Usuarios>(this.URL+'/usuarios/'+id)
+  }
+  //-------------- fin sector
 
 }
 
