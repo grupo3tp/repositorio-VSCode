@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   formularioLogin: FormGroup
   datosCorrectos: boolean = true;
   @Output()  datos = new EventEmitter();
- 
+  user = new Usuarios();
   textoError:string="";
   Usuario:string;
   Pass: string;
@@ -56,9 +56,11 @@ export class LoginComponent implements OnInit {
     const user = {Usuario: this.Usuario, Pass: this.Pass};
     this.service.login(user).subscribe( data => {
       this.service.setToken(data.token);
+      this.user.token=data.token;
       this.datosCorrectos=true;
       this.datos.emit(this.datosCorrectos);
       console.log("usuario y contraseña correctas")
+      console.log(this.user.token)
     },
     error => {
       console.log(error);
