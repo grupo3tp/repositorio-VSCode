@@ -4,6 +4,7 @@ import { Articulos } from '../models/articulos.model';
 import { Sector } from '../models/sector';
 import { Transporte } from '../models/transporte';
 import Swal from 'sweetalert2';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -12,6 +13,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./nueva-acta.component.scss']
 })
 export class NuevaActaComponent implements OnInit { 
+  formularioActa: FormGroup
   fechaActual : Date = new Date()
   articulos : Array<Articulos> = new Array<Articulos>(); 
   sector : Array<Sector> = new Array<Sector>(); 
@@ -19,10 +21,20 @@ export class NuevaActaComponent implements OnInit {
   nombreArticulo : string
   finArray : boolean;
   artElegidos : Array<string> = new Array<string>();
-  constructor (public service : DataBaseService) {  }
+  articuloEnInput : boolean;
 
-  ngOnInit(): void {   
-    this.leerSector();
+  constructor (public service : DataBaseService, private creadorFormulario: FormBuilder) {   
+    this.formularioActa=this.creadorFormulario.group({
+      transporte: ['',Validators.required],
+      origen: ['',Validators.required],
+      destino: ['',Validators.required],
+      serial: ['',Validators.required],
+    });
+ 
+  } 
+
+  ngOnInit(): void {    
+     this.leerSector();
    }
 
   leerSector(){
@@ -44,25 +56,34 @@ export class NuevaActaComponent implements OnInit {
   }
 
   agregar(){
+
     this.finArray = false;
       for (let index = 0; index <= this.artElegidos.length; index++) {
         if (this.artElegidos[index] == null && !this.finArray ) {
           this.artElegidos[index] = this.nombreArticulo;
           this.finArray = true;
           this.nombreArticulo = "";
+          this.articuloEnInput = false;
         }
       }    
   };// fin agregar()
+
+  nuevaActa(){
+    this.formularioActa.reset()
+    this.artElegidos = new Array()
+  }
 
   eliminar(posicion: number){
     this.artElegidos.splice(posicion,1)
   }// fin eliminar()
   
   articuloID(id:number){
+    console.log(id)
     if(id!=null) {
       for (let index = 0; index < this.articulos.length; index++) {
-        if(this.articulos[index].id_Art==id){
+        if(this.articulos[index].id_Art == id){
           this.nombreArticulo = this.articulos[index].Detalle
+          this.articuloEnInput = true;
         }
       }
     }
