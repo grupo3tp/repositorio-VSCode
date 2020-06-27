@@ -1,4 +1,4 @@
 export class Transporte {
-    IdTransporte : number
+    Id_Transporte : number
     Transporta : string
 }

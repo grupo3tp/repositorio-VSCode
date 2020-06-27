@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Equipo } from '../models/equipo';
 import { Remito } from '../models/remito';
-
+import { NuevaActa } from '../models/nueva-acta';
 
 @Component({
   selector: 'app-nueva-acta',
@@ -18,19 +18,25 @@ export class NuevaActaComponent implements OnInit {
   formularioActa: FormGroup;
   fechaActual : Date = new Date();
   nombreArticulo : string;
-  numeroSerial : number;
+  numeroSerial : string;
   finArray : boolean;
   idArticulo : number;
   idRemito : number;
+  idTransporte : number;
+  idDestino  : number;
+  idOrigen : number;
+  txtContacto : string;
+  txtObs : string;
 
   articulos : Array<Articulos> = new Array<Articulos>(); 
   sector : Array<Sector> = new Array<Sector>(); 
   transporte : Array<Transporte> = new Array<Transporte>();
   equipos : Array<Equipo> = new Array<Equipo>();
   remito : Array<Remito> = new Array<Remito>();
+  actaNueva = new NuevaActa;
 
   artElegidos : Array<string> = new Array<string>();
-  serialElegido : Array<number> = new Array<number>();
+  serialElegido : Array<string> = new Array<string>();
   articuloEnInput : boolean;
 
 
@@ -77,11 +83,10 @@ export class NuevaActaComponent implements OnInit {
   leerRemito(){
     this.service.leerRemito().subscribe((remitosApi) => {
       this.remito = remitosApi;
-      this.leerNumeroDeRemito();
+      this.leerNumeroDeRemito()
     })
   }
   leerNumeroDeRemito(){
-    debugger
     if (!this.remito) {
       this.idRemito = 1
     } else {
@@ -92,12 +97,10 @@ export class NuevaActaComponent implements OnInit {
         this.finArray = true;
       }
     };
-    }
-    
-  }
+    }  
+  };
 
   agregar(){
-
     this.finArray = false;
       for (let index = 0; index <= this.artElegidos.length; index++) {
         if (this.artElegidos[index] == null && !this.finArray ) {
@@ -117,9 +120,10 @@ export class NuevaActaComponent implements OnInit {
   };// fin agregar()
 
   nuevaActa(){
-    this.formularioActa.reset()
+    this.formularioActa.reset();
     this.artElegidos = new Array();
-    this. serialElegido = new Array();
+    this.serialElegido = new Array();
+    //this.leerNumeroDeRemito()
   }
 
   eliminar(posicion: number){
@@ -127,13 +131,12 @@ export class NuevaActaComponent implements OnInit {
   }
   
   articuloID(id:number){
-    debugger
     console.log(id)
     if(id!=null) {
       for (let index = 0; index < this.equipos.length; index++) {
         if (this.equipos[index].serial === id) {
            this.idArticulo = this.equipos[index].id_Art
-          this.numeroSerial = id;
+          this.numeroSerial = id.toString();
         }
       }
       for (let index1 = 0; index1 < this.articulos.length; index1++) {
@@ -147,27 +150,71 @@ export class NuevaActaComponent implements OnInit {
   
   origenID(origen:string){
     if (origen!=null) {
-      console.log(origen)
+      for (let index = 0; index < this.sector.length; index++) {
+        if (this.sector[index].Detalle == origen) {
+          this.idOrigen = this.sector[index].id_Sec;
+          console.log(this.idOrigen)
+        }
+      }
     }  
   }
   destinoID(destino:string){
     if (destino!=null) {
-      console.log(destino)
+      for (let index = 0; index < this.sector.length; index++) {
+        if (this.sector[index].Detalle == destino) {
+          this.idDestino = this.sector[index].id_Sec;
+          console.log(this.idDestino)
+        }
+      }
+    } 
+  };
+  transporteID(transport:string){
+    if (transport!=null) {
+      for (let index = 0; index < this.transporte.length; index++) {
+        if (this.transporte[index].Transporta == transport) {
+         this.idTransporte = this.transporte[index].Id_Transporte
+         console.log(this.idTransporte)
+        }
+      }
     }  
   }
-  transporteID(trans:string){
-    if (trans!=null) {
-      console.log(trans)
-    }  
+  contacto(contact:string){
+    this.txtContacto = contact;
   }
-  contacto(event){
-    console.log(event)
-  }
-  Observaciones(event){
-    console.log(event)
+  Observaciones(obs:string){
+    this.txtObs = obs;
   }
 
   confirmarMov(){
+
+    this.actaNueva.idRemito = this.idRemito;
+    this.actaNueva.Fecha = this.fechaActual; 
+    this.actaNueva.Contacto = this.txtContacto;
+    this.actaNueva.De = this.idOrigen;
+    this.actaNueva.Para = this.idDestino;
+    this.actaNueva.Id_Transporte = this.idTransporte;
+    this.actaNueva.Observaciones = this.txtObs;
+    this.finArray = false;
+    
+    for (let index = 0; index <= this.serialElegido.length; index++) {
+      this.actaNueva.serialElegido = this.serialElegido[index]
+      if (this.serialElegido[index] == null && !this.finArray) {
+        this.finArray = true;
+        this.actaNueva = new NuevaActa; 
+        location.reload();
+      }
+      else
+      {
+        if (!this.finArray) {
+          this.service.guardarNuevaActa(this.actaNueva).subscribe((marcaRecibida)=>{
+            console.log("se guardo la nueva acta" + marcaRecibida); 
+          })
+        }
+      }
+    }
+
+   
+  
     Swal.fire({
       title: 'Confirma movimento',
       text: "esta accion es irreversible",
@@ -184,8 +231,7 @@ export class NuevaActaComponent implements OnInit {
           'success'
         )
       }
-    })
+    }) 
   }
-
 
 }; //Fin exports class

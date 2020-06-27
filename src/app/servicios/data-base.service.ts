@@ -9,6 +9,7 @@ import {Usuarios} from '../models/usuarios'
 import { CookieService } from "ngx-cookie-service";
 import { Equipo } from '../models/equipo';
 import { Remito } from '../models/remito';
+import { NuevaActa } from '../models/nueva-acta';
 
 @Injectable({
   providedIn: 'root'
@@ -104,9 +105,9 @@ export class DataBaseService {
   {
     return this.http.get<Equipo[]>(this.URL+'/equipos')
   };
-  GuardarEquipos(marca:Equipo) : Observable<Equipo>
+  GuardarEquipos(equipo:Equipo) : Observable<Equipo>
   {
-    return this.http.post<Equipo>(this.URL+'/equipos', marca)
+    return this.http.post<Equipo>(this.URL+'/equipos', equipo)
   };
   ActualizarEquipos(equipo:Equipo, id:number)
   {
@@ -123,6 +124,12 @@ export class DataBaseService {
     return this.http.get<Remito[]>(this.URL+'/remito')
   };
   //---------------- fin remito
+
+  guardarNuevaActa(nueva:NuevaActa):Observable<NuevaActa[]>
+  {
+    return this.http.post<NuevaActa[]>(this.URL+'/nuevaActa',nueva)
+  };
+  //---------------- fin nuevaActa
 
 
 
