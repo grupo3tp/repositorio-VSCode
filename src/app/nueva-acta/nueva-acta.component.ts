@@ -3,7 +3,7 @@ import { DataBaseService } from '../servicios/data-base.service';
 import { Articulos } from '../models/articulos.model';
 import { Sector } from '../models/sector';
 import { Transporte } from '../models/transporte';
-
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -88,6 +88,26 @@ export class NuevaActaComponent implements OnInit {
   }
   Observaciones(event){
     console.log(event)
+  }
+
+  confirmarMov(){
+    Swal.fire({
+      title: 'Confirma movimento',
+      text: "esta accion es irreversible",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirm'
+    }).then((result) => {
+      if (result.value) {
+        Swal.fire(
+          'confirmado',
+          'El acta fue caragada',
+          'success'
+        )
+      }
+    })
   }
 
 
