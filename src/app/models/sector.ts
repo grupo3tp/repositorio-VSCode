@@ -7,5 +7,5 @@ export class Sector {
       StockPropio : number
       Activo : number
       PersonalPropio : number
-      IdUbicacion : number
+      Id_Ubicacion : number
 }
