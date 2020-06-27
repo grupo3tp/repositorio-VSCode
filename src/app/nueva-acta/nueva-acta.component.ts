@@ -4,6 +4,9 @@ import { Articulos } from '../models/articulos.model';
 import { Sector } from '../models/sector';
 import { Transporte } from '../models/transporte';
 import Swal from 'sweetalert2';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Equipo } from '../models/equipo';
+import { Remito } from '../models/remito';
 
 
 @Component({
@@ -12,16 +15,37 @@ import Swal from 'sweetalert2';
   styleUrls: ['./nueva-acta.component.scss']
 })
 export class NuevaActaComponent implements OnInit { 
-  fechaActual : Date = new Date()
+  formularioActa: FormGroup;
+  fechaActual : Date = new Date();
+  nombreArticulo : string;
+  numeroSerial : number;
+  finArray : boolean;
+  idArticulo : number;
+  idRemito : number;
+
   articulos : Array<Articulos> = new Array<Articulos>(); 
   sector : Array<Sector> = new Array<Sector>(); 
   transporte : Array<Transporte> = new Array<Transporte>();
-  nombreArticulo : string
-  finArray : boolean;
+  equipos : Array<Equipo> = new Array<Equipo>();
+  remito : Array<Remito> = new Array<Remito>();
+
   artElegidos : Array<string> = new Array<string>();
-  constructor (public service : DataBaseService) {  }
+  serialElegido : Array<number> = new Array<number>();
+  articuloEnInput : boolean;
+
+
+  constructor (public service : DataBaseService, private creadorFormulario: FormBuilder) {   
+    this.formularioActa=this.creadorFormulario.group({
+      transporte: ['',Validators.required],
+      origen: ['',Validators.required],
+      destino: ['',Validators.required],
+      serial: ['',Validators.required],
+    });
+ 
+  } 
 
   ngOnInit(): void {   
+    this.nuevaActa();
     this.leerSector();
    }
 
@@ -29,6 +53,7 @@ export class NuevaActaComponent implements OnInit {
     this.service.leerSector().subscribe((sectorApi) =>{
       this.sector = sectorApi;
       this.leerArticulo();
+      
     }) 
   };
   leerArticulo(){
@@ -40,30 +65,82 @@ export class NuevaActaComponent implements OnInit {
   leerTrasporte(){
     this.service.leerTransporte().subscribe((trasporteApi) =>{
       this.transporte = trasporteApi;
+      this.leerEquipos();
     })
+  };
+  leerEquipos(){
+    this.service.leerEquipos().subscribe((equiposApi) =>{
+      this.equipos = equiposApi
+      this.leerRemito();
+    })
+  };
+  leerRemito(){
+    this.service.leerRemito().subscribe((remitosApi) => {
+      this.remito = remitosApi;
+      this.leerNumeroDeRemito();
+    })
+  }
+  leerNumeroDeRemito(){
+    debugger
+    if (!this.remito) {
+      this.idRemito = 1
+    } else {
+      this.finArray = false;
+    for (let index = 0; index <= this.remito.length; index++) {
+      if (this.remito[index] == null  && !this.finArray ) {
+        this.idRemito = this.remito[index-1].id_Remito + 1;
+        this.finArray = true;
+      }
+    };
+    }
+    
   }
 
   agregar(){
+
     this.finArray = false;
       for (let index = 0; index <= this.artElegidos.length; index++) {
         if (this.artElegidos[index] == null && !this.finArray ) {
           this.artElegidos[index] = this.nombreArticulo;
           this.finArray = true;
           this.nombreArticulo = "";
+          this.articuloEnInput = false;
+        }
+      }  
+      this.finArray = false;
+      for (let index = 0; index <= this.serialElegido.length; index++) {
+        if (this.serialElegido[index] == null && !this.finArray ) {
+          this.serialElegido[index] = this.numeroSerial;
+          this.finArray = true;
         }
       }    
   };// fin agregar()
 
+  nuevaActa(){
+    this.formularioActa.reset()
+    this.artElegidos = new Array();
+    this. serialElegido = new Array();
+  }
+
   eliminar(posicion: number){
-    this.artElegidos.splice(posicion,1)
-  }// fin eliminar()
+    this.serialElegido.splice(posicion,1)
+  }
   
   articuloID(id:number){
+    debugger
+    console.log(id)
     if(id!=null) {
-      for (let index = 0; index < this.articulos.length; index++) {
-        if(this.articulos[index].id_Art==id){
-          this.nombreArticulo = this.articulos[index].Detalle
+      for (let index = 0; index < this.equipos.length; index++) {
+        if (this.equipos[index].serial === id) {
+           this.idArticulo = this.equipos[index].id_Art
+          this.numeroSerial = id;
         }
+      }
+      for (let index1 = 0; index1 < this.articulos.length; index1++) {
+        if(this.articulos[index1].id_Art === this.idArticulo){
+          this.nombreArticulo = this.articulos[index1].Detalle
+          this.articuloEnInput = true;
+        }   
       }
     }
   }// fin articuloID

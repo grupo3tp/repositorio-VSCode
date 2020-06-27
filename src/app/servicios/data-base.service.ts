@@ -7,6 +7,8 @@ import {Transporte} from '../models/transporte';
 import {Sector} from '../models/sector';
 import {Usuarios} from '../models/usuarios'
 import { CookieService } from "ngx-cookie-service";
+import { Equipo } from '../models/equipo';
+import { Remito } from '../models/remito';
 
 @Injectable({
   providedIn: 'root'
@@ -82,7 +84,7 @@ export class DataBaseService {
   {
       return this.http.get<Transporte[]>(this.URL+'/transporte')
   };
-  //----------------fin articulos
+  //----------------fin trasporte
 
   leerUsuarios():Observable<Usuarios[]>
   {
@@ -97,6 +99,32 @@ export class DataBaseService {
     return this.http.delete<Usuarios>(this.URL+'/usuarios/'+id)
   }
   //-------------- fin sector
+
+  leerEquipos():Observable<Equipo[]>
+  {
+    return this.http.get<Equipo[]>(this.URL+'/equipos')
+  };
+  GuardarEquipos(marca:Equipo) : Observable<Equipo>
+  {
+    return this.http.post<Equipo>(this.URL+'/equipos', marca)
+  };
+  ActualizarEquipos(equipo:Equipo, id:number)
+  {
+    return this.http.put<Equipo>(this.URL+'/equipos/'+id, equipo);
+  };
+  EliminarEquipos(id:number)
+  {
+    return this.http.delete<Equipo>(this.URL+'/equipos/'+id)
+  }
+  //------------------ fin equipos
+
+  leerRemito():Observable<Remito[]>
+  {
+    return this.http.get<Remito[]>(this.URL+'/remito')
+  };
+  //---------------- fin remito
+
+
 
 }
 

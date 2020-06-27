@@ -4,131 +4,132 @@
             
             <h1 class='text-center'>Acta de entrega</h1>    
             
-        </div>       
-    
-        <div class="row mt-3">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-2">
-                <div class="form-group">
-                    <label for="">Acta Nº:</label>
-                    <input type="datetime" disabled class="form-control" >
+        </div>     
+
+        <form [formGroup]='formularioActa'>
+
+            <div class="row mt-3">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="">Acta Nº:</label>
+                        <input  type="text" [ngModel]="idRemito" [ngModelOptions]="{standalone: true}" disabled class="form-control" >
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-1"></div>
-            <div class="col-sm-2">
-                <div class="form-group">
-                    <label for="">Fecha:</label>
-                    <input type="datetime" disabled class="form-control" [ngModel]="fechaActual | date: 'dd/MM/yyyy'" >
+                <div class="col-sm-1"></div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="">Fecha:</label>
+                        <input type="datetime" disabled class="form-control" [ngModel]="fechaActual | date: 'dd/MM/yyyy'" [ngModelOptions]="{standalone: true}" >
+                    </div>
                 </div>
+                <div class="col-sm-1"></div>
+               
+        
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="">Transporte:</label>
+                        <select formControlName="transporte" (change)="transporteID($event.target.value)"  class="form-control">
+                            <option [value]="null">seleccione un Transporte...</option> 
+                            <option *ngFor="let trans of transporte"  value={{trans.Transporta}}>{{trans.Transporta}}</option>       
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-1"></div>
             </div>
-            <div class="col-sm-1"></div>
-           
+        
+            <div class="row justify-content-center">
+               
+                <div class="form-group col-lg-10">
+                    <label for="">Origen:</label>
+                    <select formControlName="origen" (change)="origenID($event.target.value)"  class="form-control">
+                        <option [value]="null">seleccione un origen...</option> 
+                        <option  *ngFor="let sec of sector"  value={{sec.Detalle}}>{{sec.Detalle}}</option>      
+                    </select>
+                </div>
+               
+            </div>
     
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <label for="">Transporte:</label>
-                    <select (change)="transporteID($event.target.value)"  class="form-control">
-                        <option [value]="null">seleccione un Transporte...</option> 
-                        <option *ngFor="let trans of transporte"  value={{trans.Transporta}}>{{trans.Transporta}}</option>       
+            <div class="row justify-content-center">
+                <div class="form-group col-lg-10">
+                    <label for="">Destino:</label>
+                    <select formControlName="destino" (change)="destinoID($event.target.value)" class="form-control">
+                        <option [value]="null">seleccione Destino...</option> 
+                        <option *ngFor="let sec of sector" value={{sec.Detalle}}>{{sec.Detalle}}</option>       
                     </select>
                 </div>
             </div>
-            <div class="col-sm-1"></div>
-        </div>
     
-        <div class="row justify-content-center">
-           
-            <div class="form-group col-lg-10">
-                <label for="">Origen:</label>
-                <select (change)="origenID($event.target.value)"  class="form-control">
-                    <option [value]="null">seleccione un origen</option> 
-                    <option  *ngFor="let sec of sector"  value={{sec.Detalle}}>{{sec.Detalle}}</option>      
-                </select>
-            </div>
-           
-        </div>
-
-        <div class="row justify-content-center">
-            <div class="form-group col-lg-10">
-                <label for="">Destino:</label>
-                <select (change)="destinoID($event.target.value)" class="form-control">
-                    <option [value]="null">seleccione Destino...</option> 
-                    <option *ngFor="let sec of sector" value={{sec.Detalle}}>{{sec.Detalle}}</option>       
-                </select>
-            </div>
-        </div>
-
-        <div class="row ">
-            <div class="col-1"></div>         
-            <div class="form-group col-2">
-                <label for="">Contacto:  </label>
-                <input (input)="contacto($event.target.value)" type="text" class="form-control">
-            </div>
-            
-            <div class="form-group col-8">
-                <label for="">Observaciones: </label>
-                <textarea (input)="Observaciones($event.target.value)" class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
-            </div> 
-                   
-        </div>
-    
-        <div class="row justify-content-between" >
-            <div class="col-sm-1"></div>
-            <div class="col-sm-2">
-                <div class="form-group">
-                    <label  for="">Serial:</label>
-                    <select (change)="articuloID($event.target.value)"  class="form-control">
-                        <option [value]="null">seleccione ID</option>  
-                        <option *ngFor="let articulo of articulos"  [value]="articulo.id_Art">{{articulo.id_Art}}</option>            
-                    </select>
+            <div class="row ">
+                <div class="col-1"></div>         
+                <div class="form-group col-3">
+                    <label for="">Contacto:  </label>
+                    <input (input)="contacto($event.target.value)" type="text" class="form-control">
                 </div>
-             </div>
-    
-            <div  class="col-sm-7 mt-2">
-                <div class="form-group">
+                
+                <div class="form-group col-7">
+                    <label for="">Observaciones: </label>
+                    <textarea (input)="Observaciones($event.target.value)" class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+                </div> 
+                       
+            </div>
+        
+            <div class="row justify-content-between" >
+                <div class="col-sm-1"></div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label  for="">Serial:</label>
+                        <select  formControlName="serial"  (change)="articuloID($event.target.value)"  class="form-control"  >
+                            <option [value]="null">seleccione ID</option>  
+                            <option *ngFor="let equipo of equipos"  [value]="equipo.serial">{{equipo.serial}}</option>            
+                        </select>
+                    </div>
+                 </div>
+        
+                <div  class="col-sm-6 mt-2">
+                    <div class="form-group">
+                        <label for=""></label>
+                        <input  type="text" [ngModel]="nombreArticulo" [ngModelOptions]="{standalone: true}" class="form-control" disabled >
+                    </div>
+                </div>
+                
+                <div class="col-sm-1 ">
                     <label for=""></label>
-                    <input type="text" [(ngModel)]="nombreArticulo" class="form-control"disabled >
+                    <button   (click)="agregar()"  [disabled]="!articuloEnInput" class="btn1 btn-link"><i class="fas fa-plus fa-3x"></i></button>     
                 </div>
-            </div>
-            
-            <div class="col-sm-1 ">
-                <label for=""></label>
-                <button (click)="agregar()" class="btn1 btn-link"><i class="fas fa-plus fa-3x"></i></button>     
-            </div>
-            <div class="col-sm-1"></div>
-        </div>  
-    
-        <div class="row" *ngFor="let item of artElegidos; let i = index">
-            <div class="col-sm-3"></div>
-    
-            <div class="col-sm-7">
-                <input  name="art" [ngModel]="artElegidos[i]" class="form-control"disabled>
-            </div>
-
-            <div class="col-sm-1">
-                <label for=""></label>
-                <button (click)="eliminar(i)" class="btn2 btn-link"><i class="fas fa-trash-alt"></i></button>     
-            </div>
-            <div class="col-sm-1"></div>
-        </div>
-        
-        <div class="row mt-5">
-    
-            <div class="col align-self-start">
-                <button (click)="confirmarMov()" class="btn btn-primary">Confirmar Movimiento</button> 
-            </div>
-    
-            <div class="col align-self-center">
-                <button class="btn btn-primary">Nueva Acta</button> 
-            </div>
-    
-            
-            <div class="col-auto mr-auto">
-                <button class="btn btn-primary">Descargar PDF</button> 
+                <div class="col-sm-1"></div>
             </div>  
-    
-        </div>
         
+            <div class="row" *ngFor="let item of serialElegido; let i = index">
+                <div class="col-sm-4"></div>
+        
+                <div class="col-sm-6" >
+                    <input name="art" [ngModel]="serialElegido[i]" [ngModelOptions]="{standalone: true}" class="form-control"disabled>
+                </div>
+    
+                <div class="col-sm-1">
+                    <label for=""></label>
+                    <button (click)="eliminar(i)" class="btn2 btn-link"><i class="fas fa-trash-alt"></i></button>     
+                </div>
+                <div class="col-sm-1"></div>
+            </div>
+            
+            <div class="row mt-5">
+        
+                <div class="col align-self-start">
+                    <button (click)="nuevaActa()" class="btn btn-primary">Nueva Acta</button> 
+                </div>
+        
+                <div class="col align-self-center"></div>
+        
+                <div class="col-auto mr-auto">
+                    <button (click)="confirmarMov()" [disabled]="!formularioActa.valid" class="btn btn-primary">Confirmar Movimiento</button> 
+                </div>  
+        
+            </div>
+            
+        </form>
+
     </div>
     
 </body>
