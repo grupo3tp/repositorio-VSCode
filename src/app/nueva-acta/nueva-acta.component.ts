@@ -9,6 +9,7 @@ import { Equipo } from '../models/equipo';
 import { Remito } from '../models/remito';
 import { NuevaActa } from '../models/nueva-acta';
 
+
 @Component({
   selector: 'app-nueva-acta',
   templateUrl: './nueva-acta.component.html',
@@ -187,34 +188,6 @@ export class NuevaActaComponent implements OnInit {
 
   confirmarMov(){
 
-    this.actaNueva.idRemito = this.idRemito;
-    this.actaNueva.Fecha = this.fechaActual; 
-    this.actaNueva.Contacto = this.txtContacto;
-    this.actaNueva.De = this.idOrigen;
-    this.actaNueva.Para = this.idDestino;
-    this.actaNueva.Id_Transporte = this.idTransporte;
-    this.actaNueva.Observaciones = this.txtObs;
-    this.finArray = false;
-    
-    for (let index = 0; index <= this.serialElegido.length; index++) {
-      this.actaNueva.serialElegido = this.serialElegido[index]
-      if (this.serialElegido[index] == null && !this.finArray) {
-        this.finArray = true;
-        this.actaNueva = new NuevaActa; 
-        location.reload();
-      }
-      else
-      {
-        if (!this.finArray) {
-          this.service.guardarNuevaActa(this.actaNueva).subscribe((marcaRecibida)=>{
-            console.log("se guardo la nueva acta" + marcaRecibida); 
-          })
-        }
-      }
-    }
-
-   
-  
     Swal.fire({
       title: 'Confirma movimento',
       text: "esta accion es irreversible",
@@ -225,13 +198,60 @@ export class NuevaActaComponent implements OnInit {
       confirmButtonText: 'Confirm'
     }).then((result) => {
       if (result.value) {
-        Swal.fire(
-          'confirmado',
-          'El acta fue caragada',
-          'success'
-        )
+       
+    this.actaNueva.idRemito = this.idRemito;
+    this.actaNueva.Fecha = this.fechaActual; 
+    this.actaNueva.Contacto = this.txtContacto;
+    this.actaNueva.De = this.idOrigen;
+    this.actaNueva.Para = this.idDestino;
+    this.actaNueva.Id_Transporte = this.idTransporte;
+    this.actaNueva.Observaciones = this.txtObs;
+  
+    
+    this.service.guardarNuevaActaRemito(this.actaNueva).subscribe((marcaRecibida)=>{
+      console.log("se guardo la nueva acta" + marcaRecibida); 
+    })
+    this.actaNueva = new NuevaActa; 
+    this.actaNueva.idRemito = this.idRemito;
+   debugger
+    this.finArray = false;
+    for (let index = 0; index < this.serialElegido.length; index++) {
+      this.actaNueva.serialElegido = this.serialElegido[index]
+      // if (this.serialElegido[index] == null && !this.finArray) {
+      //   this.finArray = true;
+      //   this.actaNueva = new NuevaActa; 
+      // }
+      // else
+      {
+        if (!this.finArray) {
+         
+            this.service.guardarNuevaActaNAM(this.actaNueva).subscribe((marcaRecibida)=>{
+              console.log("se guardo la nueva acta" + marcaRecibida); }) 
+            
+          
+        }
       }
-    }) 
-  }
-
+    } 
+        Swal.fire({
+          title: 'confirmado',
+      text: 'El acta fue caragada',
+      icon: 'success',
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Confirm'
+      }).then((result) =>{
+        if(result.value){
+          //this.recargar();
+        }
+      })
+      }
+      
+    })
+    
+    
+    
+  } // fin confirmarMov
+  
+ recargar(){
+  location.reload();
+ }
 }; //Fin exports class

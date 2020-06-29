@@ -125,11 +125,18 @@ export class DataBaseService {
   };
   //---------------- fin remito
 
-  guardarNuevaActa(nueva:NuevaActa):Observable<NuevaActa[]>
+  guardarNuevaActaRemito(nueva:NuevaActa):Observable<NuevaActa[]>
   {
     return this.http.post<NuevaActa[]>(this.URL+'/nuevaActa',nueva)
   };
   //---------------- fin nuevaActa
+  
+  guardarNuevaActaNAM(nueva:NuevaActa):Observable<NuevaActa[]>
+  {
+    return this.http.post<NuevaActa[]>(this.URL+'/NAM',nueva)
+  };
+  //---------------- fin nuevaActaNAM
+  
 
 
 
