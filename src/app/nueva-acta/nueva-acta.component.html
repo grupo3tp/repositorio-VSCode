@@ -31,7 +31,7 @@
                         <label for="">Transporte:</label>
                         <select formControlName="transporte" (change)="transporteID($event.target.value)"  class="form-control">
                             <option [value]="null">seleccione un Transporte...</option> 
-                            <option *ngFor="let trans of transporte"  value={{trans.Transporta}}>{{trans.Transporta}}</option>       
+                            <option *ngFor="let transport of transporte"  value={{transport.Transporta}}>{{transport.Transporta}}</option>       
                         </select>
                     </div>
                 </div>
