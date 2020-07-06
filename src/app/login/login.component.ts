@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   textoError:string="";
   Usuario:string;
   Pass: string;
+  
   constructor(private creadorFormulario: FormBuilder, public service: DataBaseService, public router: Router) { }
 
   ngOnInit(): void {

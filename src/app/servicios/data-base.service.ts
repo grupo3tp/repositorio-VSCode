@@ -22,7 +22,6 @@ export class DataBaseService {
   constructor(private http : HttpClient, private cookies: CookieService) { }
 
   login(user: any): Observable<any> {
-    console.log(user)
     return this.http.post(this.URL+"/autentificacion", user);
   }
   logintoken(token: any): Observable<any> {
@@ -125,17 +124,17 @@ export class DataBaseService {
   };
   //---------------- fin remito
 
-  guardarNuevaActaRemito(nueva:NuevaActa):Observable<NuevaActa[]>
+  guardarNuevaActa(nueva:NuevaActa):Observable<any>
   {
-    return this.http.post<NuevaActa[]>(this.URL+'/nuevaActa',nueva)
+    return this.http.post(this.URL+'/nuevaActa',nueva)
   };
   //---------------- fin nuevaActa
   
-  guardarNuevaActaNAM(nueva:NuevaActa):Observable<NuevaActa[]>
-  {
-    return this.http.post<NuevaActa[]>(this.URL+'/NAM',nueva)
-  };
-  //---------------- fin nuevaActaNAM
+   guardarNuevaActaNAM(nueva:NuevaActa):Observable<any>
+   {
+     return this.http.post(this.URL+'/NAM',nueva)
+   };
+   //---------------- fin nuevaActaNAM
   
 
 
