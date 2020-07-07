@@ -213,7 +213,8 @@ export class NuevaActaComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Confirm'
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
     })
     .then((result) => {
       if (result.value) {
@@ -266,10 +267,10 @@ export class NuevaActaComponent implements OnInit {
         } 
         Swal.fire({
           title: 'confirmado',
-          text: 'El acta Nº '+ this.idRemito +' fue caragada',
+          text: 'El acta Nº '+ this.idRemito +' fue cargada',
           icon: 'success',
           confirmButtonColor: '#3085d6',
-          confirmButtonText: 'Confirm'
+          confirmButtonText: 'OK'
           })
           .then((result) =>{
             if(result.value){
