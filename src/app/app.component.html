@@ -1,10 +1,18 @@
- <div *ngIf="datos">
-  <app-encabezado (cambio)="cambioif($event)"></app-encabezado>
+<div *ngIf="datos">
+  <app-encabezado  (cambio)="cambioif($event)"></app-encabezado>
   <router-outlet></router-outlet>
- </div>
+</div>
  
 
-    <app-login *ngIf="!datos" (datos)="cambioif($event)"></app-login> 
+  <div>
+    <app-login *ngIf="!datos && !carga" (datos)="cambioif($event)"></app-login> 
+    <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "large" color = "#ffffff" type = "pacman" [fullScreen] = "true"><p style="color: rgb(255, 255, 255)" > Ingresando al sistema </p></ngx-spinner>       
+  </div>
+
+
+
+
+
   
   
  

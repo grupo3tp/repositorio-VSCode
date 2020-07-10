@@ -245,6 +245,7 @@ export class NuevaActaComponent implements OnInit {
         this.actaNueva = new NuevaActa;
         this.actaNueva.idRemito = this.idRemito;
         this.actaNueva.cantidad = 1;
+        this.actaNueva.Para = this.idDestino;
 
         // let i = 0;
         // do {
@@ -262,8 +263,13 @@ export class NuevaActaComponent implements OnInit {
          if (!this.finArray) {
              this.service.guardarNuevaActaNAM(this.actaNueva).subscribe(data=>{
                //console.log("se guardo la nueva acta" + this.actaNueva); 
-            }) 
+            });
+            this.service.guardarNuevaActaNAE(this.actaNueva).subscribe(data =>{
+
+            });
           }
+          
+
         } 
         Swal.fire({
           title: 'confirmado',

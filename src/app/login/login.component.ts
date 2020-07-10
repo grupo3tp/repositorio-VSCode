@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DataBaseService } from '../servicios/data-base.service';
 import { Usuarios } from '../models/usuarios';
 import {Router} from '@angular/router'
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,12 @@ export class LoginComponent implements OnInit {
   Usuario:string;
   Pass: string;
   
-  constructor(private creadorFormulario: FormBuilder, public service: DataBaseService, public router: Router) { }
+  constructor(
+        private creadorFormulario: FormBuilder,
+        public service: DataBaseService,
+        public router: Router,
+        private spinner: NgxSpinnerService
+         ) { }
 
   ngOnInit(): void {
 
@@ -27,46 +33,31 @@ export class LoginComponent implements OnInit {
       password: ['',Validators.required]
     });
    
-    
-  
   }
 
 
-  // ingresar(){
-  //   if(this.formularioLogin.valid)
-  //   {
-     
-  //     if(this.Usuario == "11223344" && this.Pass == "123456" ){
-  //       console.log("usuario y contraseña correctas")
-        
-  //       this.datosCorrectos=true;
-  //       this.datos.emit(this.datosCorrectos);
-      
-        
-  //     }else
-  //     {
-  //       this.datosCorrectos=false;
-        
-  //       this.textoError = 'por favor, revise que los datos sean correctos'
-  //     }
-  //   } 
-  // }
-
   login() 
   {
+    this.spinner.show();
     const user = {Usuario: this.Usuario, Pass: this.Pass};
     this.service.login(user).subscribe( data => {
+     setTimeout(() => {
       this.service.setToken(data.token);
+      this.service.guardarLocalStorage(data.token);
       this.user.token=data.token;
       this.datosCorrectos=true;
       this.datos.emit(this.datosCorrectos);
-      console.log("usuario y contraseña correctas")
-      console.log(this.user.token)
+      //console.log("usuario y contraseña correctas")
+      //console.log(this.user.token)
+      this.spinner.hide()
+     }, 1000);
+     
     },
     error => {
       console.log(error);
       this.datosCorrectos=false;
       this.textoError =error.error.errorMessage
+      this.spinner.hide()
     }
     );
   }
