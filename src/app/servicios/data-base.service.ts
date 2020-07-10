@@ -22,20 +22,27 @@ export class DataBaseService {
   constructor(private http : HttpClient, private cookies: CookieService) { }
 
   login(user: any): Observable<any> {
-    console.log(user)
     return this.http.post(this.URL+"/autentificacion", user);
   }
-  logintoken(token: any): Observable<any> {
-    return this.http.post(this.URL+"/authtoken",token)
+  
+  guardarLocalStorage(token: any){
+    localStorage.setItem('Token' , JSON.stringify(token))
   }
+  logintoken(token: any): Observable<any> {
+     return this.http.post(this.URL+"/token",token)
+  }
+  borrarLocalStorage(){
+    localStorage.removeItem("Token");
+  }
+  
   setToken(token: string) {
     this.cookies.set("token", token);
   }
   getToken():boolean {
-    return (this.cookies.check("token"));
+     return (this.cookies.check("token"));
   }
   logout() {
-    this.cookies.delete('token');
+     this.cookies.delete('token');
   }
   //----------fin login
 
@@ -125,17 +132,23 @@ export class DataBaseService {
   };
   //---------------- fin remito
 
-  guardarNuevaActaRemito(nueva:NuevaActa):Observable<NuevaActa[]>
+  guardarNuevaActa(nueva:NuevaActa):Observable<any>
   {
-    return this.http.post<NuevaActa[]>(this.URL+'/nuevaActa',nueva)
+    return this.http.post(this.URL+'/NARemito',nueva)
   };
   //---------------- fin nuevaActa
   
-  guardarNuevaActaNAM(nueva:NuevaActa):Observable<NuevaActa[]>
-  {
-    return this.http.post<NuevaActa[]>(this.URL+'/NAM',nueva)
-  };
-  //---------------- fin nuevaActaNAM
+   guardarNuevaActaNAM(nueva:NuevaActa):Observable<any>
+   {
+     return this.http.post(this.URL+'/NAMovimientos',nueva)
+   };
+   //---------------- fin nuevaActaNAM
+
+   guardarNuevaActaNAE(nueva:NuevaActa):Observable<any>
+   {
+     return this.http.post(this.URL+'/NAEquipo',nueva)
+   };
+   //---------------- fin nuevaActaNAE
   
 
 

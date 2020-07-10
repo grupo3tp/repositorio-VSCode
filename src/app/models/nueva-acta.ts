@@ -10,4 +10,6 @@ export class NuevaActa {
     Observaciones : string
     Id_Usuario : number
     serialElegido : string
+    cantidad : number
+
 }

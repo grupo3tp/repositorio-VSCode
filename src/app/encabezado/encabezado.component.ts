@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DataBaseService } from '../servicios/data-base.service';
 
 
@@ -18,6 +17,7 @@ export class EncabezadoComponent implements OnInit {
 
   cerrarSesion(){
     this.service.logout();
+    this.service.borrarLocalStorage();
     this.estado = false
     this.cambio.emit(this.estado)
   }
