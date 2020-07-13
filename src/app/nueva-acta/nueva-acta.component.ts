@@ -221,6 +221,7 @@ export class NuevaActaComponent implements OnInit {
        
         this.leerRemito();
         this.leerNumeroDeRemito();
+        let token = JSON.parse(localStorage.getItem("Token"));
 
         this.actaNueva.idRemito = this.idRemito;
         this.actaNueva.Fecha = this.fechaActual; 
@@ -229,18 +230,10 @@ export class NuevaActaComponent implements OnInit {
         this.actaNueva.Para = this.idDestino;
         this.actaNueva.Id_Transporte = this.idTransporte;
         this.actaNueva.Observaciones = this.txtObs;
+        this.actaNueva.token = token;
 
         this.service.guardarNuevaActa(this.actaNueva).subscribe(data=>{ })
 
-        // const remito = {
-        //   idRemito: this.idRemito,
-        //   Fecha : this.fechaActual,
-        //   Contacto : this.txtContacto,
-        //   De : this.idOrigen,
-        //   Para : this.idDestino,
-        //   Id_Transporte : this.idTransporte,
-        //   Observaciones : this.txtObs,
-        // }
 
         this.actaNueva = new NuevaActa;
         this.actaNueva.idRemito = this.idRemito;

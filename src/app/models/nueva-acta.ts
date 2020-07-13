@@ -11,5 +11,5 @@ export class NuevaActa {
     Id_Usuario : number
     serialElegido : string
     cantidad : number
-
+    token : string
 }
