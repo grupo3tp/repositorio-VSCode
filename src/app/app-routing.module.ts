@@ -17,12 +17,14 @@ import { ArticulosRotosComponent } from './listados/articulos-rotos/articulos-ro
 import { HistorialArticulosComponent } from './historial-articulos/historial-articulos.component';
 import { LoginComponent } from './login/login.component';
 import { Error404Component } from './error404/error404.component';
+import { ActasComponent } from './actas/actas.component';
 
 
 
 const routes: Routes = [
   {path: '' , component: HomeComponent},
   {path: 'nueva-acta', component: NuevaActaComponent},
+  {path: 'actas' , component:ActasComponent},
   {path: 'marca', component: MarcasComponent},
   {path: 'articulos',component: ArticulosComponent},
   {path: 'equipos', component: EquiposComponent},

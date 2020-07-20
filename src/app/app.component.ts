@@ -28,20 +28,18 @@ export class AppComponent {
      this.datos=true;  
      }
      
-      
-
-    
-          
-      this.token = JSON.parse(localStorage.getItem("Token"));
-      if(this.token == null){ 
-      }else{
-        const token = {token:this.token}
-        this.service.logintoken(token).subscribe (data =>{
-          console.log(data.token)
-          this.datos=data.token; 
+     //ESTO ES PARA QUE VERIFIQUE EL TOKEN EN LOCALSTORAGE CADA VEZ QUE CAMBIA DE PESTAÑA, AHORA ESTA ECHO CON LA CONFIRMACION 
+     //DEL TOKEN QUE SE ENCUENTRA EN LAS COOKIES
+      // this.token = JSON.parse(localStorage.getItem("Token"));
+      // if(this.token == null){ 
+      // }else{
+      //   const token = {token:this.token}
+      //   this.service.logintoken(token).subscribe (data =>{
+      //     console.log(data.token)
+      //     this.datos=data.token; 
         
-      })
-      }   
+      // })
+      // }   
   }
   cambioif(event){
     this.datos=event

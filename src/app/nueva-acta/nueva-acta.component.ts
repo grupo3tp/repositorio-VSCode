@@ -60,8 +60,7 @@ export class NuevaActaComponent implements OnInit {
   leerSector(){
     this.service.leerSector().subscribe((sectorApi) =>{
       this.sector = sectorApi;
-      this.leerArticulo();
-      
+      this.leerArticulo();  
     }) 
   };
   leerArticulo(){

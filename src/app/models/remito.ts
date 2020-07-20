@@ -8,6 +8,10 @@ export class Remito {
     Reemplazo :  string
     CantKits : number
     Observaciones : string
+    
     Id_Usuario : number
+    Detalle: string
+    Transporta: string
+    nSerie:string
 }
 

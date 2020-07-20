@@ -12,6 +12,7 @@ $spacer-2: $spacer * 2;
 
 
 
+
 .pl-3 {
 	padding-left: $padding-3 !important;
 }
@@ -54,11 +55,12 @@ $transition-delay;
 
 
 [data-component='sidebar'] {
-  
+ 
   .sidebar {
     position: fixed;
     z-index: 9999;
   }
+  
   //black menu
   .first-menu {
     position: fixed;
@@ -129,4 +131,80 @@ $transition-delay;
     border-radius: 0;
   }
 
+}
+@media only screen and (max-width: 500px){
+ 
+  [data-component='sidebar'] {
+ 
+    .sidebar {
+      position: fixed;
+      z-index: 9999;
+    }
+
+    
+    //black menu
+    .first-menu {
+      position: fixed;
+      background-color: $secondary-color;
+      height: 200vw;
+      width: 150px;
+      top: 40px;
+      overflow: hidden;
+      transition: width .1s;
+       &.active{
+        width: 0px;
+       }
+      a {
+        color: #fff;
+      }
+      i {
+        font-size: 12px;
+      }
+      span {
+        font-size: 14px;
+        white-space: pre-line;
+        font-family: 'Open Sans', sans-serif;
+        opacity: 1;
+        visibility: visible ;  
+      }
+ 
+    }
+    .first-menu:hover {
+      width: 150px;
+    }
+  
+    .list-group-item {
+      font-size: 14px;
+    }
+  
+  
+    //blue menu
+    .submenu {
+      position: fixed;
+      left: 150px;
+      width: 150px;
+      top: 40px;
+      background-color: $primary-color;
+      height: 100vw;
+      opacity: 0;
+      visibility: hidden;
+      transition: $sidebar-transition;
+      
+      .list-group-item {
+        margin-top: 8px;
+      }
+    }
+  
+    .first-menu li:hover .submenu {
+      visibility: visible;
+      opacity: 1;
+    }
+  
+    .list-group-item {
+      background-color: transparent;
+      border: none;
+      border-radius: 0;
+    }
+  
+  }
 }

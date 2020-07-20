@@ -26,7 +26,8 @@ import { ComprasComponent } from './compras/compras.component';
 import { ArticulosRotosComponent } from './listados/articulos-rotos/articulos-rotos.component';
 import { HistorialArticulosComponent } from './historial-articulos/historial-articulos.component';
 import { Error404Component } from './error404/error404.component';
-
+import { ActasComponent } from './actas/actas.component';
+;
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { Error404Component } from './error404/error404.component';
     ArticulosRotosComponent,
     HistorialArticulosComponent,
     Error404Component,
+    ActasComponent,
     
     
   ],

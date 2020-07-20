@@ -130,6 +130,10 @@ export class DataBaseService {
   {
     return this.http.get<Remito[]>(this.URL+'/remito')
   };
+  BuscarRemito(numero:number) : Observable<any>
+  {
+    return this.http.get(this.URL+'/remito/' +numero)
+  };
   //---------------- fin remito
 
   guardarNuevaActa(nueva:NuevaActa):Observable<any>
