@@ -1,0 +1,106 @@
+<body>
+    <div  class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+              <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                  <a class="nav-link" href="nueva-acta">Nueva Acta</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" >Actas</a>
+                </li>
+              </ul>
+            </div>
+            <div class="card-body">
+                <div class="imagen">   
+                    <h1 class='text-center'>Actas</h1>        
+                </div>    
+                <form class="form-group" id="acta">
+
+                    <div class="row mt-3">
+                        <div class="col-md-1 col-xs-0"></div>
+                        <div class="col-md-2 col-xs-3">
+                            <div class="form-group" >
+                                <label  for="">Nº de Acta:</label>
+                                <input (input)="acta($event.target.value)"  type="number"class="form-control" >
+                            </div>
+                        </div>
+                        <div class="col-sm-1"></div>
+                        <div class="col-md-2 col-xs-12">
+                            <div class="form-group">
+                                <label for="">Fecha:</label>
+                                <input type="datetime" [ngModel]="fecha | date: 'dd/MM/yyyy'" [ngModelOptions]="{standalone: true}" disabled class="form-control"  >
+                            </div>
+                        </div>
+                        <div class="col-sm-1"></div>
+                       
+                
+                        <div class="col-md-4 col-xs-12">
+                            <div class="form-group">
+                                <label for="">Transporte:</label>
+                                <input class="form-control"disabled [ngModel]="transporte" [ngModelOptions]="{standalone: true}">
+                            </div>
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                
+                    <div class="row justify-content-center">
+                       
+                        <div class="form-group col-lg-10">
+                            <label for="">Origen:</label>
+                            <input class="form-control"disabled  [ngModel]="origen" [ngModelOptions]="{standalone: true}"> 
+                        </div>
+                       
+                    </div>
+            
+                    <div class="row justify-content-center">
+                        <div class="form-group col-lg-10">
+                            <label for="">Destino:</label>
+                            <input class="form-control"disabled  [ngModel]="destino" [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+            
+                    <div class="row ">
+                        <div class="col-md-1 col-xs-0"></div>         
+                        <div class="form-group col-md-3 col-xs-6">
+                            <label for="">Contacto:  </label>
+                            <input class="form-control"disabled  [ngModel]="contacto" [ngModelOptions]="{standalone: true}">
+                        </div>
+                        
+                        <div class="form-group col-md-7 col-xs-12">
+                            <label for="">Observaciones: </label>
+                            <input class="form-control"disabled  [ngModel]="observaciones" [ngModelOptions]="{standalone: true}">
+                        </div> 
+                               
+                    </div>
+                
+                    <div class="row"  class="row" *ngFor="let item of remito; let i = index">
+                        <div class="col-1"></div>         
+                        <div class="form-group col-md-3 col-xs-12" id="serial">
+                            <label for="">serial:  </label>
+                            <input class="form-control"disabled  [ngModel]="remito[i].nSerie" [ngModelOptions]="{standalone: true}">
+                        </div> 
+                        <div class="form-group col-md-7 col-xs-12">
+                            <label for="">detalles </label>
+                            <input class="form-control"disabled  [ngModel]="remito[i].Detalle" [ngModelOptions]="{standalone: true}">
+                        </div>  
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-1"></div>
+                        <div class="col align-self-start">
+                            <button (click)="buscar()"  class="btn btn-primary">Buscar</button> 
+                        </div> 
+                                    
+                        <div class="col align-self-center"></div>
+                        
+                        <div class="col-auto mr-auto ">
+                            <button (click)="pdfGenerator()" class="btn btn-primary">PDF</button> 
+                        </div>
+                        
+                        <div class="col-1"></div>
+                    </div>
+                </form>
+            </div>
+          </div>
+    </div>
+</body>

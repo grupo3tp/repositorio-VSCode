@@ -1,12 +1,13 @@
 <div>
-    <nav class="navbar navbar-expand-lg navbar bg- p-0 fixed-top">
-      <a  class="navbar-brand" href="/"> &nbsp; TC Ordenado
-        
-         <!-- <img class="img" src="assets/logo2.jpg"  width="60" height="40">  -->
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+    <nav class="navbar nav-justified p-0 fixed-top">
+      <button *ngIf="phone" (click)="cambiar()" class="btn btn-link" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i id="cursor" class='menu' [ngClass]=" mostrarMenu  ? 'fas fa-window-close' : 'fas fa-align-justify'"  style='font-size:24px;'></i>
       </button>
+        <!-- <button (click)="cambiar()" class="btn btn-link"><i id="cursor" class='menu fas fa-align-justify' style='font-size:24px;'></i></button> -->
+      <a  class="navbar-brand" href="/">&nbsp;&nbsp; TC Ordenado      
+         <!-- <img class="img" src="assets/logo2.jpg"  width="60" height="40">  -->
+      </a>     
+      
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           
         </div>
@@ -15,7 +16,7 @@
 
     <div data-component="sidebar">
       <div class="sidebar">
-        <ul class="list-group flex-column d-inline-block first-menu">
+        <ul class="list-group flex-column d-inline-block first-menu" [ngClass]="{ 'active': !mostrarMenu }">
           <li class="list-group-item pl-3 py-2">
             <a href="/nueva-acta"><i class="fas fa-sticky-note" aria-hidden="true"></i><span class="ml-2 align-middle">Nueva Acta</span></a>
           </li> 
