@@ -28,13 +28,13 @@ export class EncabezadoComponent implements OnInit {
   getScreenSize() {
         this.scrHeight = window.innerHeight;
         this.scrWidth = window.innerWidth;
-        console.log(this.scrHeight, this.scrWidth);
+       // console.log(this.scrHeight, this.scrWidth);
         if( this.scrWidth > 600){
           this.phone = false
-          console.log(this.phone)
+        //  console.log(this.phone)
         }else{
           this.phone = true
-          console.log(this.phone)
+         // console.log(this.phone)
         }
   }
 
@@ -49,7 +49,7 @@ export class EncabezadoComponent implements OnInit {
 
   cambiar(){ 
     this.mostrarMenu = !this.mostrarMenu;
-    console.log(this.mostrarMenu)
+    //console.log(this.mostrarMenu)
     
     
   }

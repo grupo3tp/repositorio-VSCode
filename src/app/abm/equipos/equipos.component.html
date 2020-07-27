@@ -1,16 +1,33 @@
-<body>
+<div class="recuadro">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link" href="/marca"   id="home-tab" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true">Marcas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link "  id="profile-tab"  href="/articulos" data-toggle="tab" role="tab" aria-controls="profile" aria-selected="false">Articulo</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="contact-tab" data-toggle="tab" role="tab" aria-controls="contact"  href="tipo" aria-selected="false">Tipo</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"  id="contact-tab" data-toggle="tab" role="tab" aria-controls="contact" href="/sector" aria-selected="false">Sector</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link   active" style="cursor: pointer;" id="contact-tab" data-toggle="tab"  role="tab" aria-controls="contact" aria-selected="false">Equipos</a>
+        </li>
+    </ul>
     <div class="container mt-5">
         <h1>Equipos</h1>
         <div class="row justify-content-center">
             <div  class="col-1 mt-3"></div>
-            <div class="form-group col-4">
+            <div class="form-group col-md-4">
                 <label for="">Articulo:</label>
                 <select class="form-control">
                     <option value="">el articulo viene de base de datos</option>
                 </select>
             </div>
             <div class="col-1"></div>
-            <div class="form-group col-4">
+            <div class="form-group col-md-4">
                 <label for="">Estado:</label>
                 <select class="form-control">
                     <option value="">el estado viene de base de datos</option>
@@ -20,55 +37,55 @@
                     <option value="4">Reservado</option>
                 </select>
             </div>
-            <div class="col-1">
+            <div class="col-md-1">
                
             </div>
-            <div class="form-group col-4">
+            <div class="form-group col-md-4">
                 <label for="">Nº de Inventario</label>
                 <input type="text" class="form-control">
             </div>
-            <div class="col-1"></div>
-            <div class="form-group col-4">
+            <div class="col-md-1"></div>
+            <div class="form-group col-md-4">
                 <label for="">Remito Factura:</label>
                 <input type="text" class="form-control" placeholder="" >
             </div>
-            <div class="form-group col-4">
+            <div class="form-group col-md-4">
                 <label for="">Orden de Compra:</label>
                 <select class="form-control">
                     <option value="">la orden viene de base de datos</option>
                 </select>
             </div>
-            <div class="col-1"></div>
-            <div class="form-group col-4">
+            <div class="col-md-1"></div>
+            <div class="form-group col-md-4">
                 <label for="">Observaciones:</label>
-                <textarea class="form-control" rows="1"></textarea>
+                <input class="form-control" type="text">
             </div>
-            <div class="form-group col-4">
+            <div class="form-group col-md-4">
                 <label for="">Sector:</label>
                 <select class="form-control">
                     <option value="">el sector viene de base de datos</option>
                 </select>
             </div>
-            <div class="col-1"></div>
-            <div class="form-group col-4">
+            <div class="col-md-1"></div>
+            <div class="form-group col-md-4">
                 <label for="">Nº Serial</label>
                 <input type="text" class="form-control">
             </div>
-            <div class="form-group col-4"> 
+            <div class="form-group col-md-4"> 
                 <label for="">Fecha de alta:</label>
                 <input type="datetime" disabled class="form-control" [ngModel]="fecha | date: 'dd/MM/yyyy'">    
             </div>
-            <div class="col-1"></div>
-            <div class="form-group col-4">
+            <div class="col-md-1"></div>
+            <div class="form-group col-md-4">
                 <label for="">Cantidad:</label>
                 <input type="number" class="form-control">
             </div>
         </div>  
-        <div class="row justify-content-center mt-4">
-            <div class="col-4">
-                <button class="btn btn-primary">agregar</button>
+        <div class="row mt-4">
+            <div class="col-md-9"></div>
+            <div class="col-md-2">
+                <button class="btn btn-primary btn-block">agregar</button>
             </div>
-           <div class="col-5"></div>
         </div>
     </div>
-</body>
+</div>

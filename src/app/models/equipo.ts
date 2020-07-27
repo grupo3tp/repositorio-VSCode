@@ -1,5 +1,5 @@
 export class Equipo {
-    serial : number
+    serial : string
     id_Art : number
     id_Estado : number
     nInventario : number

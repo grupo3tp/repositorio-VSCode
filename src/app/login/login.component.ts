@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
       //console.log("usuario y contraseña correctas")
       //console.log(this.user.token)
       this.spinner.hide()
-     }, 1000);
+     }, 600);
      
     },
     error => {
