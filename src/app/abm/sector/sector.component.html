@@ -1,28 +1,45 @@
-<body>
+<div class="recuadro">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link" href="/marca"   id="home-tab" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true">Marcas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link "  id="profile-tab"  href="/articulos" data-toggle="tab" role="tab" aria-controls="profile" aria-selected="false">Articulo</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="contact-tab" data-toggle="tab" role="tab" aria-controls="contact"  href="tipo" aria-selected="false">Tipo</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link  active" style="cursor: pointer;" id="contact-tab" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false">Sector</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="/equipos" role="tab" aria-controls="contact" aria-selected="false">Equipos</a>
+        </li>
+    </ul>
     <div class="container mt-5">
         <h1>Sector</h1>
         <div class="row justify-content-center">
-            <div class="form-group col-8">
+            <div class="form-group col-md-8">
                 <label for="">Detalle:</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control input">
             </div>
-            <div class="form-group col-8">
+            <div class="form-group col-md-8">
                 <label for="">Telefono:</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control input">
             </div>
-            <div class="form-group col-8">
+            <div class="form-group col-md-8">
                 <label for="">Tipo Puesto:</label>
                 <select class="form-control">
                     <option value="">el tipo puesto viene de base de datos</option>
                 </select>
             </div>
-            <div class="form-group col-8">
+            <div class="form-group col-md-8">
                 <label for="">Gerencia:</label>
                 <select class="form-control">
                     <option value="">la gerencia viene de base de datos</option>
                 </select>
             </div>   
-            <div class="form-group col-8">
+            <div class="form-group col-md-8">
                 <label for="">Ubicacion edificio:</label>
                 <select class="form-control">
                     <option value="">la Ubicacion viene de base de datos</option>
@@ -44,8 +61,8 @@
             </div>
         </div>
         <div class="form-row mt-4">
-            <div class="col-2"></div>
+            <div class="col-md-9"></div>
             <button (click)="agregar()" class="btn btn-primary">Agregar</button>
         </div>
     </div>
-</body>
+</div>

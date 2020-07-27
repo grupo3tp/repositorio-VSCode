@@ -1,4 +1,3 @@
-import { ArrayType } from '@angular/compiler'
 
 export class NuevaActa {
     idRemito : number

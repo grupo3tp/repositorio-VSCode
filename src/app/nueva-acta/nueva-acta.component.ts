@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DataBaseService } from '../servicios/data-base.service';
 import { Articulos } from '../models/articulos.model';
 import { Sector } from '../models/sector';
@@ -8,7 +8,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Equipo } from '../models/equipo';
 import { Remito } from '../models/remito';
 import { NuevaActa } from '../models/nueva-acta';
-
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-nueva-acta',
@@ -29,6 +29,9 @@ export class NuevaActaComponent implements OnInit {
   txtContacto : string;
   txtObs : string;
   esIgual : boolean
+  showModal: boolean;
+  serialEncontradoModal : string;
+  find : boolean = true;
 
   articulos : Array<Articulos> = new Array<Articulos>(); 
   sector : Array<Sector> = new Array<Sector>(); 
@@ -42,7 +45,7 @@ export class NuevaActaComponent implements OnInit {
   articuloEnInput : boolean;
 
 
-  constructor (public service : DataBaseService, private creadorFormulario: FormBuilder) {   
+  constructor (public service : DataBaseService, private creadorFormulario: FormBuilder, private spinner: NgxSpinnerService) {   
     this.formularioActa=this.creadorFormulario.group({
       transporte: ['',Validators.required],
       origen: ['',Validators.required],
@@ -52,7 +55,8 @@ export class NuevaActaComponent implements OnInit {
  
   } 
 
-  ngOnInit(): void {   
+  ngOnInit(): void {  
+    this.spinner.show()
     this.nuevaActa();
     this.leerSector();
    }
@@ -82,11 +86,14 @@ export class NuevaActaComponent implements OnInit {
     })
   };
   leerRemito(){
+    
     this.service.leerRemito().subscribe((remitosApi) => {
       this.remito = remitosApi;
      //this.leerNumeroDeRemito()
     })
+    this.spinner.hide();
   }
+  
   leerNumeroDeRemito(){
     if (!this.remito) {
       this.idRemito = 1
@@ -148,13 +155,13 @@ export class NuevaActaComponent implements OnInit {
     this.serialElegido.splice(posicion,1)
   }
   
-  articuloID(id:number){
-    console.log(id)
+  articuloID(id:string){
+   // console.log(id)
     if(id!=null) {
       for (let index = 0; index < this.equipos.length; index++) {
         if (this.equipos[index].serial === id) {
            this.idArticulo = this.equipos[index].id_Art
-          this.numeroSerial = id.toString();
+          this.numeroSerial = id
         }
       }
       for (let index1 = 0; index1 < this.articulos.length; index1++) {
@@ -202,6 +209,38 @@ export class NuevaActaComponent implements OnInit {
   Observaciones(obs:string){
     this.txtObs = obs;
   }
+  numeroModal(event){
+    this.serialEncontradoModal = event
+    //console.log(this.serialEncontradoModal)
+  }
+  buscarNumeroModal(){
+    let encontro = false
+    this.equipos.forEach(element => {
+      if(element.serial === this.serialEncontradoModal){
+        this.showModal = false;
+        encontro = true
+        this.find = true 
+  
+        for (let index = 0; index < this.equipos.length; index++) {
+          if (this.equipos[index].serial === this.serialEncontradoModal) {
+              this.idArticulo = this.equipos[index].id_Art
+            this.numeroSerial = this.serialEncontradoModal
+          }
+        }
+        for (let index1 = 0; index1 < this.articulos.length; index1++) {
+          if(this.articulos[index1].id_Art === this.idArticulo){
+            this.nombreArticulo = this.articulos[index1].Detalle
+            this.articuloEnInput = true;
+          }   
+        }
+        
+      }
+    });
+    if(!encontro){
+      this.find = false;
+    }
+  }
+
 
   confirmarMov(){
 

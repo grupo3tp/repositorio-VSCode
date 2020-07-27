@@ -1,50 +1,69 @@
-<body>
-    <div class="container mt-5">
-        <h1>Marca</h1>
-       <div class="row justify-content-center">
-           
-            <div  class="form-group" class="col-sm-9" *ngIf="!esAgregar">  
-                <select (change)="marcaID($event.target.value)"  name="" id=""  class="form-control">
-                    <option [value]="null">seleccione una marca...</option>
-                    <option *ngFor="let marca of marcas" [value]="marca.id_Marca">{{marca.Detalle}}</option>
-                </select>
-            </div>
-            <form [formGroup]="formularioMarcas" class="col-sm-9">
-                <div class="form-group" *ngIf="esAgregar">
-                    <input type="text" class="form-control" formControlName="Detalle" placeholder="Agregar Marca....">
-                    <div *ngIf="formularioMarcas.controls['Detalle'].invalid && formularioMarcas.controls['Detalle'].dirty" class="alert alert-danger" role="alert">
-                       <samp *ngIf="formularioMarcas.controls['Detalle'].errors.required"> La marca es requerida!</samp>
+<div>
+    <div class="recuadro">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" style="cursor: pointer;" id="home-tab" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true">Marcas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="/articulos" role="tab" aria-controls="profile" aria-selected="false">Articulo</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="contact-tab" data-toggle="tab" href="/tipo" role="tab" aria-controls="contact" aria-selected="false">Tipo</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="contact-tab" data-toggle="tab" href="/sector" role="tab" aria-controls="contact" aria-selected="false">Sector</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="contact-tab" data-toggle="tab" href="/equipos" role="tab" aria-controls="contact" aria-selected="false">Equipos</a>
+            </li>
+        </ul>
+        <div class="container mt-5 ">
+            <h1>Marcas</h1>
+           <div class="row justify-content-center">
+                <div  class="form-group" class="col-sm-9" *ngIf="!esAgregar">  
+                    <select (change)="marcaID($event.target.value)"  name="" id=""  class="form-control">
+                        <option [value]="null">seleccione una marca...</option>
+                        <option *ngFor="let marca of marcas" [value]="marca.id_Marca">{{marca.Detalle}}</option>
+                    </select>
+                </div>
+                <form [formGroup]="formularioMarcas" class="col-sm-9">
+                    <div class="form-group" *ngIf="esAgregar">
+                        <input type="text" class="form-control" formControlName="Detalle" placeholder="Agregar Marca....">
+                        <div *ngIf="formularioMarcas.controls['Detalle'].invalid && formularioMarcas.controls['Detalle'].dirty" class="alert alert-danger" role="alert">
+                           <samp *ngIf="formularioMarcas.controls['Detalle'].errors.required"> La marca es requerida!</samp>
+                        </div> 
                     </div> 
-                </div> 
-            </form>
-            <form [formGroup]="formularioMarcas" class="col-sm-9">
-                <div class="form-group" *ngIf="esModificar">
-                    <input type="text" class="form-control" [(ngModel)]="nombreMarca" formControlName="Detalle">
-                    <div *ngIf="formularioMarcas.controls['Detalle'].invalid && formularioMarcas.controls['Detalle'].dirty" class="alert alert-danger" role="alert">
-                       <samp *ngIf="formularioMarcas.controls['Detalle'].errors.required"> La marca es requerida!</samp>
+                </form>
+                <form [formGroup]="formularioMarcas" class="col-sm-9">
+                    <div class="form-group" *ngIf="esModificar">
+                        <label style="margin-top: 10px;" for="">modifique la marca:</label>
+                        <input style="margin-top: 0px;" type="text" class="form-control" [(ngModel)]="nombreMarca" formControlName="Detalle">
+                        <div *ngIf="formularioMarcas.controls['Detalle'].invalid && formularioMarcas.controls['Detalle'].dirty" class="alert alert-danger" role="alert">
+                           <samp *ngIf="formularioMarcas.controls['Detalle'].errors.required"> La marca es requerida!</samp>
+                        </div> 
                     </div> 
-                </div> 
-            </form>
-       </div>
-    </div>
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-sm-4">
-                <button *ngIf="!esAgregar && !esModificar" class="btn btn-primary" (click)='agregarMarca()'>AgregarMarca</button>
-                <button *ngIf="esAgregar" class="btn btn-primary" [disabled]="!formularioMarcas.valid" (click)='agregar()'>Agregar</button>
-                <button *ngIf="!esAgregar && esModificar" class="btn btn-primary" [disabled]="!formularioMarcas.valid" (click)='actualizarMarca()'>Actualizar</button>
-            </div>
-            <div class="col-sm-4">
-                 <button *ngIf="!esAgregar && !esModificar"  (click)="modificar()" class="btn btn-primary">Modificar</button>  
-            </div>
-            <div class="col-auto"></div>
-            <button *ngIf="!esAgregar && !esModificar" [disabled]="!esEliminar" (click)="eliminar()" class="btn btn-danger">Eliminar</button>
-            <button *ngIf="esAgregar" (click)="atras()" class="btn btn-danger">Atras</button>
-            <button *ngIf="!esAgregar && esModificar" (click)="atras()" class="btn btn-danger">Atras</button>
-            
+                </form>
+           </div>
         </div>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                
+                <div class="col-lg-4 col-md-2 col-sm-4 col-xs-2">
+                    <button *ngIf="!esAgregar && !esModificar" class="btn btn-primary btn-block" (click)='agregarMarca()'>Agregar Marca</button>
+                    <button *ngIf="esAgregar" class="btn btn-primary btn-block" [disabled]="!formularioMarcas.valid" (click)='agregar()'>Agregar</button>
+                    <button *ngIf="!esAgregar && esModificar" class="btn btn-primary btn-block" [disabled]="!formularioMarcas.valid" (click)='actualizarMarca()'>Actualizar</button>
+                </div>
+                <div class=" col-lg-4 col-md-2 col-sm-4 col-xs-2">
+                     <button *ngIf="!esAgregar && !esModificar"  (click)="modificar()" class="btn btn-primary btn-block">Modificar</button>  
+                </div>
+                <div class="col-xs-3  col-sm-2">
+                <button *ngIf="!esAgregar && !esModificar" [disabled]="!esEliminar" (click)="eliminar()" class="btn btn-danger btn-block">Eliminar</button>
+                <button *ngIf="esAgregar" (click)="atras()" class="btn btn-danger btn-block">Atras</button>
+                <button *ngIf="!esAgregar && esModificar" (click)="atras()" class="btn btn-danger btn-block">Atras</button>
+                </div>
+            </div>
+        </div>    
     </div>
-    
-</body>
+</div>
     
 
