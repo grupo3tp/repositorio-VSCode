@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Marca } from 'src/app/models/marca';
 import { DataBaseService } from 'src/app/servicios/data-base.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -20,7 +19,7 @@ export class MarcasComponent implements OnInit {
   nombreMarca :  string;
   marcaId : number
 
-  constructor(public service:DataBaseService, private fbGenerador:FormBuilder, private ruta:Router) { }
+  constructor(public service:DataBaseService, private fbGenerador:FormBuilder) { }
 
   ngOnInit(): void {
 
