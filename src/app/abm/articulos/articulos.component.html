@@ -16,36 +16,46 @@
             <a class="nav-link" id="contact-tab" data-toggle="tab" href="/equipos" role="tab" aria-controls="contact" aria-selected="false">Equipos</a>
         </li>
     </ul>
-    <div class="container mt-5">
-        <h1>Articulos</h1>
-        <div class="row justify-content-center">
-    
-            <div class="form-group col-md-8">
-                <label for="">Detalle:</label>
-                <input type="text" class="form-control">
-            </div>
-    
-            <div class="form-group col-md-8 ">
-                <label for="">Marca:</label>
-                <select class="form-control">
-                    <option value="">la marca viene de base de datos</option>
-                </select>
-            </div>
-    
-            <div class="form-group col-md-8">
-                <label for="">Tipo:</label>
-                <select class="form-control">
-                    <option value="">el tipo de producto viene de base de datos</option>
-                </select>
-            </div>  
-    
-        </div>;
-        <div class="row">
-            <div class="col-md-9"></div>
-            <div class="col-md-2">
-                <button class="btn btn-primary">Agregar</button>
-            </div> 
-        </div> 
+    <form [formGroup]="formularioArticulos">
+        <div class="container mt-5">
+            <h1>Articulos</h1>
+            
+            <div class="row justify-content-center">
         
-    </div>;    
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="">Detalle:</label>
+                        <input (input)="detalle($event.target.value)" type="text" class="form-control" formControlName="Detalle">
+                        <div *ngIf="formularioArticulos.controls['Detalle'].invalid && formularioArticulos.controls['Detalle'].dirty" class="alert alert-danger" role="alert">
+                        <samp *ngIf="formularioArticulos.controls['Detalle'].errors.required"> el detalle es requerido!</samp>
+                        </div> 
+                    </div> 
+                </div>
+        
+                <div class="form-group col-md-8 ">
+                    <label for="">Marca:</label>
+                    <select (change)="marcaID($event.target.value)"class="form-control" formControlName="Marca">
+                        <option [value]="null">seleccione una marca...</option>
+                        <option *ngFor="let marca of marcas" [value]="marca.id_Marca">{{marca.Detalle}}</option>
+                    </select>
+                </div>
+        
+                <div class="form-group col-md-8">
+                    <label for="">Tipo:</label>
+                    <select (change)="tipoID($event.target.value)" class="form-control" formControlName="Tipo">
+                        <option [value]="null">seleccione un tipo...</option>
+                        <option *ngFor="let tipo of tipos" [value]="tipo.id_Segmento">{{tipo.Detalle}}</option>
+                    </select>
+                </div>  
+        
+            </div>;
+                <div class="row">
+                    <div class="col-md-9"></div>
+                    <div class="col-md-2">
+                        <button (click)="agregar()" class="btn btn-primary" [disabled]="!formularioArticulos.valid">Agregar</button>
+                    </div> 
+                </div> 
+            
+        </div>;  
+    </form>   
 </div>

@@ -16,32 +16,52 @@
             <a class="nav-link" id="contact-tab" data-toggle="tab" href="/equipos" role="tab" aria-controls="contact" aria-selected="false">Equipos</a>
         </li>
     </ul>
-    <div class="container mt-5">    
-        <h1>Tipo</h1>
-        <div class="row justify-content-center">
-            <div class="col-sm-9" *ngIf="!esAgregar">  
-                <select name="" id=""  class="form-control">
-                    <option value="">El tipo viene de base de dato</option>
+    <div class="container mt-5 ">
+        <h1>Tipos</h1>
+       <div class="row justify-content-center">
+            <div  class="form-group" class="col-sm-9" *ngIf="!esAgregar">  
+                <select (change)="tipoID($event.target.value)"  name="" id=""  class="form-control">
+                    <option [value]="null">seleccione un tipo...</option>
+                    <option *ngFor="let tipo of tipos" [value]="tipo.id_Segmento">{{tipo.Detalle}}</option>
                 </select>
             </div>
-            <div class="col-sm-9" *ngIf="esAgregar">
-                <input type="text" class="form-control" placeholder="Agregar Tipo....">
-            </div> 
-        </div>      
+            <form [formGroup]="formularioTipos" class="col-sm-9">
+                <div class="form-group" *ngIf="esAgregar">
+                    <input type="text" class="form-control" formControlName="Detalle" placeholder="Agregar Tipo....">
+                    <div *ngIf="formularioTipos.controls['Detalle'].invalid && formularioTipos.controls['Detalle'].dirty" class="alert alert-danger" role="alert">
+                       <samp *ngIf="formularioTipos.controls['Detalle'].errors.required"> El tipo es requerido!</samp>
+                    </div> 
+                </div> 
+            </form>
+            <form [formGroup]="formularioTipos" class="col-sm-9">
+                <div class="form-group" *ngIf="esModificar">
+                    <label style="margin-top: 10px;" for="">modifique el tipo:</label>
+                    <input style="margin-top: 0px;" type="text" class="form-control" [(ngModel)]="nombreTipo" formControlName="Detalle">
+                    <div *ngIf="formularioTipos.controls['Detalle'].invalid && formularioTipos.controls['Detalle'].dirty" class="alert alert-danger" role="alert">
+                       <samp *ngIf="formularioTipos.controls['Detalle'].errors.required"> El tipo es requerido!</samp>
+                    </div> 
+                </div> 
+            </form>
+       </div>
     </div>
-    <div class="container mt-5"> 
+    <div class="container mt-5">
         <div class="row justify-content-center">
+            
             <div class="col-lg-4 col-md-2 col-sm-4 col-xs-2">
-                <button *ngIf="!esAgregar" class="btn btn-primary btn-block" (click)='agregarMarca()'>AgregarTipo</button>
-                <button *ngIf="esAgregar" class="btn btn-primary btn-block" (click)='agregar()'>Agregar</button>
+                <button *ngIf="!esAgregar && !esModificar" class="btn btn-primary btn-block" (click)='agregarTipo()'>Agregar Marca</button>
+                <button *ngIf="esAgregar" class="btn btn-primary btn-block" [disabled]="!formularioTipos.valid" (click)='agregar()'>Agregar</button>
+                <button *ngIf="!esAgregar && esModificar" class="btn btn-primary btn-block" [disabled]="!formularioTipos.valid" (click)='actualizarTipo()'>Actualizar</button>
             </div>
-            <div class="col-lg-4 col-md-2 col-sm-4 col-xs-2">
-                <button *ngIf="!esAgregar" (click)="modificar()" class="btn btn-primary btn-block">Modificar</button>  
+            <div class=" col-lg-4 col-md-2 col-sm-4 col-xs-2">
+                 <button *ngIf="!esAgregar && !esModificar"  (click)="modificar()" class="btn btn-primary btn-block">Modificar</button>  
             </div>
             <div class="col-xs-3  col-sm-2">
-                <button *ngIf="!esAgregar" (click)="eliminar()" class="btn btn-danger btn-block">Eliminar</button>
-                <button *ngIf="esAgregar" (click)="atras()" class="btn btn-danger btn-block">Atras</button>
+            <button *ngIf="!esAgregar && !esModificar" [disabled]="!esEliminar" (click)="eliminar()" class="btn btn-danger btn-block">Eliminar</button>
+            <button *ngIf="esAgregar" (click)="atras()" class="btn btn-danger btn-block">Atras</button>
+            <button *ngIf="!esAgregar && esModificar" (click)="atras()" class="btn btn-danger btn-block">Atras</button>
             </div>
         </div>
-    </div>
+    </div>    
 </div>
+
+

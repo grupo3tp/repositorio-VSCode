@@ -10,6 +10,7 @@ import { CookieService } from "ngx-cookie-service";
 import { Equipo } from '../models/equipo';
 import { Remito } from '../models/remito';
 import { NuevaActa } from '../models/nueva-acta';
+import { Tipo } from '../models/tipo';
 
 @Injectable({
   providedIn: 'root'
@@ -49,7 +50,19 @@ export class DataBaseService {
   leerArticulos():Observable<Articulos[]>
   {
       return this.http.get<Articulos[]>(this.URL+'/articulos')
+  }
+  GuardarArticulos(art:Articulos) : Observable<Articulos>
+  {
+    return this.http.post<Articulos>(this.URL+'/articulos', art)
   };
+  ActualizarArticulos(art:Articulos, id:number)
+  {
+    return this.http.put<Articulos>(this.URL+'/articulos/'+id, art);
+  };
+  EliminarArticulos(id:number)
+  {
+    return this.http.delete<Articulos>(this.URL+'/articulos/'+id)
+  }
   //----------------fin articulos
 
   leerMarca():Observable<Marca[]>
@@ -69,6 +82,24 @@ export class DataBaseService {
     return this.http.delete<Marca>(this.URL+'/marca/'+id)
   }
   //------------------ fin marca
+
+  leerTipo():Observable<Tipo[]>
+  {
+    return this.http.get<Tipo[]>(this.URL+'/tipo')
+  };
+  GuardarTipo(tipo:Tipo) : Observable<Tipo>
+  {
+    return this.http.post<Tipo>(this.URL+'/tipo', tipo)
+  };
+  ActualizarTipo(tipo:Tipo, id:number)
+  {
+    return this.http.put<Marca>(this.URL+'/tipo/'+id, tipo);
+  };
+  EliminarTipo(id:number)
+  {
+    return this.http.delete<Marca>(this.URL+'/tipo/'+id)
+  }
+  //------------------ fin Tipo
 
   leerSector():Observable<Sector[]>
   {
