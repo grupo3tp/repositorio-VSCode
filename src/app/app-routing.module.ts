@@ -18,6 +18,7 @@ import { HistorialArticulosComponent } from './historial-articulos/historial-art
 import { LoginComponent } from './login/login.component';
 import { Error404Component } from './error404/error404.component';
 import { ActasComponent } from './actas/actas.component';
+import { CargaGranelComponent } from './carga-granel/carga-granel.component';
 
 
 
@@ -39,6 +40,7 @@ const routes: Routes = [
   {path: 'articulos-rotos', component:ArticulosRotosComponent},
   {path: 'historial',component:HistorialArticulosComponent},
   {path: 'login', component:LoginComponent},
+  {path: 'cargaGranel', component:CargaGranelComponent},
   {path: '**', component:Error404Component},
 ];
 

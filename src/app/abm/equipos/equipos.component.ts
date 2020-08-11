@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-equipos',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EquiposComponent implements OnInit {
   fecha:Date = new Date();
-  constructor() { }
+  formularioEquipos:FormGroup;
+
+
+  constructor(private fb:FormBuilder) {
+  
+   }
 
   ngOnInit(): void {
   }

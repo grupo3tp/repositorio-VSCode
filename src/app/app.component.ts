@@ -14,7 +14,7 @@ export class AppComponent {
   datos:boolean 
   user: Usuarios = new Usuarios()
   token: string
-  carga:boolean
+  //carga:boolean
 
   constructor(public service:DataBaseService,){
     

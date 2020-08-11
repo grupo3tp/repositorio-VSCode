@@ -1,0 +1,97 @@
+<div class="recuadro">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link"  href="/compras" id="home-tab" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true">Ordenes</a>
+        </li>
+        <li class="nav-item">
+          <a  style="cursor: pointer;" class="nav-link active"   id="profile-tab" data-toggle="tab" role="tab" aria-controls="profile" aria-selected="false">Cargas</a>
+        </li>
+    </ul>
+    <div class="container mt-1">
+        <h1>Cargas a Granel</h1>
+        <form [formGroup]="formCargaGranel" (submit)="agregar(formCargaGranel.value)">
+            <div class="row justify-content-center form-group">
+                <div class="col-lg-2 col-md-10 col-sm-10 col-xs-12">
+                    <label for="">Fecha:</label>
+                    <input type="datetime" class="form-control" disabled [ngModel]="fechaActual | date: 'dd/MM/yyyy'" [ngModelOptions]="{standalone: true}">
+                </div>
+                <div class="col-lg-1 col-sm-0"></div>
+                <div class="col-lg-6 col-md-10 col-sm-10 col-xs-12">
+                    <label for="">Estado:</label>
+                    <select  formControlName="estado" class="form-control" name="" id="">
+                        <option >Seleccione un estado...</option>
+                        <option *ngFor="let est of estado" [value]="est.id_Estado">{{est.Estado}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row justify-content-center form-group">
+                <div class=" col-lg-9 col-md-10 col-sm-10 col-xs-12">
+                    <label for="">Orden de compra:</label>
+                    <select  formControlName="orden" class="form-control" name="" id="">
+                        <option>Seleccione una Orden...</option>
+                        <option *ngFor="let ord of orden" [value]="ord.Id_OC">{{ord.OdeCompra}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row justify-content-center form-group">
+                <div class=" col-lg-9 col-md-10 col-sm-10 col-xs-12">
+                    <label for="">Remito/Factura:</label>
+                    <input  formControlName="remito" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="row justify-content-center form-group">
+                <div class=" col-lg-9 col-md-10 col-sm-10 col-xs-12">
+                    <label for="">Marca</label>
+                    <select  formControlName="marca" class="form-control" name="" id="">
+                        <option >Seleccione una Marca...</option>
+                        <option *ngFor="let marca of marcas" [value]="marca.id_Marca">{{marca.Detalle}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row justify-content-center form-group">
+                <div class=" col-lg-9 col-md-10 col-sm-10 col-xs-12">
+                    <label for="">Articulo</label>
+                    <select  formControlName="articulo" class="form-control" name="" id="">
+                        <option >Seleccione una Articulo...</option>
+                        <option *ngFor="let art of articulo" [value]="art.id_Art">{{art.Detalle}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row justify-content-center form-group">
+                <div class=" col-lg-9 col-md-10 col-sm-10 col-xs-12">
+                    <label for="">Sector</label>
+                    <select  formControlName="sector" class="form-control" name="" id="">
+                        <option >Seleccione un sector...</option>
+                        <option *ngFor="let sec of sector" [value]="sec.id_Sec">{{sec.Detalle}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row justify-content-center form-group">
+                <div class=" col-lg-9 col-md-10 col-sm-10 col-xs-12">
+                    <label for="">observaciones</label>
+                    <textarea formControlName="observaciones" class="form-control" name="" id="obs" rows="3"></textarea>
+                </div>
+            </div>
+            <div formArrayName="seriales">
+                <div class="row justify-content-center form-group" *ngFor="let item of getSeriales.controls; let i = index" [formGroupName]="i">  
+                    <div class=" col-md-8 col-sm-10 col-xs-8 mt-4">  
+                        <input  class="form-control" type="text" formControlName="serial">
+                    </div>
+                    <div class="col-md-1 col-xs-2 mt-4">
+                        <button class="btn btn-link" (click)="removeSerial(i)">Elim</button>
+                    </div>    
+                </div>     
+            </div>
+            <div class="row justify-content-center form-group mt-4"> 
+                <div class="col-md-2">
+                    <button class="btn btn-link" (click)="addSerial()">agregar Serial</button> 
+                </div>
+            </div>
+            <div class="row justify-content-end form-group mt-5"> 
+                <div class="col-md-3">
+                    <button class="btn btn-primary" [disabled]="!formCargaGranel.valid" type="submit">Confirmar carga</button> 
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
