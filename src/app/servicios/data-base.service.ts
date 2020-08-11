@@ -11,6 +11,9 @@ import { Equipo } from '../models/equipo';
 import { Remito } from '../models/remito';
 import { NuevaActa } from '../models/nueva-acta';
 import { Tipo } from '../models/tipo';
+import { OrdenCompra } from '../models/orden-compra';
+import { Estado } from '../models/estado';
+import { Historial } from '../models/historial';
 
 @Injectable({
   providedIn: 'root'
@@ -64,6 +67,29 @@ export class DataBaseService {
     return this.http.delete<Articulos>(this.URL+'/articulos/'+id)
   }
   //----------------fin articulos
+
+  leerEstado():Observable<Estado[]>
+  {
+      return this.http.get<Estado[]>(this.URL+'/estado')
+  }
+
+  leerOrdenCompra():Observable<OrdenCompra[]>
+  {
+      return this.http.get<OrdenCompra[]>(this.URL+'/ordenCompra')
+  }
+  GuardarOrdenCompra(ord:OrdenCompra) : Observable<OrdenCompra>
+  {
+    return this.http.post<OrdenCompra>(this.URL+'/ordenCompra', ord)
+  };
+  ActualizarOrdenCompra(ord:OrdenCompra, id:number)
+  {
+    return this.http.put<OrdenCompra>(this.URL+'/ordenCompra/'+id, ord);
+  };
+  EliminarOrdenCompra(id:number)
+  {
+    return this.http.delete<OrdenCompra>(this.URL+'/ordenCompra/'+id)
+  }
+  //----------------fin OrdenCompra
 
   leerMarca():Observable<Marca[]>
   {
@@ -184,9 +210,15 @@ export class DataBaseService {
      return this.http.post(this.URL+'/NAEquipo',nueva)
    };
    //---------------- fin nuevaActaNAE
-  
 
-
+   buscarHistorial(id:string):Observable<Historial[]>
+   {
+     return this.http.get<Historial[]>(this.URL+'/historial/' +id)
+   };
+   buscarHistoActa(id:string):Observable<Historial[]>
+   {
+     return this.http.get<Historial[]>(this.URL+'/histoActa/'+id)
+   }
 
 }
 

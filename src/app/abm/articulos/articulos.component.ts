@@ -31,7 +31,12 @@ export class ArticulosComponent implements OnInit {
       Tipo:['',Validators.required],
     });
 
+    this.nuevoArticulo();
     this.leerMarca();
+  }
+
+  nuevoArticulo(){
+    this.formularioArticulos.reset()
   }
 
 

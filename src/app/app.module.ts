@@ -27,6 +27,7 @@ import { ArticulosRotosComponent } from './listados/articulos-rotos/articulos-ro
 import { HistorialArticulosComponent } from './historial-articulos/historial-articulos.component';
 import { Error404Component } from './error404/error404.component';
 import { ActasComponent } from './actas/actas.component';
+import { CargaGranelComponent } from './carga-granel/carga-granel.component';
 ;
 
 @NgModule({
@@ -51,6 +52,7 @@ import { ActasComponent } from './actas/actas.component';
     HistorialArticulosComponent,
     Error404Component,
     ActasComponent,
+    CargaGranelComponent,
     
     
   ],
