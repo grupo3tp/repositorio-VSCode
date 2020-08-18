@@ -26,6 +26,7 @@ export class ActasComponent implements OnInit {
   destino : string;
   contacto : string;
   observaciones : string;
+  nInventario: string;
   serial : number;
   detalles : string;
   numeroSerie : string
@@ -130,9 +131,9 @@ export class ActasComponent implements OnInit {
     
       
     
-    var col = ["serial", "detalle"]//, "fecha", "transporte", "origen", "destino", "contacto","observaciones"] 
+    var col = ["serial", "n° Inventario","detalle"]//, "fecha", "transporte", "origen", "destino", "contacto","observaciones"] 
     this.remito.forEach(element =>{
-      var temp = [element.nSerie, element.Detalle]//, element.Fecha.toString().substring(0,10), element.Transporta, element.De, 
+      var temp = [element.nSerie,element.nInventario, element.Detalle]//, element.Fecha.toString().substring(0,10), element.Transporta, element.De, 
       //element.Para, element.Contacto, element.Observaciones]
       cuerpo.push(temp)
     })
