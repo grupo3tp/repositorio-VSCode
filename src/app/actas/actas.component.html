@@ -65,11 +65,14 @@
                         <div class="form-group col-md-3 col-xs-6">
                             <label for="">Contacto:  </label>
                             <input class="form-control"disabled  [ngModel]="contacto" [ngModelOptions]="{standalone: true}">
+                            <label for="">serial:  </label>
                         </div>
                         
                         <div class="form-group col-md-7 col-xs-12">
                             <label for="">Observaciones: </label>
                             <input class="form-control"disabled  [ngModel]="observaciones" [ngModelOptions]="{standalone: true}">
+                            <label for="">Detalle  </label>
+
                         </div> 
                                
                     </div>
@@ -77,11 +80,11 @@
                     <div class="row"  class="row" *ngFor="let item of remito; let i = index">
                         <div class="col-1"></div>         
                         <div class="form-group col-md-3 col-xs-12" id="serial">
-                            <label for="">serial:  </label>
+                            <!-- <label for="">serial:  </label> -->
                             <input class="form-control"disabled  [ngModel]="remito[i].nSerie" [ngModelOptions]="{standalone: true}">
                         </div> 
                         <div class="form-group col-md-7 col-xs-12">
-                            <label for="">detalles </label>
+                            <!-- <label for="">detalles </label> -->
                             <input class="form-control"disabled  [ngModel]="remito[i].Detalle" [ngModelOptions]="{standalone: true}">
                         </div>  
                     </div>

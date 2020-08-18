@@ -10,6 +10,7 @@ import { PatternValidator } from '@angular/forms';
 
 
 
+
 @Component({
   selector: 'app-actas',
   templateUrl: './actas.component.html',
@@ -25,6 +26,7 @@ export class ActasComponent implements OnInit {
   destino : string;
   contacto : string;
   observaciones : string;
+  nInventario: string;
   serial : number;
   detalles : string;
   numeroSerie : string
@@ -95,24 +97,82 @@ export class ActasComponent implements OnInit {
 
   pdfGenerator(){
   
-    var doc = new jsPDF('l','mm','A4');
+    var doc = new jsPDF('p','mm','A4');
+    doc.page=1;
+    var pagina = "Pagina: " + doc.page ;
+    doc.setFontSize(30);
+    doc.text(80,10,'ORIGINAL')
+    
+    //doc.text(pagina, 50, doc.internal.pageSize.height );
     var cuerpo = [];
     var imgData = "../../assets/logo13.png"
-  
+    //Cabecera
+    var contacto:string;
+    var items:number=this.remito.length;
     
-    var col = ["serial", "detalle", "fecha", "transporte", "origen", "destino", "contacto","observaciones"] 
+    doc.setFontSize(15);
+    doc.text(170,10,'Acta n°: '+ this.nRemito);
+
+    doc.setFontSize(10);
+    var dia:string=(this.remito[0].Fecha.toString().substring(8,10)+this.remito[0].Fecha.toString().substring(4,8)+this.remito[0].Fecha.toString().substring(0,4));
+    doc.text(10,10, 'Fecha: '+ dia);
+    //doc.text(10,10, 'Fecha: '+ this.remito[0].Fecha.toString().substring(0,10));
+    doc.text(10,20,'De: '+ this.remito[0].De);
+    doc.text(10,30,'Para: '+ this.remito[0].Para);
+    
+    if(this.remito[0].Contacto==null){this.contacto=' . ' ;}
+    else{this.contacto=this.remito[0].Contacto;}
+    doc.text(10,40,'Contacto: '+ this.contacto);
+    
+    if(this.remito[0].Observaciones==null){this.contacto=' . ' ;}
+    else{this.contacto=this.remito[0].Observaciones;}
+    doc.text(10,50,'Observaciones: ' + this.contacto);
+    doc.addImage(imgData, 'png',140 , 15, 50, 30);
+    
+      
+    
+    var col = ["serial", "n° Inventario","detalle"]//, "fecha", "transporte", "origen", "destino", "contacto","observaciones"] 
     this.remito.forEach(element =>{
-      var temp = [element.nSerie, element.Detalle, element.Fecha.toString().substring(0,10), element.Transporta, element.De, 
-      element.Para, element.Contacto, element.Observaciones]
+      var temp = [element.nSerie,element.nInventario, element.Detalle]//, element.Fecha.toString().substring(0,10), element.Transporta, element.De, 
+      //element.Para, element.Contacto, element.Observaciones]
       cuerpo.push(temp)
     })
-    doc.autoTable(col,cuerpo)
-    let finalY = doc.previousAutoTable.finalY; //this gives you the value of the end-y-axis-position of the previous autotable.
-    doc.text('Acta Nº: '+this.nRemito, 15, finalY + 10);
-    doc.addImage(imgData, 'png',125 , finalY + 20, 50, 30)
+    doc.autoTable(col,cuerpo,{startY:55})
+    let finalY = doc.previousAutoTable.finalY+20; //this gives you the value of the end-y-axis-position of the previous autotable.
+        
+    if(finalY>210){
+      doc.addPage();
+      finalY=20;
+        
+    }
     
+    doc.text('Total equipos: '+ items,10,finalY)
+    doc.text('_______________________________', 130, finalY + 10);
+    doc.text('Firma', 130, finalY + 15);
+    doc.text('_______________________________', 130, finalY + 30);
+    doc.text('Aclaración', 130, finalY + 35);
+    doc.text('_______________________________', 130, finalY + 50);
+    doc.text('DNI', 130, finalY + 55);
+    doc.text('_______________________________', 130, finalY + 70);
+    doc.text('Cargo', 130, finalY + 75);
+    doc.text('_______________________________', 10, finalY + 50);
+    doc.text('Entrego', 30, finalY + 55);
     
-  
+
+    
+    //doc.addImage(imgData, 'png',125 , finalY + 20, 50, 30)
+    const pageCount = doc.internal.getNumberOfPages();
+
+// For each page, print the page number and the total pages
+    for(var i = 1; i <= pageCount; i++) 
+    {
+      // Go to page i
+      doc.setPage(i);
+      //Print Page 1 of 4 for example
+      doc.text('Pagina ' + String(i) + ' de ' + String(pageCount),210-20,290,null,null,"right");
+    }
+    
+   
     doc.save('acta Nº '+this.nRemito);
   }
         //esto es lo que estaba para que quede mas lindo pero no continua en una hoja nueva
@@ -181,5 +241,3 @@ export class ActasComponent implements OnInit {
   //   pdf.create().open()
   // }
 }
-
-
