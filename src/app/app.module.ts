@@ -28,7 +28,7 @@ import { HistorialArticulosComponent } from './historial-articulos/historial-art
 import { Error404Component } from './error404/error404.component';
 import { ActasComponent } from './actas/actas.component';
 import { CargaGranelComponent } from './carga-granel/carga-granel.component';
-;
+import {DropdownModule} from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -65,8 +65,7 @@ import { CargaGranelComponent } from './carga-granel/carga-granel.component';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    
-    
+    DropdownModule,   
   ],
   providers: [
     DataBaseService
