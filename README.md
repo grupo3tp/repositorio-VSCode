@@ -12,6 +12,8 @@ npm install
 
 para ejecutar el sistema 
 
+y npm install jspdf@1.4.1
+
 ng serve --o
 
 
