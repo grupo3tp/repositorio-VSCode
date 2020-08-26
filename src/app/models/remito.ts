@@ -12,6 +12,12 @@ export class Remito {
     Id_Usuario : number
     Detalle: string
     Transporta: string
-    nSerie:string
+    nSerie: string
+    Direccion: string
+    Localidad: string
+    Provincia: string
+    Cantidad: number
+    Marcas: string
+
 }
 
