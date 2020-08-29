@@ -46,7 +46,6 @@ export class NuevaActaComponent implements OnInit {
   equipos : Array<Equipo> = new Array<Equipo>();
   remito : Array<Remito> = new Array<Remito>();
   actaNueva = new NuevaActa;
-  equipo : EquipoSerial[]
   artElegidos : Array<string> = new Array<string>();
   serialElegido : Array<string> = new Array<string>();
   articuloEnInput : boolean;
