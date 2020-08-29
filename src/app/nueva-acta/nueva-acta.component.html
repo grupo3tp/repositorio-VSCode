@@ -82,6 +82,7 @@
                         <div class="col-md-3 col-xs-12">
                             <div class="form-group">
                                 <label  style="margin-bottom: 0px;">Serial: <button  (click)="showModal=true" class="btn"><i class="fas fa-search" style=" margin-left: 30; cursor: pointer;"></i></button></label>
+                                <!-- <p-dropdown formControlName="serial"  [showTransitionOptions]="'0ms'"  [hideTransitionOptions]="'0ms'" [options]="equipos" [(ngModel)]="equipoSeleccionado"  filter="true"  placeholder="seleccione un serial.." optionLabel="serial" [style]="{'width':'245px'}"></p-dropdown> -->
                                 <select formControlName="serial"  (change)="articuloID($event.target.value)"  class="form-control"  >
                                     <option [value]="null">seleccione ID</option>  
                                     <option *ngFor="let equipo of equipos"  [value]="equipo.serial">{{equipo.serial}}</option>            
@@ -153,7 +154,7 @@
                 <div  class="container-fluid">
                     <div class="row">   
                         <div class="col-6">
-                            <input type="text" (input)="numeroModal($event.target.value.toUpperCase())">
+                            <input type="text" (input)="numeroModal($event.target.value.toUpperCase())" (Keydown.enter)="buscarNumeroModal()">
                         </div>
                         <div *ngIf="!find" class="col-1">
                             <i class="fas fa-exclamation" style="font-size:24px; color:red"></i>

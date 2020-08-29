@@ -9,7 +9,9 @@ import { Equipo } from '../models/equipo';
 import { Remito } from '../models/remito';
 import { NuevaActa } from '../models/nueva-acta';
 import {NgxSpinnerService} from 'ngx-spinner';
-import { error } from 'protractor';
+
+
+
 
 @Component({
   selector: 'app-nueva-acta',
@@ -35,13 +37,16 @@ export class NuevaActaComponent implements OnInit {
   find : boolean = true;
   generoError : boolean
 
+
+ 
+
   articulos : Array<Articulos> = new Array<Articulos>(); 
   sector : Array<Sector> = new Array<Sector>(); 
   transporte : Array<Transporte> = new Array<Transporte>();
   equipos : Array<Equipo> = new Array<Equipo>();
   remito : Array<Remito> = new Array<Remito>();
   actaNueva = new NuevaActa;
-
+  equipo : EquipoSerial[]
   artElegidos : Array<string> = new Array<string>();
   serialElegido : Array<string> = new Array<string>();
   articuloEnInput : boolean;
@@ -87,6 +92,10 @@ export class NuevaActaComponent implements OnInit {
     this.service.leerEquipoPorSector(id_Sec).subscribe((equiposApi) =>{
       this.equipos = equiposApi
       this.spinner.hide();
+
+      
+    
+
     })
   };
   leerRemito(){

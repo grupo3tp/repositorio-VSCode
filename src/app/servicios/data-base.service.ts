@@ -14,6 +14,7 @@ import { Tipo } from '../models/tipo';
 import { OrdenCompra } from '../models/orden-compra';
 import { Estado } from '../models/estado';
 import { Historial } from '../models/historial';
+import { CargaGranel } from '../models/carga-granel';
 
 @Injectable({
   providedIn: 'root'
@@ -223,6 +224,11 @@ export class DataBaseService {
    {
      return this.http.get<Historial[]>(this.URL+'/histoActa/'+id)
    }
+
+   guardarCargaGranel(nueva:CargaGranel):Observable<any>
+   {
+     return this.http.post(this.URL+'/cargaGranel',nueva)
+   };
 
 }
 
