@@ -9,7 +9,9 @@ import { Equipo } from '../models/equipo';
 import { Remito } from '../models/remito';
 import { NuevaActa } from '../models/nueva-acta';
 import {NgxSpinnerService} from 'ngx-spinner';
-import { EquipoSerial } from '../models/equipo-serial';
+
+
+
 
 @Component({
   selector: 'app-nueva-acta',
@@ -33,7 +35,11 @@ export class NuevaActaComponent implements OnInit {
   showModal: boolean;
   serialEncontradoModal : string;
   find : boolean = true;
-  equipoSeleccionado : string;
+  generoError : boolean
+
+
+ 
+
   articulos : Array<Articulos> = new Array<Articulos>(); 
   sector : Array<Sector> = new Array<Sector>(); 
   transporte : Array<Transporte> = new Array<Transporte>();
@@ -57,7 +63,7 @@ export class NuevaActaComponent implements OnInit {
   } 
 
   ngOnInit(): void {  
-    this.spinner.show()
+    
     this.nuevaActa();
     this.leerSector();
    }
@@ -77,14 +83,19 @@ export class NuevaActaComponent implements OnInit {
   leerTrasporte(){
     this.service.leerTransporte().subscribe((trasporteApi) =>{
       this.transporte = trasporteApi;
-      this.leerEquipos();
+      //this.leerEquipos();
+      this.leerRemito();
     })
   };
-  leerEquipos(){
-    this.service.leerEquipos().subscribe((equiposApi) =>{
+  leerEquipos(id_Sec:number){
+    this.spinner.show()
+    this.service.leerEquipoPorSector(id_Sec).subscribe((equiposApi) =>{
       this.equipos = equiposApi
+      this.spinner.hide();
+
       
-      this.leerRemito();
+    
+
     })
   };
   leerRemito(){
@@ -93,7 +104,7 @@ export class NuevaActaComponent implements OnInit {
       this.remito = remitosApi;
      //this.leerNumeroDeRemito()
     })
-    this.spinner.hide();
+    
   }
   
   leerNumeroDeRemito(){
@@ -173,6 +184,7 @@ export class NuevaActaComponent implements OnInit {
         }   
       }
     }
+    
   }// fin articuloID
   
   origenID(origen:string){
@@ -181,6 +193,7 @@ export class NuevaActaComponent implements OnInit {
         if (this.sector[index].Detalle == origen) {
           this.idOrigen = this.sector[index].id_Sec;
           console.log(this.idOrigen)
+          this.leerEquipos(this.idOrigen);
         }
       }
     }  
@@ -190,7 +203,7 @@ export class NuevaActaComponent implements OnInit {
       for (let index = 0; index < this.sector.length; index++) {
         if (this.sector[index].Detalle == destino) {
           this.idDestino = this.sector[index].id_Sec;
-          console.log(this.idDestino)
+          //console.log(this.idDestino)
         }
       }
     } 
@@ -293,29 +306,42 @@ export class NuevaActaComponent implements OnInit {
         for (let index = 0; index < this.serialElegido.length; index++) {
           this.actaNueva.serialElegido = this.serialElegido[index]
 
-         if (!this.finArray) {
-             this.service.guardarNuevaActaNAM(this.actaNueva).subscribe(data=>{
-               //console.log("se guardo la nueva acta" + this.actaNueva); 
-            });
-            this.service.guardarNuevaActaNAE(this.actaNueva).subscribe(data =>{
-
-            });
-          }
-          
-
-        } 
-        Swal.fire({
-          title: 'confirmado',
-          text: 'El acta Nº '+ this.idRemito +' fue cargada',
-          icon: 'success',
-          confirmButtonColor: '#3085d6',
-          confirmButtonText: 'OK'
-          })
-          .then((result) =>{
-            if(result.value){
-              this.recargar();
-            }
-          })
+        
+            if (!this.finArray) {
+              this.service.guardarNuevaActaNAM(this.actaNueva).subscribe(data=>{
+                //console.log("se guardo la nueva acta" + this.actaNueva); 
+               
+             },error =>{
+               this.generoError = true
+              
+               Swal.fire({
+                 title: error.messaje,
+                 text: 'El acta Nº '+ this.idRemito +' no fue cargada',
+                 icon: 'warning',
+                 confirmButtonColor: '#3085d6',
+                 confirmButtonText: 'OK'
+                 })
+             });
+             this.service.guardarNuevaActaNAE(this.actaNueva).subscribe(data =>{
+              Swal.fire({
+                title: 'confirmado',
+                text: 'El acta Nº '+ this.idRemito +' fue cargada',
+                icon: 'success',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK'
+                })
+                .then((result) =>{
+                  if(result.value){
+                    this.recargar();
+                  }
+                })
+              
+             },error =>{
+               this.generoError = true
+             
+             });
+           }
+          } 
       }  
     })  
   } // fin confirmarMov

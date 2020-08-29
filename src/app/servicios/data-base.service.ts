@@ -170,6 +170,10 @@ export class DataBaseService {
   {
     return this.http.get<Equipo[]>(this.URL+'/equipos')
   };
+  leerEquipoPorSector(id:number) : Observable<Equipo[]>
+  {
+    return this.http.get<Equipo[]>(this.URL+'/equipos/'+id)
+  };
   GuardarEquipos(equipo:Equipo) : Observable<Equipo>
   {
     return this.http.post<Equipo>(this.URL+'/equipos', equipo)
