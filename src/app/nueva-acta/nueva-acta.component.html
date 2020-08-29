@@ -44,10 +44,11 @@
                        
                         <div class="form-group col-xs-12 col-sm-12 col-md-10 col-lg-10">
                             <label for="">Origen:</label>
-                            <select formControlName="origen" (change)="origenID($event.target.value)"  class="form-control">
+                            <select formControlName="origen" (change)="origenID($event.target.value)" (onModelChange)="origenID($event.target.value)" class="form-control">
                                 <option [value]="null">seleccione un origen...</option> 
                                 <option  *ngFor="let sec of sector"  value={{sec.Detalle}}>{{sec.Detalle}}</option>      
                             </select>
+                            <p style="margin-bottom: 0px;">seleccione un origen para obtener los seriales a seleccionar</p>
                         </div>
                        
                     </div>
@@ -137,7 +138,7 @@
           </div>
     </div>
 
-    <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "large" color = "#fff" type = "ball-beat" [fullScreen] = "true"><p style="color: white" > Cargando Acta... </p></ngx-spinner>
+    <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "large" color = "#fff" type = "ball-beat" [fullScreen] = "true"><p style="color: white" > Cargando Seriales... </p></ngx-spinner>
 
     <div class="modal fade" id="exampleModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" [ngClass]="{'show':showModal}">
         <div class="modal-dialog modal-dialog-centered">
