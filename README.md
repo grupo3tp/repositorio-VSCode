@@ -15,8 +15,6 @@ npm install primeicons --save
 
 para ejecutar el sistema 
 
-
-
 ng serve --o
 
 
