@@ -18,51 +18,53 @@
     </ul>
     <div class="container mt-5">
         <h1>Sector</h1>
-        <div class="row justify-content-center">
-            <div class="form-group col-md-8">
-                <label for="">Detalle:</label>
-                <input type="text" class="form-control input">
+        <form [formGroup]="formSector" (submit)="agregar(formSector.value)">
+            <div class="row justify-content-center">
+                <div class="form-group col-md-8">
+                    <label for="">Detalle:</label>
+                    <input  formControlName="detalle" type="text" class="form-control input">
+                </div>
+                <div class="form-group col-md-8">
+                    <label for="">Telefono:</label>
+                    <input  formControlName="telefono" type="text" class="form-control input">
+                </div>
+                <div class="form-group col-md-8">
+                    <label for="">Tipo Puesto:</label>
+                    <select  formControlName="tipoPuesto" class="form-control">
+                        <option *ngFor="let puesto of puestos" [value]="puesto.id_TipoSector">{{puesto.Tipo}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-8">
+                    <label for="">Gerencia:</label>
+                    <select  formControlName="gerencia" class="form-control">
+                        <option *ngFor="let gerencia of gerencias" [value]="gerencia.id_Dir">{{gerencia.Descripcion}}</option>
+                    </select>
+                </div>   
+                <div class="form-group col-md-8">
+                    <label for="">Ubicacion edificio:</label>
+                    <select  formControlName="ubicacion" class="form-control">
+                        <option *ngFor="let ubicacion of ubicaciones" [value]="ubicacion.Id_Ubicacion">{{ubicacion.Ubicacion}}</option>
+                    </select>
+                </div>  
+                <div class="form-group col-md-8">
+                    <div class="form-check form-check-inline col-md-4 mt-3">
+                        <input formControlName="stock" class="form-check-input" type="checkbox" id="inlineCheckbox1" value="1">
+                        <label class="form-check-label" for="inlineCheckbox1">Stock Propio</label>
+                      </div>
+                      <div class="form-check form-check-inline  col-md-4">
+                        <input formControlName="personal" class="form-check-input" type="checkbox" id="inlineCheckbox2" [value]="1">
+                        <label  class="form-check-label" for="inlineCheckbox2">Personal Propio</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input  formControlName="activo" class="form-check-input" type="checkbox" id="inlineCheckbox3" [value]="1">
+                        <label  class="form-check-label" for="inlineCheckbox3">Activo</label>
+                      </div>
+                </div>
             </div>
-            <div class="form-group col-md-8">
-                <label for="">Telefono:</label>
-                <input type="text" class="form-control input">
+            <div class="form-row mt-4">
+                <div class="col-md-9"></div>
+                <button type="submit" [disabled]="!formSector.valid" class="btn btn-primary">Agregar</button>
             </div>
-            <div class="form-group col-md-8">
-                <label for="">Tipo Puesto:</label>
-                <select class="form-control">
-                    <option value="">el tipo puesto viene de base de datos</option>
-                </select>
-            </div>
-            <div class="form-group col-md-8">
-                <label for="">Gerencia:</label>
-                <select class="form-control">
-                    <option value="">la gerencia viene de base de datos</option>
-                </select>
-            </div>   
-            <div class="form-group col-md-8">
-                <label for="">Ubicacion edificio:</label>
-                <select class="form-control">
-                    <option value="">la Ubicacion viene de base de datos</option>
-                </select>
-            </div>  
-            <div class="form-group col-md-8">
-                <div class="form-check form-check-inline col-md-4 mt-3">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">Stock Propio</label>
-                  </div>
-                  <div class="form-check form-check-inline  col-md-4">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                    <label class="form-check-label" for="inlineCheckbox2">Personal Propio</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-                    <label class="form-check-label" for="inlineCheckbox3">Activo</label>
-                  </div>
-            </div>
-        </div>
-        <div class="form-row mt-4">
-            <div class="col-md-9"></div>
-            <button (click)="agregar()" class="btn btn-primary">Agregar</button>
-        </div>
+        </form>
     </div>
 </div>
