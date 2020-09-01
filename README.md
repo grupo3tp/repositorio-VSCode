@@ -9,10 +9,13 @@ requiere tener instalado VSCode
 en la terminal CMD vaya a la raiz donde va a estra el proyecto y para instalar los complementos necesarios ejecute el comando:
 
 npm install
+npm install jspdf@1.4.1
+npm install jspdf jspdf-autotable
+npm install primeicons --save
 
 para ejecutar el sistema 
 
-y npm install jspdf@1.4.1
+
 
 ng serve --o
 
