@@ -15,6 +15,9 @@ import { OrdenCompra } from '../models/orden-compra';
 import { Estado } from '../models/estado';
 import { Historial } from '../models/historial';
 import { CargaGranel } from '../models/carga-granel';
+import { TipoPuesto } from '../models/tipo-puesto';
+import { Gerencia } from '../models/gerencia';
+import { UbicacionEdif } from '../models/ubicacion-edif';
 
 @Injectable({
   providedIn: 'root'
@@ -145,6 +148,60 @@ export class DataBaseService {
     return this.http.delete<Sector>(this.URL+'/sector/'+id)
   }
   //-------------- fin sector
+
+  leerTipoPuesto():Observable<TipoPuesto[]>
+  {
+    return this.http.get<[]>(this.URL+'/tipoPuesto')
+  };
+  GuardarTipoPuesto(sector:TipoPuesto) : Observable<TipoPuesto>
+  {
+    return this.http.post<TipoPuesto>(this.URL+'/tipoPuesto', sector)
+  };
+  ActualizarTipoPuesto(sector:TipoPuesto, id:number)
+  {
+    return this.http.put<TipoPuesto>(this.URL+'/tipoPuesto/'+id, sector);
+  };
+  EliminarTipoPuesto(id:number)
+  {
+    return this.http.delete<TipoPuesto>(this.URL+'/tipoPuesto/'+id)
+  }
+  //-------------- fin TipoPuesto
+
+  leerGerencia():Observable<Gerencia[]>
+  {
+    return this.http.get<[]>(this.URL+'/gerencia')
+  };
+  GuardarGerencia(sector:Gerencia) : Observable<Gerencia>
+  {
+    return this.http.post<Gerencia>(this.URL+'/gerencia', sector)
+  };
+  ActualizarGerencia(sector:Gerencia, id:number)
+  {
+    return this.http.put<Gerencia>(this.URL+'/gerencia/'+id, sector);
+  };
+  EliminarGerencia(id:number)
+  {
+    return this.http.delete<Gerencia>(this.URL+'/gerencia/'+id)
+  }
+  //-------------- fin Gerencia
+
+  leerUbicacionEdif():Observable<UbicacionEdif[]>
+  {
+    return this.http.get<[]>(this.URL+'/UbicacionEdif')
+  };
+  GuardarUbicacionEdif(sector:UbicacionEdif) : Observable<UbicacionEdif>
+  {
+    return this.http.post<UbicacionEdif>(this.URL+'/UbicacionEdif', sector)
+  };
+  ActualizarUbicacionEdif(sector:UbicacionEdif, id:number)
+  {
+    return this.http.put<UbicacionEdif>(this.URL+'/UbicacionEdif/'+id, sector);
+  };
+  EliminarUbicacionEdif(id:number)
+  {
+    return this.http.delete<UbicacionEdif>(this.URL+'/UbicacionEdif/'+id)
+  }
+  //-------------- fin UbicacionEdif
 
   leerTransporte():Observable<Transporte[]>
   {

@@ -20,76 +20,102 @@
 
         <h1>Equipos</h1>
 
-        <form [formGroup]="formularioEquipos">
-            <div class="row justify-content-center">
-                <div  class="col-1 mt-3"></div>
-                <div class="form-group col-md-4">
-                    <label for="">Articulo:</label>
-                    <select class="form-control">
-                        <option value="">el articulo viene de base de datos</option>
-                    </select>
+        <form [formGroup]="formCargaGranel" (submit)="agregar(formCargaGranel.value)">
+            <div class="row justify-content-center form-group">
+                <div class="col-lg-2 col-md-10 col-sm-10 col-xs-12">
+                    <label for="">Fecha:</label>
+                    <input type="datetime" class="form-control" disabled [ngModel]="fechaActual | date: 'dd/MM/yyyy'" [ngModelOptions]="{standalone: true}">
                 </div>
-                <div class="col-1"></div>
-                <div class="form-group col-md-4">
+                <div class="col-lg-1 col-sm-0"></div>
+                <div class="col-lg-6 col-md-10 col-sm-10 col-xs-12">
                     <label for="">Estado:</label>
-                    <select class="form-control">
-                        <option value="">el estado viene de base de datos</option>
-                        <option value="1">Disponible</option>
-                        <option value="2">No Funciona</option>
-                        <option value="3">Reemplazo</option>
-                        <option value="4">Reservado</option>
+                    <select  formControlName="estado" class="form-control" name="" id="">
+                        <option >Seleccione un estado...</option>
+                        <option *ngFor="let est of estado" [value]="est.id_Estado">{{est.Estado}}</option>
                     </select>
                 </div>
-                <div class="col-md-1">
-                
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="">Nº de Inventario</label>
-                    <input type="text" class="form-control">
-                </div>
-                <div class="col-md-1"></div>
-                <div class="form-group col-md-4">
-                    <label for="">Remito Factura:</label>
-                    <input type="text" class="form-control" placeholder="" >
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="">Orden de Compra:</label>
-                    <select class="form-control">
-                        <option value="">la orden viene de base de datos</option>
+            </div>
+            <div class="row justify-content-center form-group">
+                <div class=" col-lg-9 col-md-10 col-sm-10 col-xs-12">
+                    <label for="">Orden de compra:</label>
+                    <select  formControlName="orden" class="form-control" name="" id="">
+                        <option>Seleccione una Orden...</option>
+                        <option *ngFor="let ord of orden" [value]="ord.Id_OC">{{ord.OdeCompra}}</option>
                     </select>
                 </div>
-                <div class="col-md-1"></div>
-                <div class="form-group col-md-4">
-                    <label for="">Observaciones:</label>
-                    <input class="form-control" type="text">
+            </div>
+            <div class="row justify-content-center form-group">
+                <div class=" col-lg-9 col-md-10 col-sm-10 col-xs-12">
+                    <label for="">Remito/Factura:</label>
+                    <input  formControlName="remito" type="text" class="form-control">
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="">Sector:</label>
-                    <select class="form-control">
-                        <option value="">el sector viene de base de datos</option>
+            </div>
+            <!-- <div class="row justify-content-center form-group">
+                <div class=" col-lg-9 col-md-10 col-sm-10 col-xs-12">
+                    <label for="">Marca</label>
+                    <select  formControlName="marca" class="form-control" name="" id="">
+                        <option >Seleccione una Marca...</option>
+                        <option *ngFor="let marca of marcas" [value]="marca.id_Marca">{{marca.Detalle}}</option>
                     </select>
                 </div>
-                <div class="col-md-1"></div>
-                <div class="form-group col-md-4">
-                    <label for="">Nº Serial</label>
-                    <input type="text" class="form-control">
+            </div> -->
+            <div class="row justify-content-center form-group">
+                <div class=" col-lg-9 col-md-10 col-sm-10 col-xs-12">
+                    <label for="">Articulo</label>
+                    <select  formControlName="articulo" class="form-control" name="" id="">
+                        <option >Seleccione una Articulo...</option>
+                        <option *ngFor="let art of articulo" [value]="art.id_Art">{{art.Detalle}}</option>
+                    </select>
                 </div>
-                <div class="form-group col-md-4"> 
-                    <label for="">Fecha de alta:</label>
-                    <input type="datetime" disabled class="form-control" [ngModel]="fecha | date: 'dd/MM/yyyy'">    
+            </div>
+            <div class="row justify-content-center form-group">
+                <div class=" col-lg-9 col-md-10 col-sm-10 col-xs-12">
+                    <label for="">Sector</label>
+                    <select  formControlName="sector" class="form-control" name="" id="">
+                        <option >Seleccione un sector...</option>
+                        <option *ngFor="let sec of sector" [value]="sec.id_Sec">{{sec.Detalle}}</option>
+                    </select>
                 </div>
-                <div class="col-md-1"></div>
-                <div class="form-group col-md-4">
-                    <label for="">Cantidad:</label>
-                    <input type="number" class="form-control">
+            </div>
+            <div class="row justify-content-center form-group">
+                <div class=" col-lg-9 col-md-10 col-sm-10 col-xs-12">
+                    <label for="">observaciones</label>
+                    <textarea formControlName="observaciones" class="form-control" name="" id="obs" rows="3"></textarea>
                 </div>
-            </div>  
-            <div class="row mt-4">
-                <div class="col-md-9"></div>
+            </div>
+            <div class="row justify-content-around">
+                <div formArrayName="nsInventarios">
+                    <label class="mt-5"for="">Inventario:</label>
+                    <div class="row" *ngFor="let item of getInventario.controls; let j = index" [formGroupName]="j"> 
+                        <div class="col-2"></div> 
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-4">  
+                            <input  class="form-control" type="text" formControlName="nInventario">
+                        </div>    
+                    </div>     
+                </div>
+                <div formArrayName="seriales">
+                    <label  class="mt-5" for="">Serial:</label>
+                    <div class="row" *ngFor="let item of getSeriales.controls; let i = index" [formGroupName]="i">  
+                        <div class="col-md-10 col-sm-10 col-xs-7 mt-4">  
+                            <input  class="form-control" (keydown.enter)="addSerial()" type="text" formControlName="serial">
+                        </div>
+                        <div class="col-md-1 col-xs-1 mt-4">
+                            <div class="btn btn-link" (click)="removeSerial(i)"><i class="fas fa-trash-alt"></i></div>
+                        </div> 
+                    </div>     
+                </div>
+            </div>
+            <div class="row justify-content-center form-group mt-4"> 
                 <div class="col-md-2">
-                    <button class="btn btn-primary btn-block">agregar</button>
+                    <div class="btn btn-link" (click)="addSerial()"><i class="pi pi-check"></i>&nbsp; Agregar</div> 
+                </div>
+            </div>
+            <div class="row justify-content-end form-group mt-5"> 
+                <div class="col-md-3">
+                    <button class="btn btn-primary" (click)="agregar(formCargaGranel.value)" [disabled]="!formCargaGranel.valid" type="submit">Confirmar carga</button> 
                 </div>
             </div>
         </form>
+       
     </div>
 </div>
