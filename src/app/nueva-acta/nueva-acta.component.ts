@@ -11,8 +11,6 @@ import { NuevaActa } from '../models/nueva-acta';
 import {NgxSpinnerService} from 'ngx-spinner';
 
 
-
-
 @Component({
   selector: 'app-nueva-acta',
   templateUrl: './nueva-acta.component.html',
@@ -91,19 +89,21 @@ export class NuevaActaComponent implements OnInit {
     this.service.leerEquipoPorSector(id_Sec).subscribe((equiposApi) =>{
       this.equipos = equiposApi
       this.spinner.hide();
-
-      
-    
-
+    },error=>{
+      Swal.fire({
+        title: 'No hay equipos asignados al sector',
+        text: 'verifique el origen!',
+        icon: 'error',
+        }) 
+        this.spinner.hide();
     })
   };
   leerRemito(){
     
     this.service.leerRemito().subscribe((remitosApi) => {
-      this.remito = remitosApi;
+        this.remito = remitosApi; 
      //this.leerNumeroDeRemito()
     })
-    
   }
   
   leerNumeroDeRemito(){
@@ -191,7 +191,7 @@ export class NuevaActaComponent implements OnInit {
       for (let index = 0; index < this.sector.length; index++) {
         if (this.sector[index].Detalle == origen) {
           this.idOrigen = this.sector[index].id_Sec;
-          console.log(this.idOrigen)
+          //console.log(this.idOrigen)
           this.leerEquipos(this.idOrigen);
         }
       }

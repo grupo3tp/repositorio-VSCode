@@ -1,1 +1,29 @@
-<p>por-sector works!</p>
+<div class="recuadro">
+    <form [formGroup]="formxSector" (submit)="agregar(formxSector.value)">
+        <div class="container mt-5">
+            <h1>Listado por sector</h1>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="">Detalle:</label>
+                        <input type="text" class="form-control" formControlName="detalle"> 
+                    </div> 
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    <button class="btn btn-primary btn-block">boton 1</button>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                     <button class="btn btn-primary btn-block">boton 2</button>  
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    <button  class="btn btn-danger btn-block">boton 3</button>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    <button  class="btn btn-danger btn-block">boton 4</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

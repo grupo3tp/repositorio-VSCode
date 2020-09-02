@@ -48,7 +48,7 @@
                                 <option [value]="null">seleccione un origen...</option> 
                                 <option  *ngFor="let sec of sector"  value={{sec.Detalle}}>{{sec.Detalle}}</option>      
                             </select>
-                            <p style="margin-bottom: 0px;">seleccione un origen para obtener los seriales a seleccionar</p>
+                            <p style="margin-bottom: 0px;">*seleccione un origen para obtener los seriales a seleccionar</p>
                         </div>
                        
                     </div>
@@ -83,7 +83,7 @@
                             <div class="form-group">
                                 <label  style="margin-bottom: 0px;">Serial: <button  (click)="showModal=true" class="btn"><i class="fas fa-search" style=" margin-left: 30; cursor: pointer;"></i></button></label>
                                 <!-- <p-dropdown formControlName="serial"  [showTransitionOptions]="'0ms'"  [hideTransitionOptions]="'0ms'" [options]="equipos" [(ngModel)]="equipoSeleccionado"  filter="true"  placeholder="seleccione un serial.." optionLabel="serial" [style]="{'width':'245px'}"></p-dropdown> -->
-                                <select formControlName="serial"  (change)="articuloID($event.target.value)"  class="form-control"  >
+                                <select   (change)="articuloID($event.target.value)"  class="form-control"  >
                                     <option [value]="null">seleccione ID</option>  
                                     <option *ngFor="let equipo of equipos"  [value]="equipo.serial">{{equipo.serial}}</option>            
                                 </select>
@@ -93,13 +93,13 @@
                         <div  class="col-xs-12 col-md-6">
                             <div class="form-group">
                                 <label for=""></label>
-                                <input style="margin-top: 14px;" type="text" [ngModel]="nombreArticulo" [ngModelOptions]="{standalone: true}" class="form-control" disabled >
+                                <input  style="margin-top: 14px;" type="text" [ngModel]="nombreArticulo" [ngModelOptions]="{standalone: true}" class="form-control" disabled >
                             </div>
                         </div>
                         
                         <div class="col-sm-1 col-md-2 col-lg-1 col-xs-6 mt-2">
                             <label for=""></label>
-                            <button (click)="agregar()" style="background: transparent;" [disabled]="!articuloEnInput" class="btn1 btn-link">
+                            <button  (click)="agregar()" style="background: transparent;" [disabled]="!articuloEnInput" class="btn1 btn-link">
                                 <i style="background: transparent;" class="fas fa-plus fa-3x"></i>
                             </button>     
                         </div>
@@ -110,7 +110,7 @@
                         <div class="col-sm-4 col-xs-0" ></div>
                 
                         <div class="col-md-6 col-xs-9" >
-                            <input name="art" [ngModel]="serialElegido[i]" [ngModelOptions]="{standalone: true}" class="form-control"disabled>
+                            <input formControlName="serial"  name="art" [ngModel]="serialElegido[i]"  class="form-control"disabled>
                         </div>
             
                         <div class="col-md-1 col-xs-3 ">
@@ -154,7 +154,7 @@
                 <div  class="container-fluid">
                     <div class="row">   
                         <div class="col-6">
-                            <input type="text" (input)="numeroModal($event.target.value.toUpperCase())" (Keydown.enter)="buscarNumeroModal()">
+                            <input  type="text" (input)="numeroModal($event.target.value.toUpperCase())" (Keydown.enter)="buscarNumeroModal()">
                         </div>
                         <div *ngIf="!find" class="col-1">
                             <i class="fas fa-exclamation" style="font-size:24px; color:red"></i>
