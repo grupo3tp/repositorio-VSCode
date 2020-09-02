@@ -8,6 +8,7 @@ import { OrdenCompra } from 'src/app/models/orden-compra';
 import { Articulos } from 'src/app/models/articulos.model';
 import { Sector } from 'src/app/models/sector';
 import Swal from 'sweetalert2';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-equipos',
@@ -22,11 +23,12 @@ export class EquiposComponent implements OnInit {
   //marcas : Array<Marca> = new Array<Marca>();
   articulo : Array<Articulos> = new Array<Articulos>();
   sector : Array<Sector> = new Array<Sector>();
+  sonIguales : boolean = false
+  estaVacio : boolean = false
 
-  constructor(private fb:FormBuilder, private service : DataBaseService) {  }
+  constructor(private fb:FormBuilder, private service : DataBaseService, private spinner: NgxSpinnerService) {}
 
   ngOnInit(): void {
-
     this.formCargaGranel = this.fb.group({
       estado : ['', Validators.required],
       orden : ['', Validators.required],
@@ -38,7 +40,7 @@ export class EquiposComponent implements OnInit {
       seriales : this.fb.array([this.fb.group({serial : ['']})]),
       nsInventarios : this.fb.array([this.fb.group({nInventario : ['']})])
     })
-
+    
     this.leerEstados();
   }
 
@@ -106,6 +108,7 @@ export class EquiposComponent implements OnInit {
   }
   
   agregar(formValue:any){
+    this.spinner.show()
     const carga = new CargaGranel()
     carga.FechaAlta = new Date()
     carga.id_Estado =formValue.estado
@@ -118,34 +121,83 @@ export class EquiposComponent implements OnInit {
     carga.seriales = formValue.seriales
     carga.nsInventarios = formValue.nsInventarios
     carga.Cantidad = 1
-    
-    //console.log(carga)
-   
+
     for (let i = 0; i < carga.seriales.length; i++) {
-      carga.serial = Object.values(carga.seriales[i]).toString();
-      carga.nInventario =  Object.values(carga.nsInventarios[i]).toString();
-      //console.log(carga)
-       this.service.guardarCargaGranel(carga).subscribe((cargaApi)=>{ 
-         Swal.fire({
-           title: 'Equipos guardados',
-           icon: 'success',
-           confirmButtonColor: '#3085d6',
-           confirmButtonText: 'Ok',
-         }) .then((result) =>{
-          if(result.value){
-            location.reload();
-            this.formCargaGranel.reset();
-          }
-        })
-      },error =>{
+      let serial1 = Object.values(carga.seriales[i]).toString();
+      if(serial1 == ""){
+        this.estaVacio = true
+      }
+      for (let j = i+1; j < carga.seriales.length; j++) {
+        let serial2 = Object.values(carga.seriales[j]).toString();
+        if (serial1 == serial2) {
+          this.sonIguales = true
+        }
+      };
+    };
+    for (let i = 0; i < carga.nsInventarios.length; i++) {
+      let serial1 = Object.values(carga.nsInventarios[i]).toString();
+      if(serial1 == ""){
+        this.estaVacio = true
+      }
+      for (let j = i+1; j < carga.nsInventarios.length; j++) {
+        let serial2 = Object.values(carga.nsInventarios[j]).toString();
+        if (serial1 == serial2) {
+          this.sonIguales = true
+        }
+      };
+    };
+   
+    if (this.sonIguales || this.estaVacio) {
+      this.spinner.hide()
+      if (this.estaVacio) {
         Swal.fire({
-          title: 'Error',
+          title: 'quedo un serial o Nº de inventario sin llenar',
           icon: 'warning',
           confirmButtonColor: '#3085d6',
-          confirmButtonText: 'Ok',
+          confirmButtonText: 'Ok'
         })
-      })
-
+        this.estaVacio = false
+      }else{
+        Swal.fire({
+          title: 'repitio seriales o Nº de inventario',
+          icon: 'warning',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Ok'
+        })
+        this.sonIguales = false
+      }
+     
+     
+    } else {
+      for (let i = 0; i < carga.seriales.length; i++) {
+        carga.serial = Object.values(carga.seriales[i]).toString();
+        carga.nInventario =  Object.values(carga.nsInventarios[i]).toString();
+        //console.log(carga)
+         this.service.guardarCargaGranel(carga).subscribe((cargaApi)=>{ 
+           this.spinner.hide()
+           Swal.fire({
+             title: 'Equipos guardados',
+             icon: 'success',
+             confirmButtonColor: '#3085d6',
+             confirmButtonText: 'Ok',
+           }) .then((result) =>{
+            if(result.value){
+              location.reload();
+              this.formCargaGranel.reset();
+            }
+          })
+        },error =>{
+          this.spinner.hide()
+          Swal.fire({
+            title: 'Error',
+            text: error.name,
+            icon: 'warning',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Ok',
+          })
+        })
+  
+      } 
     }
   } 
 }

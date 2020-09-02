@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-por-sector',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PorSectorComponent implements OnInit {
 
-  constructor() { }
+  formxSector : FormGroup
+
+  constructor(private fb:FormBuilder) { }
 
   ngOnInit(): void {
+    this.formxSector = this.fb.group({
+      detalle: ['', Validators.required]
+    })
+  }
+
+  agregar(formValue : any){
+    formValue.detalle
+
   }
 
 }

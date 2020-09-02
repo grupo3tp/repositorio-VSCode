@@ -85,7 +85,7 @@
             </div>
             <div class="row justify-content-around">
                 <div formArrayName="nsInventarios">
-                    <label class="mt-5"for="">Inventario:</label>
+                    <label class="mt-5" style="margin-bottom: 0%;" for="">Inventario:</label>
                     <div class="row" *ngFor="let item of getInventario.controls; let j = index" [formGroupName]="j"> 
                         <div class="col-2"></div> 
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-4">  
@@ -94,7 +94,7 @@
                     </div>     
                 </div>
                 <div formArrayName="seriales">
-                    <label  class="mt-5" for="">Serial:</label>
+                    <label  class="mt-5" style="margin-bottom: 0%;" for="">Serial:</label>
                     <div class="row" *ngFor="let item of getSeriales.controls; let i = index" [formGroupName]="i">  
                         <div class="col-md-10 col-sm-10 col-xs-7 mt-4">  
                             <input  class="form-control" (keydown.enter)="addSerial()" type="text" formControlName="serial">
@@ -112,10 +112,11 @@
             </div>
             <div class="row justify-content-end form-group mt-5"> 
                 <div class="col-md-3">
-                    <button class="btn btn-primary" (click)="agregar(formCargaGranel.value)" [disabled]="!formCargaGranel.valid" type="submit">Confirmar carga</button> 
+                    <button class="btn btn-primary" (click)="agregar(formCargaGranel.value)" [disabled]="!formCargaGranel.valid" type="button">Confirmar carga</button> 
                 </div>
             </div>
         </form>
        
     </div>
 </div>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "large" color = "#fff" type = "ball-beat" [fullScreen] = "true"><p style="color: white" > Cargando... </p></ngx-spinner>
