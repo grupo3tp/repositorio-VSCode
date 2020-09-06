@@ -211,11 +211,15 @@ export class DataBaseService {
 
   leerUsuarios():Observable<Usuarios[]>
   {
-    return this.http.get<[]>(this.URL+'/usuarios')
+    return this.http.get<[Usuarios]>(this.URL+'/usuarios')
   };
   GuardarUsuarios(user:Usuarios) : Observable<Usuarios>
   {
     return this.http.post<Usuarios>(this.URL+'/usuarios', user)
+  };
+  ActualizarUsuarios(user:Usuarios, id:number)
+  {
+    return this.http.put<Usuarios>(this.URL+'/usuarios/'+id, user);
   };
   EliminarUsuarios(id:number)
   {
