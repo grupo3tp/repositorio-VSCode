@@ -16,6 +16,7 @@ export class UsuariosComponent implements OnInit {
   users : Array<Usuarios> = new Array<Usuarios>();
   leerUsuarios : Array<Usuarios> = new Array<Usuarios>();
   esIgual : boolean = false;
+  nuevoUsuario : boolean = false;
 
   constructor(private fb : FormBuilder, private service : DataBaseService, private spinner: NgxSpinnerService) { }
 
@@ -29,10 +30,34 @@ export class UsuariosComponent implements OnInit {
     this.cargaUsuarios()
   }
 
+  buscarUsarios(){
+    this.service.leerUsuarios().subscribe((item)=>{
+      this.users = item;
+      
+    })
+  }
+
   cargaUsuarios(){
     this.service.leerUsuarios().subscribe((item)=>{
       this.leerUsuarios = item
+      this.buscarUsarios();
     })
+  }
+
+  agregarUsuario(){
+    this.nuevoUsuario = !this.nuevoUsuario;
+  }
+
+  activar(id : number, activo : boolean){
+    activo = !activo;
+    let valor : number;
+    if(activo == true){
+      valor = 1
+    }else{
+      valor = 0
+    }
+
+  this.service.ActivarDesactivar(id, valor)
   }
 
   agregar(formValue : any){

@@ -291,5 +291,9 @@ export class DataBaseService {
      return this.http.post(this.URL+'/cargaGranel',nueva)
    };
 
+   ActivarDesactivar(id: number, Activo : number){
+     console.log(id, Activo)
+    return this.http.put<Usuarios>(this.URL+'/ActivarDesactivarUsuario/'+id, Activo);
+   }
 }
 
