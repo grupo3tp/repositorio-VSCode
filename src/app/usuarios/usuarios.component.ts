@@ -76,8 +76,11 @@ export class UsuariosComponent implements OnInit {
             icon: 'success',
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'Ok',
+          }).then((result)=>{
+            if(result.value){
+              location.reload();
+            }
           })
-          location.reload()
         },error=>{
           Swal.fire({
             title: 'Error',
@@ -98,6 +101,7 @@ export class UsuariosComponent implements OnInit {
     carga.Usuario = formValue.usuario
     carga.Pass = formValue.pass
     carga.Nivel_Seguridad = formValue.nivel
+    carga.Activo = 1
  
     for (let i = 0; i < this.leerUsuarios.length; i++) {
       if (this.leerUsuarios[i].Usuario == carga.Usuario) {
