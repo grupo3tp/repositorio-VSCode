@@ -4,6 +4,7 @@ import { Usuarios } from '../models/usuarios';
 import { DataBaseService } from '../servicios/data-base.service';
 import Swal from 'sweetalert2';
 import {NgxSpinnerService} from 'ngx-spinner';
+import { Valor } from '../models/valor';
 
 @Component({
   selector: 'app-usuarios',
@@ -17,6 +18,8 @@ export class UsuariosComponent implements OnInit {
   leerUsuarios : Array<Usuarios> = new Array<Usuarios>();
   esIgual : boolean = false;
   nuevoUsuario : boolean = false;
+  activado : string
+  desactivado :  string
 
   constructor(private fb : FormBuilder, private service : DataBaseService, private spinner: NgxSpinnerService) { }
 
@@ -30,13 +33,6 @@ export class UsuariosComponent implements OnInit {
     this.cargaUsuarios()
   }
 
-  buscarUsarios(){
-    this.service.leerUsuarios().subscribe((item)=>{
-      this.users = item;
-      
-    })
-  }
-
   cargaUsuarios(){
     this.service.leerUsuarios().subscribe((item)=>{
       this.leerUsuarios = item
@@ -44,20 +40,55 @@ export class UsuariosComponent implements OnInit {
     })
   }
 
+  buscarUsarios(){
+    this.service.leerUsuarios().subscribe((item)=>{
+      this.users = item;
+      
+    })
+  }
+
   agregarUsuario(){
     this.nuevoUsuario = !this.nuevoUsuario;
   }
 
-  activar(id : number, activo : boolean){
-    activo = !activo;
-    let valor : number;
-    if(activo == true){
-      valor = 1
+  activar(id : number, activo : number){
+    
+    let valor = new Valor;
+    valor.Id_Usuario=id
+    if(activo == 0){
+      valor.Activo = 1 //1 usuario activado
     }else{
-      valor = 0
+      valor.Activo = 0 //0 usuario desactivado
     }
 
-  this.service.ActivarDesactivar(id, valor)
+    Swal.fire({
+      title: 'seguro desea cambiar el estado del usuario',
+      icon: 'warning',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }) .then((result) =>{
+     if(result.value){  
+        this.service.ActivarDesactivar(valor).subscribe((item)=>{
+          Swal.fire({
+            title: 'cambio realizado',
+            icon: 'success',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Ok',
+          })
+          location.reload()
+        },error=>{
+          Swal.fire({
+            title: 'Error',
+            text: error.name,
+            icon: 'warning',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Ok',
+          })
+        })
+     }
+   })
   }
 
   agregar(formValue : any){

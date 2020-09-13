@@ -18,6 +18,7 @@ import { CargaGranel } from '../models/carga-granel';
 import { TipoPuesto } from '../models/tipo-puesto';
 import { Gerencia } from '../models/gerencia';
 import { UbicacionEdif } from '../models/ubicacion-edif';
+import { Valor } from '../models/valor';
 
 @Injectable({
   providedIn: 'root'
@@ -291,9 +292,8 @@ export class DataBaseService {
      return this.http.post(this.URL+'/cargaGranel',nueva)
    };
 
-   ActivarDesactivar(id: number, Activo : number){
-     console.log(id, Activo)
-    return this.http.put<Usuarios>(this.URL+'/ActivarDesactivarUsuario/'+id, Activo);
+   ActivarDesactivar(Activo : Valor){
+    return this.http.put<Valor>(this.URL+'/ActivarDesactivarUsuario', Activo);
    }
 }
 

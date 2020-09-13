@@ -17,7 +17,10 @@
                         <th scope="row">{{usuarios.Nombre_Usuario}}</th>
                         <td>{{usuarios.Usuario}}</td>
                         <td>{{usuarios.Nivel_Usuario}}</td>
-                        <td><button (click)="activar(usuarios.Id_Usuario, usuarios.Activo)" class="btn btn-primary">{{usuarios.Activo}}</button></td>
+                        <td>
+                            <button *ngIf="usuarios.Activo == 1" (click)="activar(usuarios.Id_Usuario, usuarios.Activo)" class="btn btn-primary btn-block">Activado</button>
+                            <button *ngIf="usuarios.Activo == 0" (click)="activar(usuarios.Id_Usuario, usuarios.Activo)" class="btn btn-primary btn-block">Desactivado</button>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
