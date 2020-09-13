@@ -4,6 +4,9 @@ export class Usuarios {
     Usuario:string 
     Pass :string 
     Nivel_Seguridad :number
-    token : string
+    Token : string
+    Activo : boolean
+    Id_Nivel : number
+    Nivel_Usuario : string
 }
 

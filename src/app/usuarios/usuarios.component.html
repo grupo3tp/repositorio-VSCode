@@ -1,37 +1,70 @@
 <div class="recuadro">
-    <div class="container mt-5">
-
-        <h1>Carga de usuarios</h1>
-        <form [formGroup]="formUser" (submit)="agregar(formUser.value)">
-            <div class="row justify-content-center form-group">
-                <div class=" col-lg-9 col-md-10 col-sm-10 col-xs-12">
-                    <label for="">Nombre de usuario:</label>
-                    <input placeholder="Ingrese nombre y apellido..."  formControlName="nombre"   type="text" class="form-control">
-                </div>
-                <div class=" col-lg-9 col-md-10 col-sm-10 col-xs-12">
-                    <label for="">Usuario:</label>
-                    <input placeholder="Ingrese un usuario..." formControlName="usuario" type="text" class="form-control">
-                </div>
-                <div class=" col-lg-9 col-md-10 col-sm-10 col-xs-12">
-                    <label for="">Contraseña:</label>
-                    <input placeholder="Ingrese una contraseña..."  formControlName="pass" type="password" class="form-control">
-                </div>
-                <div class=" col-lg-9 col-md-10 col-sm-10 col-xs-12">
-                    <label for="">Nivel de seguridad:</label>
-                    <select  formControlName="nivel"  name="" id=""  class="form-control">
-                        <option hidden value="">Selecciona una opción</option>
-                        <option value="1">Administrador</option>
-                        <option value="2">Secretaria</option>
-                        <option value="3">Usuario</option>
-                    </select>
-                </div>
+    <div class="containerUsuario mt-5 justify-content-center">
+        <div *ngIf="!nuevoUsuario"> 
+            <h1>Lista de Usuarios</h1>
+            <div>
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nombre de Usuario</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Nivel de Seguridad</th>
+                        <th scope="col">Habilitado</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let usuarios of users">
+                        <th scope="row">{{usuarios.Nombre_Usuario}}</th>
+                        <td>{{usuarios.Usuario}}</td>
+                        <td>{{usuarios.Nivel_Usuario}}</td>
+                        <td><button (click)="activar(usuarios.Id_Usuario, usuarios.Activo)" class="btn btn-primary">{{usuarios.Activo}}</button></td>
+                      </tr>
+                    </tbody>
+                  </table>
             </div>
-            <div class="row mt-5">   
-                <div class="col-9"></div>
-                <div class="form-group col-md-2">
+                <div class="row justify-content-center">
+                        <div class="form-group col-md-3">   
+                            <button class= "btn btn-primary btn-block" (click)="agregarUsuario()">Agregar Usuario</button>
+                        </div>
+                </div>
+        </div>
+        <div *ngIf="nuevoUsuario"> 
+            <h1>Carga de usuarios</h1>
+            <form [formGroup]="formUser" (submit)="agregar(formUser.value)">
+                <div class="row justify-content-center form-group">
+                    <div class=" col-lg-8 col-md-9 col-sm-10 col-xs-12">
+                        <label for="">Nombre de usuario:</label>
+                        <input placeholder="Ingrese nombre y apellido..."  formControlName="nombre"   type="text" class="form-control">
+                    </div>
+                    <div class=" col-lg-8 col-md-9 col-sm-10 col-xs-12">
+                        <label for="">Usuario:</label>
+                        <input placeholder="Ingrese un usuario..." formControlName="usuario" type="text" class="form-control">
+                    </div>
+                    <div class=" col-lg-8 col-md-9 col-sm-10 col-xs-12">
+                        <label for="">Contraseña:</label>
+                        <input placeholder="Ingrese una contraseña..."  formControlName="pass" type="password" class="form-control">
+                    </div>
+                    <div class=" col-lg-8 col-md-9 col-sm-10 col-xs-12">
+                        <label for="">Nivel de seguridad:</label>
+                        <select  formControlName="nivel"  name="" id=""  class="form-control">
+                            <option hidden value="">Selecciona una opción</option>
+                            <option value="1">Administrador</option>
+                            <option value="2">Secretaria</option>
+                            <option value="3">Usuario</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mt-5 d-flex justify-content-around">   
+                    <div class="col-2">
                     <button class="btn btn-primary btn-block" type="submit" [disabled]="!formUser.valid">Agregar</button>
-                </div>    
-            </div>
-        </form>
+                </div>
+                    <div class="form-group col-md-2">
+                        <button class="btn btn-danger btn-block" (click)="agregarUsuario()" >Cancelar</button>
+                    </div>    
+                </div>
+            </form>
+            </div> 
+
+        
     </div>
 </div>

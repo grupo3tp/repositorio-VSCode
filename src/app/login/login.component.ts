@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
      setTimeout(() => {
       this.service.setToken(data.token);
       this.service.guardarLocalStorage(data.token);
-      this.user.token=data.token;
+      this.user.Token=data.token;
       this.datosCorrectos=true;
       this.datos.emit(this.datosCorrectos);
       //console.log("usuario y contraseña correctas")
