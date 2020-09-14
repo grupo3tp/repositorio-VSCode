@@ -48,13 +48,12 @@ export class LoginComponent implements OnInit {
       this.datosCorrectos=true;
       this.datos.emit(this.datosCorrectos);
       //console.log("usuario y contraseña correctas")
-      //console.log(this.user.token)
       this.spinner.hide()
+      this.router.navigateByUrl("/")
      }, 600);
      
     },
     error => {
-      console.log(error);
       this.datosCorrectos=false;
       this.textoError =error.error.errorMessage
       this.spinner.hide()

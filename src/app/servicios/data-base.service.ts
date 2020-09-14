@@ -280,7 +280,7 @@ export class DataBaseService {
 
    buscarHistorial(id:string):Observable<Historial[]>
    {
-     return this.http.get<Historial[]>(this.URL+'/historial/' +id)
+     return this.http.get<Historial[]>(this.URL+'/historial/'+id)
    };
    buscarHistoActa(id:string):Observable<Historial[]>
    {
