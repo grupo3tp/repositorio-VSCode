@@ -31,7 +31,6 @@ h1{
     height: 75%;
     padding-bottom: 5px;
     padding-top: 5px;
-    transform: translate(0%, 7%);
     margin: auto;
     background: rgba(255, 255, 255, 0.15);
     border-radius: 2.5rem;
@@ -75,4 +74,37 @@ h1{
     border: 0 none;
     background: #ebf5fc;
 
+}
+@media screen and (max-width: 600px) {
+    h1{
+        font-size: 2.9em;
+    }
+
+    .containerUsuario{
+        width: 100%;
+        border-radius: 2.5rem;
+    }
+   table {
+       width:100%;
+   }
+   thead {
+       display: none;
+   }
+   tr:nth-of-type(2n) {
+       background-color: inherit;
+   }
+   tr td:first-child {
+       background: #f0f0f0;
+       font-weight:bold;
+       font-size:1.3em;
+   }
+   tbody td {
+       display: block;
+       text-align:center;
+   }
+   tbody td:before {
+       content: attr(data-th);
+       display: block;
+       text-align:center;
+   }
 }

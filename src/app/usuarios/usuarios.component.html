@@ -2,9 +2,9 @@
     <div class="containerUsuario mt-5 justify-content-center">
         <div *ngIf="!nuevoUsuario"> 
             <h1>Lista de Usuarios</h1>
-            <div>
+            <div  class="table-responsive">
                 <table class="table">
-                    <thead>
+                    <thead >
                       <tr>
                         <th scope="col">Nombre de Usuario</th>
                         <th scope="col">Usuario</th>
@@ -19,14 +19,14 @@
                         <td>{{usuarios.Nivel_Usuario}}</td>
                         <td>
                             <button *ngIf="usuarios.Activo == 1" (click)="activar(usuarios.Id_Usuario, usuarios.Activo)" class="btn btn-primary btn-block">Activado</button>
-                            <button *ngIf="usuarios.Activo == 0" (click)="activar(usuarios.Id_Usuario, usuarios.Activo)" class="btn btn-primary btn-block">Desactivado</button>
+                            <button *ngIf="usuarios.Activo == 0" (click)="activar(usuarios.Id_Usuario, usuarios.Activo)" class="btn btn-secondary btn-block">Desactivado</button>
                         </td>
                       </tr>
                     </tbody>
                   </table>
             </div>
                 <div class="row justify-content-center">
-                        <div class="form-group col-md-3">   
+                        <div class="form-group col-md-4">   
                             <button class= "btn btn-primary btn-block" (click)="agregarUsuario()">Agregar Usuario</button>
                         </div>
                 </div>
@@ -57,8 +57,8 @@
                         </select>
                     </div>
                 </div>
-                <div class="row mt-5 d-flex justify-content-around">   
-                    <div class="col-2">
+                <div class="row mt-5 d-flex justify-content-around form-group">   
+                    <div class="col-md-2">
                     <button class="btn btn-primary btn-block" type="submit" [disabled]="!formUser.valid">Agregar</button>
                 </div>
                     <div class="form-group col-md-2">

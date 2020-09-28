@@ -16,10 +16,9 @@ export class AppComponent {
   token: string
   //carga:boolean
 
-  constructor(public service:DataBaseService,){
+  constructor(public service:DataBaseService){
     
-   
-  
+ 
   }
   ngOnInit(): void{
 
@@ -35,8 +34,7 @@ export class AppComponent {
    //     return 'onbeforeunload';
    //  }
      
-     //ESTO ES PARA QUE VERIFIQUE EL TOKEN EN LOCALSTORAGE CADA VEZ QUE CAMBIA DE PESTAÑA, AHORA ESTA ECHO CON LA CONFIRMACION 
-     //DEL TOKEN QUE SE ENCUENTRA EN LAS COOKIES
+     //ESTO ES PARA QUE VERIFIQUE EL TOKEN EN LOCALSTORAGE CADA VEZ QUE CAMBIA DE PESTAÑA
        this.token = JSON.parse(localStorage.getItem("Token"));
        if(this.token == null){ 
        }else{
