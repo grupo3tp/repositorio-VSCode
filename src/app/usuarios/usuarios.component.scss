@@ -61,8 +61,41 @@ h1{
 
 }
 .containerUsuario{
-    width: 700px;
+    width: 70%;
     margin: auto;
     background: #ebf5fc;
     background-color: #ecf0f3;
+}
+@media screen and (max-width: 600px) {
+        h1{
+            font-size: 2em;
+        }
+
+        .containerUsuario{
+            width: 100%;
+            border-radius: 2.5rem;
+        }
+       table {
+           width:100%;
+       }
+       thead {
+           display: none;
+       }
+       tr:nth-of-type(2n) {
+           background-color: inherit;
+       }
+       tr td:first-child {
+           background: #f0f0f0;
+           font-weight:bold;
+           font-size:1.3em;
+       }
+       tbody td {
+           display: block;
+           text-align:center;
+       }
+       tbody td:before {
+           content: attr(data-th);
+           display: block;
+           text-align:center;
+       }
 }
