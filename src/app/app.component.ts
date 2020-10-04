@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { DataBaseService } from './servicios/data-base.service';
 import { Usuarios } from './models/usuarios';
 
@@ -14,14 +14,13 @@ export class AppComponent {
   datos:boolean 
   user: Usuarios = new Usuarios()
   token: string
-  //carga:boolean
+  nivelComponent : number;
 
-  constructor(public service:DataBaseService){
-    
- 
-  }
+  constructor(public service:DataBaseService){}
+
   ngOnInit(): void{
-
+    
+    // con esto verifica que el toquen este el las cookies, es mas rapido que el localstorage pero no verifica en la BD
      //console.log(this.service.getToken())
      //if(this.service.getToken()==true){
      //this.datos=true;  
@@ -42,7 +41,7 @@ export class AppComponent {
          this.service.logintoken(token).subscribe (data =>{
           // console.log(data.token)
            this.datos=data.token; 
-        
+          this.nivelComponent = JSON.parse(localStorage.getItem("idNivel"))
        })
        }   
   }
@@ -50,9 +49,12 @@ export class AppComponent {
 
   cambioif(event){
     this.datos=event
-
   }
+
+  tipoNivel(event){
+   this.nivelComponent = event;
+   //console.log("esto le llega a el componente padre: "+this.nivelComponent)
+  }
+
  
-
-
 }

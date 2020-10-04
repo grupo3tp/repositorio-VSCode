@@ -37,13 +37,17 @@ export class DataBaseService {
   guardarLocalStorage(token: any){
     localStorage.setItem('Token' , JSON.stringify(token))
   }
+  guardarLocalStorageId(nivel: any){
+    localStorage.setItem('idNivel' , JSON.stringify(nivel))
+  }
   logintoken(token: any): Observable<any> {
      return this.http.post(this.URL+"/token",token)
   }
   borrarLocalStorage(){
     localStorage.removeItem("Token");
+    localStorage.removeItem("idNivel");
   }
-  
+ 
   setToken(token: string) {
     this.cookies.set("token", token);
   }
@@ -214,6 +218,10 @@ export class DataBaseService {
   {
     return this.http.get<[Usuarios]>(this.URL+'/usuarios')
   };
+  leerUnUsuario(user:string):Observable<Usuarios[]>
+  {
+    return this.http.get<[Usuarios]>(this.URL+'/usuarios/'+user)
+  }
   GuardarUsuarios(user:Usuarios) : Observable<Usuarios>
   {
     return this.http.post<Usuarios>(this.URL+'/usuarios', user)

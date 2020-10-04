@@ -29,6 +29,7 @@ import { Error404Component } from './error404/error404.component';
 import { ActasComponent } from './actas/actas.component';
 import { CargaGranelComponent } from './carga-granel/carga-granel.component';
 import {DropdownModule} from 'primeng/dropdown';
+import { PerfilComponent } from './perfil/perfil.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import {DropdownModule} from 'primeng/dropdown';
     Error404Component,
     ActasComponent,
     CargaGranelComponent,
+    PerfilComponent,
     
     
   ],

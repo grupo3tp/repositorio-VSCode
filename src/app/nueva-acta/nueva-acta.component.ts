@@ -47,6 +47,7 @@ export class NuevaActaComponent implements OnInit {
   artElegidos : Array<string> = new Array<string>();
   serialElegido : Array<string> = new Array<string>();
   articuloEnInput : boolean;
+ 
 
 
   constructor (public service : DataBaseService, private creadorFormulario: FormBuilder, private spinner: NgxSpinnerService) {   
@@ -60,10 +61,12 @@ export class NuevaActaComponent implements OnInit {
   } 
 
   ngOnInit(): void {  
-    
+   
     this.nuevaActa();
     this.leerSector();
    }
+
+  
 
   leerSector(){
     this.service.leerSector().subscribe((sectorApi) =>{
