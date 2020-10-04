@@ -19,6 +19,7 @@ import { LoginComponent } from './login/login.component';
 import { Error404Component } from './error404/error404.component';
 import { ActasComponent } from './actas/actas.component';
 import { CargaGranelComponent } from './carga-granel/carga-granel.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 
 
@@ -41,6 +42,7 @@ const routes: Routes = [
   {path: 'historial',component:HistorialArticulosComponent},
   {path: 'login', component:LoginComponent},
   {path: 'cargaGranel', component:CargaGranelComponent},
+  {path: 'perfil', component:PerfilComponent}, 
   {path: '**', component:Error404Component},
 ];
 

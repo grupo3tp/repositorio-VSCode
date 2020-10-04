@@ -1,11 +1,11 @@
 <div *ngIf="datos">
-  <app-encabezado  (cambio)="cambioif($event)"></app-encabezado>
+  <app-encabezado  (cambio)="cambioif($event)" [nivel]="nivelComponent"></app-encabezado>
   <router-outlet></router-outlet>
 </div>
  
 
   <div>
-    <app-login *ngIf="!datos" (datos)="cambioif($event)"></app-login> 
+    <app-login *ngIf="!datos"  (datos)="cambioif($event)" (nivel)="tipoNivel($event)"  ></app-login>  
   </div>
 
 

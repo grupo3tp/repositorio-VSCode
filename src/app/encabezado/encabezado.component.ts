@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, HostListener} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, HostListener, Input, SimpleChanges} from '@angular/core';
+
 import { DataBaseService } from '../servicios/data-base.service';
 
 @Component({
@@ -8,21 +9,33 @@ import { DataBaseService } from '../servicios/data-base.service';
 })
 export class EncabezadoComponent implements OnInit {
   @Output() cambio = new EventEmitter();
+  @Input() nivel : number;
   estado: boolean
   mostrarMenu : boolean
   scrHeight : number
   scrWidth : number
   phone : boolean 
   icono : string
-
-  constructor(private service : DataBaseService) {   this.esPhone, this.getScreenSize()}
- 
+  noMostrar = false
+  tipoNivel : number
+  constructor(private service : DataBaseService) {  this.getScreenSize() }
   ngOnInit(): void {
+    this.nivel
+     //console.log("esto llega al encabezado del padre: "+this.nivel)
   }
 
-  esPhone(){
-  
-  }
+  // otra forma de recibir un valor a travez de la funcion input, sirve para agregarle funcionalidades a la variable
+  // como por ejemplo this.tipoNivel.toLowerCase
+
+  //  @Input()
+  //  set nivel(value : number){
+  //    value = value || null;
+  //    this.tipoNivel = value
+  //  }
+
+  //  get nivel() {return this.tipoNivel}
+
+
 
   @HostListener('window:resize', ['$event'])
   getScreenSize() {
@@ -49,15 +62,15 @@ export class EncabezadoComponent implements OnInit {
 
   cambiar(){ 
     this.mostrarMenu = !this.mostrarMenu;
-    //console.log(this.mostrarMenu)
-    
-    
   }
+  
+
   cerrarSesion(){
     this.service.logout();
     this.service.borrarLocalStorage();
     this.estado = false
     this.cambio.emit(this.estado)
+
   }
 
 }

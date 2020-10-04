@@ -13,11 +13,15 @@ import {NgxSpinnerService} from 'ngx-spinner';
 export class LoginComponent implements OnInit {
   formularioLogin: FormGroup
   datosCorrectos: boolean = true;
-  @Output()  datos = new EventEmitter();
+  @Output() datos = new EventEmitter();
+  @Output() nivel : EventEmitter<number> =  new EventEmitter<number>();
+  users : Array<Usuarios> = new Array<Usuarios>();
   user = new Usuarios();
   textoError:string="";
   Usuario:string;
   Pass: string;
+  tipoNivel: number;
+  
   
   constructor(
         private creadorFormulario: FormBuilder,
@@ -35,13 +39,17 @@ export class LoginComponent implements OnInit {
    
   }
 
-
   login() 
   {
     this.spinner.show();
     const user = {Usuario: this.Usuario, Pass: this.Pass};
     this.service.login(user).subscribe( data => {
      setTimeout(() => {
+      this.service.guardarLocalStorageId(data.nivel);
+     // console.log("esto viene de la bd: "+ data.nivel)
+      this.tipoNivel = data.nivel;
+     // console.log("esto se carga en la variable que es emitida del login: "+this.tipoNivel)
+      this.nivel.emit(this.tipoNivel);
       this.service.setToken(data.token);
       this.service.guardarLocalStorage(data.token);
       this.user.Token=data.token;

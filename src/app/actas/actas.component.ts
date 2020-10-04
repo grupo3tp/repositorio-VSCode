@@ -30,14 +30,17 @@ export class ActasComponent implements OnInit {
   serial : number;
   detalles : string;
   numeroSerie : string
-  
+  nivel : number;
   
   constructor(private service : DataBaseService) { }
 
   ngOnInit(): void {
-
+    this.idNivel();
   }
 
+  idNivel(){
+    this.nivel = JSON.parse(localStorage.getItem("idNivel"));
+   }
 
   acta(numero){
    this.nRemito = numero
