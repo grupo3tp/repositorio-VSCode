@@ -6,16 +6,19 @@
                 <div class="col-md-8">
                     <div class="form-group">
                         <label for="">Detalle:</label>
-                        <input type="text" class="form-control" formControlName="detalle"> 
+                        <select class="form-control" formControlName="id_Sec">
+                            <option [value]="null">seleccione un sector...</option>
+                            <option *ngFor="let sectores of sector" [value]="sectores.id_Sec">{{sectores.Detalle}}</option>
+                        </select>
                     </div> 
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                    <button class="btn btn-primary btn-block">boton 1</button>
+                    <button (click)="agregar" class="btn btn-primary btn-block">button</button>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                     <button class="btn btn-primary btn-block">boton 2</button>  
+                     <button (click)="agregar1" class="btn btn-primary btn-block">boton 2</button>  
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                     <button  class="btn btn-danger btn-block">boton 3</button>

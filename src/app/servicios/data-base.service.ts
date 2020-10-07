@@ -140,6 +140,10 @@ export class DataBaseService {
   {
     return this.http.get<[]>(this.URL+'/sector')
   };
+  leerSectorxId(id:number):Observable<Sector[]>
+  {
+    return this.http.get<[]>(this.URL+'/sector/'+id)
+  };
   GuardarSector(sector:Sector) : Observable<Sector>
   {
     return this.http.post<Sector>(this.URL+'/sector', sector)
@@ -302,6 +306,10 @@ export class DataBaseService {
 
    ActivarDesactivar(Activo : Valor){
     return this.http.put<Valor>(this.URL+'/ActivarDesactivarUsuario', Activo);
-   }
+   };
+
+   updatePass(Pass : Usuarios){
+    return this.http.put<Usuarios>(this.URL+'/updatePass', Pass);
+   };
 }
 
