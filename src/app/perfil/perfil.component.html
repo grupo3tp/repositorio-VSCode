@@ -1,1 +1,71 @@
-<p>perfil works!</p>
+<div class="recuadro">
+    <div class="containerUsuario mt-5 justify-content-center">
+        <div *ngIf="!nuevoUsuario"> 
+            <h1>Lista de Usuarios</h1>
+            <div  class="table-responsive">
+                <table class="table">
+                    <thead >
+                      <tr>
+                        <th scope="col">Nombre de Usuario</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Nivel de Seguridad</th>
+                        <th scope="col">Habilitado</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td scope="row">
+                            <input type="text" disabled [ngModel]="nombreUser" class="form-control">
+                        </td>
+                        <td>
+                            <input type="text" disabled [ngModel]="usuario" class="form-control"> 
+                        </td>
+                        <td>
+                            <input type="text" disabled [ngModel]="nivelUser" class="form-control">
+                        </td>
+                        <td>
+                            <button class= "btn btn-primary btn-block" (click)="agregarUsuario()">Cambiar clave</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>        
+        </div>
+        
+        <div *ngIf="nuevoUsuario"> 
+            <h1>Cambio de clave</h1>
+            <form [formGroup]="formUser" (submit)="agregar(formUser.value)">
+                <div class="row justify-content-center form-group">
+                    <div class=" col-lg-8 col-md-9 col-sm-10 col-xs-12">
+                        <label for="">Nombre de usuario:</label>
+                        <input disabled [ngModel]="nombreUser"  type="text" class="form-control" [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <div class=" col-lg-8 col-md-9 col-sm-10 col-xs-12">
+                        <label for="">Usuario:</label>
+                        <input disabled [ngModel]="usuario" type="text" class="form-control" [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <div class=" col-lg-8 col-md-9 col-sm-10 col-xs-12">
+                        <label for="">Nivel de seguridad:</label>
+                        <input disabled type="text" class="form-control" [ngModel]="nivelUser" [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <div class=" col-lg-8 col-md-9 col-sm-10 col-xs-12">
+                        <label for="">Contraseña Nueva:</label>
+                        <input placeholder="Ingrese una nueva contraseña..."  formControlName="pass" type="password" class="form-control">
+                    </div>
+                    <div class=" col-lg-8 col-md-9 col-sm-10 col-xs-12">
+                        <label for="">Repetir Contraseña Nueva:</label>
+                        <input placeholder="Ingrese una nueva contraseña..."  formControlName="pass2" type="password" class="form-control">
+                    </div>
+                </div>
+                <div class="row mt-5 d-flex justify-content-around form-group">   
+                    <div class="col-md-2">
+                    <button class="btn btn-primary btn-block" type="submit" [disabled]="!formUser.valid">Agregar</button>
+                </div>
+                    <div class="form-group col-md-2">
+                        <button class="btn btn-danger btn-block" (click)="agregarUsuario()" >Cancelar</button>
+                    </div>    
+                </div>
+            </form>
+            </div>        
+    </div>
+</div>

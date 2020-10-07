@@ -1,0 +1,101 @@
+h1{
+    color: rgb(0, 0, 0);
+    font-size: 4em;
+    text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px
+     rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px
+      rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);
+    font-family: fantasy;
+    text-align: center; 
+    margin-bottom: 20px;
+    padding-top: 30px;
+}
+
+.recuadro{
+    width: 75%;
+    height: 75%;
+    padding-bottom: 40px;
+    transform: translate(0%, 7%);
+    margin: auto;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 2.5rem;
+    background-color: #ecf0f3;
+    box-shadow: 5px 5px 20px #555555, -5px -5px 20px #555555;
+    color: black;
+   
+ 
+}
+.recuadro input{
+    display: block;
+    margin-bottom: 5px;
+    width: 100%;
+    border-radius: 10px;
+    padding: 1px;
+    border: none;
+    box-shadow: inset 5px 5px 15px rgba(175, 175, 175, 0.8), inset -5px -5px 15px
+        rgba(0, 0, 0, 0.1);
+    border: 0 none;
+    background: #ebf5fc;
+}
+.recuadro textarea{
+    display: block;
+    margin-bottom: 5px;
+    width: 100%;
+    border-radius: 10px;
+    padding: 1px;
+    border: none;
+    box-shadow: inset 5px 5px 15px rgba(175, 175, 175, 0.8), inset -5px -5px 15px
+        rgba(0, 0, 0, 0.1);
+    border: 0 none;
+    background: #ebf5fc;
+}
+.recuadro select{
+    display: block;
+    width: 100%;
+    border-radius: 10px;
+    padding: 1px;
+    border: none;
+    box-shadow: inset 5px 5px 15px rgba(175, 175, 175, 0.8), inset -5px -5px 15px
+        rgba(0, 0, 0, 0.1);
+    border: 0 none;
+    background: #ebf5fc;
+
+}
+.containerUsuario{
+    width: 70%;
+    margin: auto;
+    background: #ebf5fc;
+    background-color: #ecf0f3;
+}
+@media screen and (max-width: 600px) {
+        h1{
+            font-size: 2em;
+        }
+
+        .containerUsuario{
+            width: 100%;
+            border-radius: 2.5rem;
+        }
+       table {
+           width:100%;
+       }
+       thead {
+           display: none;
+       }
+       tr:nth-of-type(2n) {
+           background-color: inherit;
+       }
+       tr td:first-child {
+           background: #f0f0f0;
+           font-weight:bold;
+           font-size:1.3em;
+       }
+       tbody td {
+           display: block;
+           text-align:center;
+       }
+       tbody td:before {
+           content: attr(data-th);
+           display: block;
+           text-align:center;
+       }
+}
