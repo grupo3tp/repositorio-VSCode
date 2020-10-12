@@ -1,31 +1,36 @@
 <div class="recuadro">
-    <form [formGroup]="formxSector" (submit)="agregar(formxSector.value)">
+    <!-- <form [formGroup]="formxSector" (submit)="agregar(formxSector.value)"> -->
+    <form [formGroup]="formxSector">
+
         <div class="container mt-5">
             <h1>Listado por sector</h1>
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="form-group">
                         <label for="">Detalle:</label>
-                        <select class="form-control" formControlName="id_Sec">
+                        <!-- <select class="form-control" formControlName="id_Sec">
+                            <option [value]="null">seleccione un sector...</option>
+                            <option *ngFor="let sectores of sector" [value]="sectores.id_Sec">{{sectores.Detalle}}</option>
+                        </select> -->
+                        <select  (change)="sectoresID($event.target.value)"  class="form-control" formControlName="id_Sec">
                             <option [value]="null">seleccione un sector...</option>
                             <option *ngFor="let sectores of sector" [value]="sectores.id_Sec">{{sectores.Detalle}}</option>
                         </select>
+
                     </div> 
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                    <button (click)="agregar" class="btn btn-primary btn-block">button</button>
+                    <button (click)="lTotales()" class="btn btn-primary btn-block">Totales</button>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                     <button (click)="agregar1" class="btn btn-primary btn-block">boton 2</button>  
+                     <button (click)="lArticulos()" class="btn btn-primary btn-block">Por Articulo</button>  
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                    <button  class="btn btn-danger btn-block">boton 3</button>
+                    <button (click)="lSerie()" class="btn btn-primary btn-block">Con N° de Serie</button>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                    <button  class="btn btn-danger btn-block">boton 4</button>
-                </div>
+                
             </div>
         </div>
     </form>
