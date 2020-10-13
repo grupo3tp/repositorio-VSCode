@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   datosCorrectos: boolean = true;
   @Output() datos = new EventEmitter();
   @Output() nivel : EventEmitter<number> =  new EventEmitter<number>();
+  @Output() nombre : EventEmitter<string> = new EventEmitter<string>();
   users : Array<Usuarios> = new Array<Usuarios>();
   user = new Usuarios();
   textoError:string="";
@@ -47,6 +48,7 @@ export class LoginComponent implements OnInit {
      setTimeout(() => {
       this.service.guardarLocalStorageId(data.nivel);
      // console.log("esto viene de la bd: "+ data.nivel)
+     this.nombre.emit(data.nombre);
       this.tipoNivel = data.nivel;
      // console.log("esto se carga en la variable que es emitida del login: "+this.tipoNivel)
       this.nivel.emit(this.tipoNivel);

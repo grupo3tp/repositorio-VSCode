@@ -34,7 +34,7 @@ export class PerfilComponent implements OnInit {
   cargaUsuarios(){
     this.service.leerUsuarios().subscribe((item)=>{
       this.users = item;
-      this.leerToken = JSON.parse(localStorage.getItem("Token"))
+      this.leerToken = JSON.parse(sessionStorage.getItem("Token"))
       for (let i = 0; i < this.users.length; i++) {
         if (this.users[i].Token == this.leerToken){
           this.nombreUser = this.users[i].Nombre_Usuario;

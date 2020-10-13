@@ -10,6 +10,7 @@ import { DataBaseService } from '../servicios/data-base.service';
 export class EncabezadoComponent implements OnInit {
   @Output() cambio = new EventEmitter();
   @Input() nivel : number;
+  @Input() userName : string
   estado: boolean
   mostrarMenu : boolean
   scrHeight : number
@@ -18,8 +19,10 @@ export class EncabezadoComponent implements OnInit {
   icono : string
   noMostrar = false
   tipoNivel : number
+  
   constructor(private service : DataBaseService) {  this.getScreenSize() }
   ngOnInit(): void {
+
     this.nivel
      //console.log("esto llega al encabezado del padre: "+this.nivel)
   }
