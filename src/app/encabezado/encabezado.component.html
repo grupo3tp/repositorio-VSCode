@@ -4,13 +4,11 @@
         <i id="cursor" class='menu' [ngClass]=" mostrarMenu  ? 'fas fa-window-close' : 'fas fa-align-justify'"  style='font-size:24px;'></i>
       </button>
         <!-- <button (click)="cambiar()" class="btn btn-link"><i id="cursor" class='menu fas fa-align-justify' style='font-size:24px;'></i></button> -->
-      <a  class="navbar-brand" href="/">&nbsp;&nbsp; TC Ordenado      
+      <a *ngIf="!phone" class="navbar-brand" href="/">&nbsp;&nbsp; TC Ordenado      
          <!-- <img class="img" src="assets/logo2.jpg"  width="60" height="40">  -->
       </a>     
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          
-        </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent"> </div>
+        <a class="btn btn-link" href="/perfil">{{userName}}</a>
         <button class="btn btn-link" (click)="cerrarSesion()">Cerrar Sesión</button>
      </nav> <!--final nav bar  -->
 

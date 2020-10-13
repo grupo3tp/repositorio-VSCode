@@ -15,6 +15,9 @@ export class AppComponent {
   user: Usuarios = new Usuarios()
   token: string
   nivelComponent : number;
+  nombreUsuario : string;
+  usuarios : Array<Usuarios> = new Array<Usuarios>();
+
 
   constructor(public service:DataBaseService){}
 
@@ -34,14 +37,22 @@ export class AppComponent {
    //  }
      
      //ESTO ES PARA QUE VERIFIQUE EL TOKEN EN LOCALSTORAGE CADA VEZ QUE CAMBIA DE PESTAÑA
-       this.token = JSON.parse(localStorage.getItem("Token"));
+       this.token = JSON.parse(sessionStorage.getItem("Token"));
        if(this.token == null){ 
        }else{
          const token = {token:this.token}
          this.service.logintoken(token).subscribe (data =>{
           // console.log(data.token)
            this.datos=data.token; 
-          this.nivelComponent = JSON.parse(localStorage.getItem("idNivel"))
+          this.nivelComponent = JSON.parse(sessionStorage.getItem("idNivel"))
+          this.service.leerUsuarios().subscribe((item)=>{
+            this.usuarios = item;
+            this.usuarios.forEach(element => {
+              if (element.Token == this.token) {
+                this.nombreUsuario = element.Nombre_Usuario;
+              }
+            });
+          })
        })
        }   
   }
@@ -54,6 +65,10 @@ export class AppComponent {
   tipoNivel(event){
    this.nivelComponent = event;
    //console.log("esto le llega a el componente padre: "+this.nivelComponent)
+  }
+
+  userName(event){
+    this.nombreUsuario = event;
   }
 
  

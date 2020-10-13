@@ -35,17 +35,17 @@ export class DataBaseService {
   }
   
   guardarLocalStorage(token: any){
-    localStorage.setItem('Token' , JSON.stringify(token))
+    sessionStorage.setItem('Token' , JSON.stringify(token))
   }
   guardarLocalStorageId(nivel: any){
-    localStorage.setItem('idNivel' , JSON.stringify(nivel))
+    sessionStorage.setItem('idNivel' , JSON.stringify(nivel))
   }
   logintoken(token: any): Observable<any> {
      return this.http.post(this.URL+"/token",token)
   }
   borrarLocalStorage(){
-    localStorage.removeItem("Token");
-    localStorage.removeItem("idNivel");
+    sessionStorage.removeItem("Token");
+    sessionStorage.removeItem("idNivel");
   }
  
   setToken(token: string) {
