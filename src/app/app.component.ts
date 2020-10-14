@@ -40,6 +40,7 @@ export class AppComponent {
        this.token = JSON.parse(sessionStorage.getItem("Token"));
        if(this.token == null){ 
        }else{
+         this.datos=true;
          const token = {token:this.token}
          this.service.logintoken(token).subscribe (data =>{
           // console.log(data.token)

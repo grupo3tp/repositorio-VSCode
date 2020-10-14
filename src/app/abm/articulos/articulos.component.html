@@ -23,7 +23,7 @@
             <div class="row justify-content-center">
         
                 <div class="col-md-8">
-                    <div class="form-group">
+                    <div class="form-group" *ngIf="!esModificar">
                         <label for="">Detalle:</label>
                         <input (input)="detalle($event.target.value)" type="text" class="form-control" formControlName="Detalle">
                         <div *ngIf="formularioArticulos.controls['Detalle'].invalid && formularioArticulos.controls['Detalle'].dirty" class="alert alert-danger" role="alert">
@@ -32,7 +32,7 @@
                     </div> 
                 </div>
                 
-                <div class="form-group col-md-8 ">
+                <div *ngIf="!esModificar" class="form-group col-md-8 ">
                     <label for="">Marca:</label>
                     <select (change)="marcaID($event.target.value)"class="form-control" formControlName="Marca">
                         <option [value]="null">seleccione una marca...</option>
@@ -40,21 +40,58 @@
                     </select>
                 </div>
         
-                <div class="form-group col-md-8">
+                <div *ngIf="!esModificar" class="form-group col-md-8">
                     <label for="">Tipo:</label>
                     <select (change)="tipoID($event.target.value)" class="form-control" formControlName="Tipo">
                         <option [value]="null">seleccione un tipo...</option>
                         <option *ngFor="let tipo of tipos" [value]="tipo.id_Segmento">{{tipo.Detalle}}</option>
                     </select>
                 </div>  
-        
-            </div>;
-                <div class="row">
-                    <div class="col-md-9"></div>
-                    <div class="col-md-2">
-                        <button (click)="agregar()" class="btn btn-primary" [disabled]="!formularioArticulos.valid">Agregar</button>
+
+                <div class="form-group col-md-8" *ngIf="esModificar">
+                    <label for="">Articulos:</label>
+                    <select (change)="artId($event.target.value)"class="form-control">
+                        <option [value]="null">seleccione un articulo...</option>
+                        <option *ngFor="let art of articulos" [value]="art.id_Art">{{art.Detalle}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-8" *ngIf="esModificar">
+                    <label for="">Modifique el Articulo:</label>
+                    <input (input)="detalle($event.target.value)" type="text" class="form-control" [(ngModel)]="artName" formControlName="Detalle">
+                    <div *ngIf="formularioArticulos.controls['Detalle'].invalid && formularioArticulos.controls['Detalle'].dirty" class="alert alert-danger" role="alert">
+                    <samp *ngIf="formularioArticulos.controls['Detalle'].errors.required"> la modificacion es requerido!</samp>
                     </div> 
+                </div>
+
+                <div *ngIf="esModificar" class="form-group col-md-8 ">
+                    <label for="">Marca:</label>
+                    <select (change)="marcaID($event.target.value)"class="form-control" formControlName="Marca">
+                        <option [value]="null">seleccione una marca...</option>
+                        <option *ngFor="let marca of marcas" [value]="marca.id_Marca">{{marca.Detalle}}</option>
+                    </select>
+                </div>
+        
+                <div *ngIf="esModificar" class="form-group col-md-8">
+                    <label for="">Tipo:</label>
+                    <select (change)="tipoID($event.target.value)" class="form-control" formControlName="Tipo">
+                        <option [value]="null">seleccione un tipo...</option>
+                        <option *ngFor="let tipo of tipos" [value]="tipo.id_Segmento">{{tipo.Detalle}}</option>
+                    </select>
+                </div>  
+            </div>;
+
+            <div class="row justify-content-around">
+                
+                <div class="col-lg-4 col-md-2 col-sm-4 col-xs-2">
+                    <button *ngIf="!esModificar" (click)="modificar()" class="btn btn-primary btn-block">Modificar</button>
+                    <button *ngIf="esModificar" (click)="atras()" class="btn btn-danger btn-block">Atras</button>
                 </div> 
+                <div class="col-lg-4 col-md-2 col-sm-4 col-xs-2">
+                    <button  *ngIf="!esModificar" (click)="agregar()" class="btn btn-primary btn-block" [disabled]="!formularioArticulos.valid">Agregar</button>
+                    <button *ngIf="esModificar" (click)="modificacion()" class="btn btn-primary btn-block" [disabled]="!formularioArticulos.valid">Modificar</button>
+                </div>
+            </div> 
             
         </div>;  
     </form>   
