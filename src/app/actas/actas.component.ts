@@ -39,7 +39,7 @@ export class ActasComponent implements OnInit {
   }
 
   idNivel(){
-    this.nivel = JSON.parse(localStorage.getItem("idNivel"));
+    this.nivel = JSON.parse(sessionStorage.getItem("idNivel"));
    }
 
   acta(numero){
