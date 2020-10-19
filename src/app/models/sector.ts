@@ -6,7 +6,7 @@ export class Sector {
       Articulo : string;
       Cantidad : number;
       id_Sec : number;
-      Detalle : String;
+      Detalle : string;
       telefonos : number;
       id_TipoSector : number;
       id_Dir : number;

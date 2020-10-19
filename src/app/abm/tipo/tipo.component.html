@@ -15,6 +15,9 @@
         <li class="nav-item">
             <a class="nav-link" id="contact-tab" data-toggle="tab" href="/equipos" role="tab" aria-controls="contact" aria-selected="false">Equipos</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="/ubicacion-edif" role="tab" aria-controls="contact" aria-selected="false">Edificios</a>
+        </li>
     </ul>
     <div class="container mt-5 ">
         <h1>Tipos</h1>
@@ -48,7 +51,7 @@
         <div class="row justify-content-around">
             
             <div class="col-lg-4 col-md-2 col-sm-4 col-xs-2">
-                <button *ngIf="!esAgregar && !esModificar" class="btn btn-primary btn-block" (click)='agregarTipo()'>Agregar Marca</button>
+                <button *ngIf="!esAgregar && !esModificar" class="btn btn-primary btn-block" (click)='agregarTipo()'>Agregar Tipo</button>
                 <button *ngIf="esAgregar" class="btn btn-primary btn-block" [disabled]="!formularioTipos.valid" (click)='agregar()'>Agregar</button>
                 <button *ngIf="!esAgregar && esModificar" class="btn btn-primary btn-block" [disabled]="!formularioTipos.valid" (click)='actualizarTipo()'>Actualizar</button>
             </div>
