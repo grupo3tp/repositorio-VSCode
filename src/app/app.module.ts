@@ -30,6 +30,7 @@ import { ActasComponent } from './actas/actas.component';
 import { CargaGranelComponent } from './carga-granel/carga-granel.component';
 import {DropdownModule} from 'primeng/dropdown';
 import { PerfilComponent } from './perfil/perfil.component';
+import { UbicacionEdifComponent } from './abm/ubicacion-edif/ubicacion-edif.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { PerfilComponent } from './perfil/perfil.component';
     ActasComponent,
     CargaGranelComponent,
     PerfilComponent,
+    UbicacionEdifComponent,
     
     
   ],

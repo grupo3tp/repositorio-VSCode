@@ -20,6 +20,8 @@ import { Error404Component } from './error404/error404.component';
 import { ActasComponent } from './actas/actas.component';
 import { CargaGranelComponent } from './carga-granel/carga-granel.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { UbicacionEdif } from './models/ubicacion-edif';
+import { UbicacionEdifComponent } from './abm/ubicacion-edif/ubicacion-edif.component';
 
 
 
@@ -42,7 +44,8 @@ const routes: Routes = [
   {path: 'historial',component:HistorialArticulosComponent},
   {path: 'login', component:LoginComponent},
   {path: 'cargaGranel', component:CargaGranelComponent},
-  {path: 'perfil', component:PerfilComponent}, 
+  {path: 'perfil', component:PerfilComponent},
+  {path: 'ubicacion-edif', component:UbicacionEdifComponent}, 
   {path: '**', component:Error404Component},
 ];
 

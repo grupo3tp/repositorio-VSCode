@@ -19,6 +19,7 @@ import { TipoPuesto } from '../models/tipo-puesto';
 import { Gerencia } from '../models/gerencia';
 import { UbicacionEdif } from '../models/ubicacion-edif';
 import { Valor } from '../models/valor';
+import { Provincias } from '../models/provincias';
 
 @Injectable({
   providedIn: 'root'
@@ -212,6 +213,23 @@ export class DataBaseService {
   }
   //-------------- fin UbicacionEdif
 
+  leerProvincias():Observable<Provincias[]>
+  {
+    return this.http.get<[]>(this.URL+'/distritos')
+  };
+  GuardarProvincias(sector:Provincias) : Observable<Provincias>
+  {
+    return this.http.post<Provincias>(this.URL+'/distritos', sector)
+  };
+  ActualizarProvincias(sector:Provincias, id:number)
+  {
+    return this.http.put<Provincias>(this.URL+'/distritos/'+id, sector);
+  };
+  EliminarProvincias(id:number)
+  {
+    return this.http.delete<Provincias>(this.URL+'/distritos/'+id)
+  }
+  //---------------fin provincias
   leerTransporte():Observable<Transporte[]>
   {
       return this.http.get<Transporte[]>(this.URL+'/transporte')
