@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   buscar(){
     
     //this.dato.emit(this.number)
-    location.replace("/historial")
+    location.replace("/#/historial")
   }
 
 }

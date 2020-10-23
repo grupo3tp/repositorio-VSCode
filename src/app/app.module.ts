@@ -31,6 +31,7 @@ import { CargaGranelComponent } from './carga-granel/carga-granel.component';
 import {DropdownModule} from 'primeng/dropdown';
 import { PerfilComponent } from './perfil/perfil.component';
 import { UbicacionEdifComponent } from './abm/ubicacion-edif/ubicacion-edif.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { UbicacionEdifComponent } from './abm/ubicacion-edif/ubicacion-edif.comp
     DropdownModule,   
   ],
   providers: [
-    DataBaseService
+    DataBaseService,
+    
   ],
   bootstrap: [AppComponent]
 })

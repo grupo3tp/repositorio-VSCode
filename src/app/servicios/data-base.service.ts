@@ -26,8 +26,8 @@ import { Provincias } from '../models/provincias';
 })
 export class DataBaseService {
  
-  URL:string = "http://localhost:3300/api"
-  
+  URL:string = "https://quiet-depths-07107.herokuapp.com/api" 
+  // URL:string = "http://localhost:3300/api"
 
   constructor(private http : HttpClient, private cookies: CookieService) { }
 
