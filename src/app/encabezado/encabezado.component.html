@@ -3,26 +3,31 @@
       <button *ngIf="phone" (click)="cambiar()" class="btn btn-link" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <i id="cursor" class='menu' [ngClass]=" mostrarMenu  ? 'fas fa-window-close' : 'fas fa-align-justify'"  style='font-size:24px;'></i>
       </button>
+      
         <!-- <button (click)="cambiar()" class="btn btn-link"><i id="cursor" class='menu fas fa-align-justify' style='font-size:24px;'></i></button> -->
       <a *ngIf="!phone" class="navbar-brand" href="/">&nbsp;&nbsp; TC Ordenado      
          <!-- <img class="img" src="assets/logo2.jpg"  width="60" height="40">  -->
       </a>     
         <div class="collapse navbar-collapse" id="navbarSupportedContent"> </div>
-        <a class="btn btn-link" href="/perfil">{{userName}}</a>
+        <a class="btn btn-link" href="/#/perfil">{{userName}}</a>
         <button class="btn btn-link" (click)="cerrarSesion()">Cerrar Sesión</button>
      </nav> <!--final nav bar  -->
 
-    <div data-component="sidebar">
-      <div class="sidebar">
+    <div data-component="sidebar"  data-toggle="collapse" >
+      <div class="sidebar ">
         <ul class="list-group flex-column d-inline-block first-menu" [ngClass]="{ 'active': !mostrarMenu }">
+          <li  *ngIf="nivel != 3 && phone" class="list-group-item pl-3 py-2">
+            <a  routerLink="/"><i  class="fas fa-bookmark" aria-hidden="true"></i><span class="ml-2 align-middle">Principal</span></a>
+           
+          </li> 
           <li class="list-group-item pl-3 py-2">
             <a style="cursor: pointer;"><i class="fas fa-sticky-note" aria-hidden="true"></i><span class="ml-2 align-middle">Actas</span></a>
             <ul class="list-group flex-column d-inline-block submenu">
               <li *ngIf="nivel != 3" class="list-group-item pl-4">
-                <a href="/nueva-acta" class="">Nueva Acta</a>
+                <a routerLink="/nueva-acta" class="">Nueva Acta</a>
               </li> 
               <li class="list-group-item pl-4">
-                <a href="/actas" class="">Acta</a>
+                <a href="/#/actas" class="">Acta</a>
               </li>  
            </ul> 
           </li> 
@@ -33,22 +38,22 @@
               <li class="list-group-item pl-4"></li>
               
               <li class="list-group-item pl-4">
-                <a href="/marca" class="">Marcas</a>
+                <a href="/#/marca" class="">Marcas</a>
               </li> 
               <li class="list-group-item pl-4">
-                <a href="/articulos" class="">Articulos</a>
+                <a href="/#/articulos" class="">Articulos</a>
               </li> 
               <li class="list-group-item pl-4">
-                <a href="/tipo" class="">Tipo</a>
+                <a href="/#/tipo" class="">Tipo</a>
               </li> 
               <li class="list-group-item pl-4">
-                <a href="/sector" class="">Sector</a>
+                <a href="/#/sector" class="">Sector</a>
               </li> 
               <li class="list-group-item pl-4">
-                <a href="/equipos" class="">Equipos</a>
+                <a href="/#/equipos" class="">Equipos</a>
               </li> 
               <li class="list-group-item pl-4">
-                <a href="/ubicacion-edif" class="">Edificios</a>
+                <a href="/#/ubicacion-edif" class="">Edificios</a>
               </li> 
            </ul> 
           </li> 
@@ -59,29 +64,26 @@
               <li class="list-group-item pl-4"></li>
               <li class="list-group-item pl-4"></li>
               <li class="list-group-item pl-4">
-                <a href="/por-sector" class="">Por sector</a>
+                <a href="/#/por-sector" class="">Por sector</a>
               </li> 
               <li class="list-group-item pl-4">
-                <a href="/por-articulo" class="">Por Articulo</a>
+                <a href="/#/por-articulo" class="">Por Articulo</a>
               </li> 
               <li class="list-group-item pl-4">
-                <a href="/por-ubicacion" class="">Por ubicación</a>
+                <a href="/#/por-ubicacion" class="">Por ubicación</a>
               </li> 
            </ul> 
           </li> 
           <li *ngIf="nivel != 3" class="list-group-item pl-3 py-2">
-            <a href="/compras" style="cursor: pointer;"><i class="fas fa-shopping-cart" aria-hidden="true"></i><span class="ml-2 align-middle">Ordenes</span></a>
+            <a href="/#/compras" style="cursor: pointer;"><i class="fas fa-shopping-cart" aria-hidden="true"></i><span class="ml-2 align-middle">Ordenes</span></a>
             
           </li> 
-          <li *ngIf="nivel != 3 " class="list-group-item pl-3 py-2">
-            <a href="/reserva"><i class="fas fa-bookmark" aria-hidden="true"></i><span class="ml-2 align-middle">Reservas</span></a>
-           
-          </li> 
+         
           <li *ngIf="nivel == 1 " class="list-group-item pl-3 py-2">
-            <a href="/usuarios"><i class="fas fa-user" aria-hidden="true"></i><span class="ml-2 align-middle">Usuarios</span></a>    
+            <a href="/#/usuarios"><i class="fas fa-user" aria-hidden="true"></i><span class="ml-2 align-middle">Usuarios</span></a>    
           </li> 
           <li *ngIf="nivel > 1 " class="list-group-item pl-3 py-2">
-            <a href="/perfil"><i class="fas fa-user" aria-hidden="true"></i><span class="ml-2 align-middle">Perfil</span></a>    
+            <a href="/#/perfil"><i class="fas fa-user" aria-hidden="true"></i><span class="ml-2 align-middle">Perfil</span></a>    
           </li> 
         </ul> 
       </div> <!-- /.sidebar -->

@@ -65,6 +65,7 @@ export class EncabezadoComponent implements OnInit {
 
   cambiar(){ 
     this.mostrarMenu = !this.mostrarMenu;
+  
   }
   
 

@@ -55,7 +55,7 @@ export class NuevaActaComponent implements OnInit {
       transporte: ['',Validators.required],
       origen: ['',Validators.required],
       destino: ['',Validators.required],
-      serial: ['',Validators.required],
+    //  serial: ['',Validators.required],
     });
  
   } 
@@ -124,15 +124,15 @@ export class NuevaActaComponent implements OnInit {
   };
 
   agregar(){
-    // this.finArray = false;
-    //   for (let index = 0; index <= this.artElegidos.length; index++) {
-    //     if (this.artElegidos[index] == null && !this.finArray ) {
-    //       this.artElegidos[index] = this.nombreArticulo;
-    //       this.finArray = true;
-    //       this.nombreArticulo = "";
-    //       this.articuloEnInput = false;
-    //     }
-    //   }  
+      this.finArray = false;
+    //    for (let index = 0; index <= this.artElegidos.length; index++) {
+    //      if (this.artElegidos[index] == null && !this.finArray ) {
+    //        this.artElegidos[index] = this.nombreArticulo;
+    //        this.finArray = true;
+    //        this.nombreArticulo = "";
+    //        this.articuloEnInput = false;
+    //      }
+    //    }  
     this.esIgual =  true;
     for (let index = 0; index < this.serialElegido.length; index++) {
       if(this.serialElegido[index] === this.numeroSerial){
@@ -261,91 +261,102 @@ export class NuevaActaComponent implements OnInit {
 
   confirmarMov(){
 
-    Swal.fire({
-      title: 'Confirma movimento',
-      text: "esta accion es irreversible",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Confirmar',
-      cancelButtonText: 'Cancelar'
-    })
-    .then((result) => {
-      if (result.value) {
-       
-        this.leerRemito();
-        this.leerNumeroDeRemito();
-        let token = JSON.parse(localStorage.getItem("Token"));
-
-        this.actaNueva.idRemito = this.idRemito;
-        this.actaNueva.Fecha = this.fechaActual; 
-        this.actaNueva.Contacto = this.txtContacto;
-        this.actaNueva.De = this.idOrigen;
-        this.actaNueva.Para = this.idDestino;
-        this.actaNueva.Id_Transporte = this.idTransporte;
-        this.actaNueva.Observaciones = this.txtObs;
-        this.actaNueva.token = token;
-
-        this.service.guardarNuevaActa(this.actaNueva).subscribe(data=>{ })
-
-
-        this.actaNueva = new NuevaActa;
-        this.actaNueva.idRemito = this.idRemito;
-        this.actaNueva.cantidad = 1;
-        this.actaNueva.Para = this.idDestino;
-
-        // let i = 0;
-        // do {
-        //    this.actaNueva.serialElegido = this.serialElegido[i]
-        //    this.service.guardarNuevaActaNAM(this.actaNueva).subscribe(data=>{
-        //      console.log(data+"lo que trajo modelos")
-        //    })
-        //     i++;
-        // } while (i < this.serialElegido.length);
-           
-        this.finArray = false;
-        for (let index = 0; index < this.serialElegido.length; index++) {
-          this.actaNueva.serialElegido = this.serialElegido[index]
-
-        
-            if (!this.finArray) {
-              this.service.guardarNuevaActaNAM(this.actaNueva).subscribe(data=>{
-                //console.log("se guardo la nueva acta" + this.actaNueva); 
-               
-             },error =>{
-               this.generoError = true
-              
-               Swal.fire({
-                 title: error.messaje,
-                 text: 'El acta Nº '+ this.idRemito +' no fue cargada',
-                 icon: 'warning',
-                 confirmButtonColor: '#3085d6',
-                 confirmButtonText: 'OK'
-                 })
-             });
-             this.service.guardarNuevaActaNAE(this.actaNueva).subscribe(data =>{
-              Swal.fire({
-                title: 'confirmado',
-                text: 'El acta Nº '+ this.idRemito +' fue cargada',
-                icon: 'success',
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'OK'
-                })
-                .then((result) =>{
-                  if(result.value){
-                    this.recargar();
-                  }
-                })
-              
-             },error =>{
-               this.generoError = true
+    if (this.serialElegido.length > 0) {
+      Swal.fire({
+        title: 'Confirma movimento',
+        text: "esta accion es irreversible",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Confirmar',
+        cancelButtonText: 'Cancelar'
+      })
+      .then((result) => {
+        if (result.value) {
+         
+          this.leerRemito();
+          this.leerNumeroDeRemito();
+          let token = JSON.parse(sessionStorage.getItem("Token"));
+  
+          this.actaNueva.idRemito = this.idRemito;
+          this.actaNueva.Fecha = this.fechaActual; 
+          this.actaNueva.Contacto = this.txtContacto;
+          this.actaNueva.De = this.idOrigen;
+          this.actaNueva.Para = this.idDestino;
+          this.actaNueva.Id_Transporte = this.idTransporte;
+          this.actaNueva.Observaciones = this.txtObs;
+          this.actaNueva.token = token;
+  
+          this.service.guardarNuevaActa(this.actaNueva).subscribe(data=>{ })
+  
+  
+          this.actaNueva = new NuevaActa;
+          this.actaNueva.idRemito = this.idRemito;
+          this.actaNueva.cantidad = 1;
+          this.actaNueva.Para = this.idDestino;
+  
+          // let i = 0;
+          // do {
+          //    this.actaNueva.serialElegido = this.serialElegido[i]
+          //    this.service.guardarNuevaActaNAM(this.actaNueva).subscribe(data=>{
+          //      console.log(data+"lo que trajo modelos")
+          //    })
+          //     i++;
+          // } while (i < this.serialElegido.length);
              
-             });
-           }
-          } 
-      }  
-    })  
+          this.finArray = false;
+          for (let index = 0; index < this.serialElegido.length; index++) {
+            this.actaNueva.serialElegido = this.serialElegido[index]
+  
+          
+              if (!this.finArray) {
+                this.service.guardarNuevaActaNAM(this.actaNueva).subscribe(data=>{
+                  //console.log("se guardo la nueva acta" + this.actaNueva); 
+                 
+               },error =>{
+                 this.generoError = true
+                
+                 Swal.fire({
+                   title: error.messaje,
+                   text: 'El acta Nº '+ this.idRemito +' no fue cargada',
+                   icon: 'warning',
+                   confirmButtonColor: '#3085d6',
+                   confirmButtonText: 'OK'
+                   })
+               });
+               this.service.guardarNuevaActaNAE(this.actaNueva).subscribe(data =>{
+                Swal.fire({
+                  title: 'confirmado',
+                  text: 'El acta Nº '+ this.idRemito +' fue cargada',
+                  icon: 'success',
+                  confirmButtonColor: '#3085d6',
+                  confirmButtonText: 'OK'
+                  })
+                  .then((result) =>{
+                    if(result.value){
+                      this.recargar();
+                    }
+                  })
+                
+               },error =>{
+                 this.generoError = true
+               
+               });
+             }
+            } 
+        }  
+      })  
+    } else{
+      Swal.fire({
+        title: 'no selecciono articulos',
+        icon: 'info',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK'
+        })
+    }
+
+    
   } // fin confirmarMov
   
   
