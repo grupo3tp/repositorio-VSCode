@@ -51,10 +51,10 @@ export class UsuariosComponent implements OnInit {
     this.nuevoUsuario = !this.nuevoUsuario;
   }
 
-  activar(id : number, activo : number){
+  activar(nombre : string, activo : number){
     
-    let valor = new Valor;
-    valor.Id_Usuario=id
+    let valor = new Usuarios;
+    valor.Usuario=nombre
     if(activo == 0){
       valor.Activo = 1 //1 usuario activado
     }else{
@@ -71,6 +71,10 @@ export class UsuariosComponent implements OnInit {
     }) .then((result) =>{
      if(result.value){  
         this.service.ActivarDesactivar(valor).subscribe((item)=>{
+          let user = new Usuarios
+          user.Intento = 0;
+          user.Usuario = nombre;
+          this.service.updateIntento(user).subscribe()
           Swal.fire({
             title: 'cambio realizado',
             icon: 'success',
@@ -102,7 +106,7 @@ export class UsuariosComponent implements OnInit {
     carga.Pass = formValue.pass
     carga.Nivel_Seguridad = formValue.nivel
     carga.Activo = 1
- 
+    
     for (let i = 0; i < this.leerUsuarios.length; i++) {
       if (this.leerUsuarios[i].Usuario == carga.Usuario) {
         this.esIgual = true

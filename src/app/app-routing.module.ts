@@ -15,12 +15,10 @@ import { ComprasComponent } from './compras/compras.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { ArticulosRotosComponent } from './listados/articulos-rotos/articulos-rotos.component';
 import { HistorialArticulosComponent } from './historial-articulos/historial-articulos.component';
-import { LoginComponent } from './login/login.component';
 import { Error404Component } from './error404/error404.component';
 import { ActasComponent } from './actas/actas.component';
 import { CargaGranelComponent } from './carga-granel/carga-granel.component';
 import { PerfilComponent } from './perfil/perfil.component';
-import { UbicacionEdif } from './models/ubicacion-edif';
 import { UbicacionEdifComponent } from './abm/ubicacion-edif/ubicacion-edif.component';
 
 
@@ -42,11 +40,10 @@ const routes: Routes = [
   {path: 'compras', component:ComprasComponent},
   {path: 'articulos-rotos', component:ArticulosRotosComponent},
   {path: 'historial',component:HistorialArticulosComponent},
-  {path: 'login', component:LoginComponent},
   {path: 'cargaGranel', component:CargaGranelComponent},
   {path: 'perfil', component:PerfilComponent},
   {path: 'ubicacion-edif', component:UbicacionEdifComponent}, 
-  {path: '**', component:Error404Component},
+  {path: '**', redirectTo:''},
 ];
 
 @NgModule({

@@ -196,6 +196,9 @@ export class NuevaActaComponent implements OnInit {
           this.idOrigen = this.sector[index].id_Sec;
           //console.log(this.idOrigen)
           this.leerEquipos(this.idOrigen);
+          if (this.serialElegido.length > 0) {
+            this.serialElegido.length = 0;
+          }
         }
       }
     }  

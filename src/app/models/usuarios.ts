@@ -9,5 +9,6 @@ export class Usuarios {
     Activo : number
     Id_Nivel : number
     Nivel_Usuario : string
+    Intento:number
 }
 
