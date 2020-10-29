@@ -26,8 +26,8 @@ import { Provincias } from '../models/provincias';
 })
 export class DataBaseService {
  
-  URL:string = "https://quiet-depths-07107.herokuapp.com/api" 
-  // URL:string = "http://localhost:3300/api"
+ //URL:string = "https://quiet-depths-07107.herokuapp.com/api" 
+  URL:string = "http://localhost:3300/api"
 
   constructor(private http : HttpClient, private cookies: CookieService) { }
 
@@ -328,6 +328,10 @@ export class DataBaseService {
 
    updatePass(Pass : Usuarios){
     return this.http.put<Usuarios>(this.URL+'/updatePass', Pass);
+   };
+
+   updateIntento(numero : Usuarios){
+     return this.http.put<Usuarios>(this.URL+'/intento', numero);
    };
 }
 

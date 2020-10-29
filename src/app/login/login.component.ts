@@ -4,6 +4,7 @@ import { DataBaseService } from '../servicios/data-base.service';
 import { Usuarios } from '../models/usuarios';
 import {Router} from '@angular/router'
 import {NgxSpinnerService} from 'ngx-spinner';
+import { Valor } from '../models/valor';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
   Usuario:string;
   Pass: string;
   tipoNivel: number;
+  contadorErrores: number
   
   
   constructor(
@@ -47,25 +49,44 @@ export class LoginComponent implements OnInit {
     this.service.login(user).subscribe( data => {
      setTimeout(() => {
       this.service.guardarLocalStorageId(data.nivel);
-     // console.log("esto viene de la bd: "+ data.nivel)
-     this.nombre.emit(data.nombre);
+      this.nombre.emit(data.nombre);
       this.tipoNivel = data.nivel;
-     // console.log("esto se carga en la variable que es emitida del login: "+this.tipoNivel)
       this.nivel.emit(this.tipoNivel);
       this.service.setToken(data.token);
       this.service.guardarLocalStorage(data.token);
       this.user.Token=data.token;
       this.datosCorrectos=true;
       this.datos.emit(this.datosCorrectos);
-      //console.log("usuario y contraseña correctas")
+        let numero = new Usuarios
+        numero.Intento = 0;
+        numero.Usuario = this.Usuario;
+        this.service.updateIntento(numero).subscribe();
       this.spinner.hide()
       this.router.navigateByUrl("/")
      }, 600);
      
     },
     error => {
+      console.log(error)
       this.datosCorrectos=false;
-      this.textoError =error.error.errorMessage
+      this.textoError = error.error.errorMessage;
+    
+      this.contadorErrores =  JSON.parse(error.error.errorPass); 
+      console.log(this.contadorErrores)
+      let numero = new Usuarios
+      numero.Intento = this.contadorErrores + 1;
+      numero.Usuario = this.Usuario
+      if (numero.Intento <= 3) {
+        this.service.updateIntento(numero).subscribe()
+      } else {
+        let desactivar = new Usuarios
+        desactivar.Activo = 0;
+        desactivar.Usuario = this.Usuario
+        this.service.ActivarDesactivar(desactivar).subscribe()
+      }
+      
+     
+     
       this.spinner.hide()
     }
     );
