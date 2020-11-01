@@ -54,6 +54,10 @@ export class AppComponent {
               }
             });
           })
+       }, error =>{
+         this.service.borrarLocalStorage()
+         location.reload();
+         
        })
        }   
   }

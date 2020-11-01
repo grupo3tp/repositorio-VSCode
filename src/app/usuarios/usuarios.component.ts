@@ -64,10 +64,11 @@ export class UsuariosComponent implements OnInit {
     Swal.fire({
       title: 'seguro desea cambiar el estado del usuario',
       icon: 'warning',
+      showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Confirmar',
-      cancelButtonText: 'Cancelar'
+      cancelButtonText: 'Cancelar',
     }) .then((result) =>{
      if(result.value){  
         this.service.ActivarDesactivar(valor).subscribe((item)=>{
