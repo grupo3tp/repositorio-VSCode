@@ -67,12 +67,12 @@ export class LoginComponent implements OnInit {
      
     },
     error => {
-      console.log(error)
+     //console.log(error)
       this.datosCorrectos=false;
       this.textoError = error.error.errorMessage;
     
       this.contadorErrores =  JSON.parse(error.error.errorPass); 
-      console.log(this.contadorErrores)
+      //console.log(this.contadorErrores)
       let numero = new Usuarios
       numero.Intento = this.contadorErrores + 1;
       numero.Usuario = this.Usuario
