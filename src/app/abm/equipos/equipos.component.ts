@@ -173,7 +173,7 @@ export class EquiposComponent implements OnInit {
         carga.serial = Object.values(carga.seriales[i]).toString();
         carga.nInventario =  Object.values(carga.nsInventarios[i]).toString();
         //console.log(carga)
-         this.service.guardarCargaGranel(carga).subscribe((cargaApi)=>{ 
+        
            this.spinner.hide()
            Swal.fire({
              title: 'Equipos guardados',
@@ -182,20 +182,22 @@ export class EquiposComponent implements OnInit {
              confirmButtonText: 'Ok',
            }) .then((result) =>{
             if(result.value){
+              this.service.guardarCargaGranel(carga).subscribe((cargaApi)=>{ 
               location.reload();
               this.formCargaGranel.reset();
+            },error =>{
+              this.spinner.hide()
+              Swal.fire({
+                title: 'Error',
+                text: error.name,
+                icon: 'warning',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Ok',
+              })
+            })
             }
           })
-        },error =>{
-          this.spinner.hide()
-          Swal.fire({
-            title: 'Error',
-            text: error.name,
-            icon: 'warning',
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'Ok',
-          })
-        })
+  
   
       } 
     }

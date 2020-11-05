@@ -82,11 +82,6 @@ export class ActasComponent implements OnInit {
     }else{
       location.reload();
     }
-
-   
-   
-      
-     
     
     setTimeout(() => {
       this.transporte = this.remito[0].Transporta

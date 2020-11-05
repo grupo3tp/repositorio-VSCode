@@ -10,4 +10,5 @@ export class Historial {
     fecha : Date
     De : string
     Para : string
+    Ultimo : string
 }

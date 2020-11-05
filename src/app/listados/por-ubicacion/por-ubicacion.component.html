@@ -1,0 +1,36 @@
+<div class="recuadro">
+    <!-- <form [formGroup]="formxSector" (submit)="agregar(formxSector.value)"> -->
+    <form [formGroup]="formxUbicacion">
+
+        <div class="container mt-5">
+            <h1>Listado por Edificios</h1>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="">Detalle:</label>
+                        <!-- <select class="form-control" formControlName="id_Sec">
+                            <option [value]="null">seleccione un sector...</option>
+                            <option *ngFor="let sectores of sector" [value]="sectores.id_Sec">{{sectores.Detalle}}</option>
+                        </select> -->
+                        <select  (change)="edifID($event.target.value)"  class="form-control" formControlName="edif">
+                            <option [value]="null">seleccione un sector...</option>
+                            <option *ngFor="let edif of edificios" [value]="edif.Id_Ubicacion">{{edif.Ubicacion}}</option>
+                        </select>
+
+                    </div> 
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    <button (click)="lTotales()" class="btn btn-primary btn-block">Totales</button>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                     <button (click)="lArticulos()" class="btn btn-primary btn-block">Por Articulo</button>  
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    <button (click)="lSerie()" class="btn btn-primary btn-block">Con N° de Serie</button>
+                </div>               
+            </div>
+        </div>
+    </form>
+</div>

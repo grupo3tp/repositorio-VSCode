@@ -199,6 +199,10 @@ export class DataBaseService {
   {
     return this.http.get<[]>(this.URL+'/UbicacionEdif')
   };
+  leerEdificioxId(id:number):Observable<UbicacionEdif[]>
+  {
+    return this.http.get<[]>(this.URL+'/UbicacionEdif/'+id)
+  };
   GuardarUbicacionEdif(sector:UbicacionEdif) : Observable<UbicacionEdif>
   {
     return this.http.post<UbicacionEdif>(this.URL+'/UbicacionEdif', sector)

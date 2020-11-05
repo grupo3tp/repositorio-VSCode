@@ -49,14 +49,13 @@
     </div>
     <div class="container mt-5">
         <div class="row justify-content-around">
-            
+            <div *ngIf="!esAgregar && !esModificar"  class=" col-lg-4 col-md-2 col-sm-4 col-xs-2">
+                <button  (click)="modificar()" class="btn btn-primary btn-block">Modificar</button>  
+           </div>
             <div class="col-lg-4 col-md-2 col-sm-4 col-xs-2">
                 <button *ngIf="!esAgregar && !esModificar" class="btn btn-primary btn-block" (click)='agregarTipo()'>Agregar Tipo</button>
                 <button *ngIf="esAgregar" class="btn btn-primary btn-block" [disabled]="!formularioTipos.valid" (click)='agregar()'>Agregar</button>
                 <button *ngIf="!esAgregar && esModificar" class="btn btn-primary btn-block" [disabled]="!formularioTipos.valid" (click)='actualizarTipo()'>Actualizar</button>
-            </div>
-            <div *ngIf="!esAgregar && !esModificar"  class=" col-lg-4 col-md-2 col-sm-4 col-xs-2">
-                 <button  (click)="modificar()" class="btn btn-primary btn-block">Modificar</button>  
             </div>
             <div *ngIf="esAgregar || esModificar" class="col-xs-3  col-sm-2">
             <button *ngIf="esAgregar" (click)="atras()" class="btn btn-danger btn-block">Atras</button>
