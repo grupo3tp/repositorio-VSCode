@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { S_IFREG } from 'constants';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Provincias } from 'src/app/models/provincias';
 import { UbicacionEdif } from 'src/app/models/ubicacion-edif';
 import { DataBaseService } from 'src/app/servicios/data-base.service';
@@ -24,7 +25,7 @@ export class UbicacionEdifComponent implements OnInit {
   controlaStock : number
   boolStock : boolean
 
-  constructor(private fb:FormBuilder, private service : DataBaseService) { }
+  constructor(private fb:FormBuilder, private service : DataBaseService,  private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.formEdificios = this.fb.group({
@@ -40,7 +41,7 @@ export class UbicacionEdifComponent implements OnInit {
   leerEdificios(){
     this.service.leerUbicacionEdif().subscribe((item)=>{
       this.edificios = item;
-      console.log(this.edificios)
+     // console.log(this.edificios)
       this.leerProvincias();
     })
   }
@@ -70,13 +71,30 @@ export class UbicacionEdifComponent implements OnInit {
       carga.ControlaStock = 0;
     }
 
-    console.log(carga)
-
+    //console.log(carga)
+    this.spinner.hide()
+    Swal.fire({
+      title: 'Edificio guardado',
+      icon: 'success',
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Ok',
+    }) .then((result) =>{
+     if(result.value){
     this.service.GuardarUbicacionEdif(carga).subscribe((item)=>{
-      console.log("exito")
+      location.reload();
+      this.formEdificios.reset();
     }, error =>{
-      console.log("exploto")
-    })
+      this.spinner.hide()
+              Swal.fire({
+                title: 'Error',
+                text: error.name,
+                icon: 'warning',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Ok',
+              })
+            })
+            }
+          })
 
   }
   ubicacion(event){

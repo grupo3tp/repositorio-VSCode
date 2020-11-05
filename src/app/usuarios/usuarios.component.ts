@@ -5,6 +5,7 @@ import { DataBaseService } from '../servicios/data-base.service';
 import Swal from 'sweetalert2';
 import {NgxSpinnerService} from 'ngx-spinner';
 import { Valor } from '../models/valor';
+import { error } from 'protractor';
 
 @Component({
   selector: 'app-usuarios',
@@ -20,6 +21,7 @@ export class UsuariosComponent implements OnInit {
   nuevoUsuario : boolean = false;
   activado : string
   desactivado :  string
+  errorNombre : boolean = true
 
   constructor(private fb : FormBuilder, private service : DataBaseService, private spinner: NgxSpinnerService) { }
 
@@ -102,7 +104,19 @@ export class UsuariosComponent implements OnInit {
   agregar(formValue : any){
     this.spinner.show();
     const carga = new Usuarios
+    let pattern = /^[A-Z _]+$/i;
+    debugger
     carga.Nombre_Usuario = formValue.nombre
+    if (!pattern.test(carga.Nombre_Usuario)) {
+      Swal.fire({
+        title: 'Error',
+        text: 'solo se aceptan letras en el nombre',
+        icon: 'warning',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Ok',
+      })
+      return
+    }
     carga.Usuario = formValue.usuario
     carga.Pass = formValue.pass
     carga.Nivel_Seguridad = formValue.nivel
@@ -124,7 +138,7 @@ export class UsuariosComponent implements OnInit {
       })
       this.esIgual=false
     }else{
-      this.service.GuardarUsuarios(carga).subscribe((item)=>{
+      
         this.spinner.hide()
         Swal.fire({
           title: 'Usuario guardado',
@@ -133,20 +147,22 @@ export class UsuariosComponent implements OnInit {
           confirmButtonText: 'Ok',
         }) .then((result) =>{
          if(result.value){  
-           location.reload();
-           this.formUser.reset();
+          this.service.GuardarUsuarios(carga).subscribe((item)=>{
+            location.reload();
+            this.formUser.reset();
+        },error=>{
+          this.spinner.hide()
+          Swal.fire({
+            title: 'Error',
+            text: error.name,
+            icon: 'warning',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Ok',
+          })
+        })
          }
        })
-      },error=>{
-        this.spinner.hide()
-        Swal.fire({
-          title: 'Error',
-          text: error.name,
-          icon: 'warning',
-          confirmButtonColor: '#3085d6',
-          confirmButtonText: 'Ok',
-        })
-      })
+   
     }
   }
 

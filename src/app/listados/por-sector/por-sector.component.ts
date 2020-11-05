@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { error } from 'protractor';
 import { Sector } from 'src/app/models/sector';
 import { DataBaseService } from 'src/app/servicios/data-base.service';
 import * as jsPDF from 'jspdf';
-import 'jspdf-autotable'
+import 'jspdf-autotable';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-por-sector',
@@ -35,7 +35,7 @@ export class PorSectorComponent implements OnInit {
 
     this.service.leerSectorxId(idSector).subscribe((item)=>{
       this.sectorQuery = item;
-      debugger
+      
       this.generacionPdf();
     },error=>{
       console.log("exploto"+error);
@@ -47,10 +47,14 @@ export class PorSectorComponent implements OnInit {
 
     this.service.leerSectorxId(idSector).subscribe((item)=>{
       this.sectorQuery = item;
-      debugger
       this.generacionPdf();
     },error=>{
-      console.log("exploto"+error);
+      Swal.fire({
+        title: 'no registra movimientos',
+        icon: 'warning',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Ok',
+      })
     })
   }
 
@@ -59,10 +63,14 @@ export class PorSectorComponent implements OnInit {
 
     this.service.leerSectorxId(idSector).subscribe((item)=>{
       this.sectorQuery = item;
-      debugger
       this.generacionPdf1();
     },error=>{
-      console.log("exploto"+error);
+      Swal.fire({
+        title: 'no registra movimientos',
+        icon: 'warning',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Ok',
+      })
     })
   }
 
@@ -71,10 +79,14 @@ export class PorSectorComponent implements OnInit {
 
     this.service.leerSectorxId(idSector).subscribe((item)=>{
       this.sectorQuery = item;
-      debugger
       this.generacionPdf2();
     },error=>{
-      console.log("exploto"+error);
+      Swal.fire({
+        title: 'no registra movimientos',
+        icon: 'warning',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Ok',
+      })
     })
   }
 

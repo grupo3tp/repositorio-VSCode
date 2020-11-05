@@ -25,6 +25,7 @@ export class HistorialArticulosComponent implements OnInit {
   fecha : Date
   De : string
   Para : string
+  Ultimo: string
   mostrar = false
 
   constructor(private service : DataBaseService, ) { }
@@ -54,6 +55,8 @@ export class HistorialArticulosComponent implements OnInit {
       this.OdeCompra = this.historial[0].OdeCompra
       this.Fecha = this.historial[0].Fecha
       this.Obvs = this.historial[0].Obvs
+      this.Ultimo = this.historial[0].Ultimo
+
       this.service.buscarHistoActa(this.nSerial).subscribe((item)=>{
         this.historial = item
       })
@@ -65,6 +68,12 @@ export class HistorialArticulosComponent implements OnInit {
         }) 
      }
      )
+  }
+
+  obtenerUltimo(){
+    this.historial.forEach(element => {
+      element.Para
+    });
   }
 
 }

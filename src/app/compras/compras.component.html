@@ -23,7 +23,7 @@
                     <label>Proveedor:</label>
                     <select formControlName="proveedor" (change)="proveedorID($event.target.value)" name="" id=""  class="form-control">
                         <option [value]="null">seleccione un proveedor...</option>
-                        <option *ngFor="let orden of ordenDeCompra" [value]="orden.Proveedor">{{orden.Proveedor}}</option>      
+                        <option *ngFor="let prov of proveedores" [value]="prov">{{prov}}</option>      
                     </select>
                 </div>
                 <div class="form-group col-lg-10">
@@ -34,7 +34,7 @@
             <div class="row mt-3">
                 <div class="col-9"></div>
                 <div class="col-lg-2">
-                    <button (click)="agregar()" class="btn btn-primary btn-block">Cargar</button>
+                    <button [disabled]="!formularioCompra.valid" (click)="agregar()" class="btn btn-primary btn-block">Cargar</button>
                 </div>
             </div>
         </form>
