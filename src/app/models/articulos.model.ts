@@ -3,5 +3,7 @@ export class Articulos {
      Detalle :string;
      id_Marca:number;
      id_Segmento :number;
+     marcaDetalle : string;
+     segDetalle :  string;
 
 }

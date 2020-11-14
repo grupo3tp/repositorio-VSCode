@@ -1,43 +1,24 @@
-<div class="container mt-5">
-    <div class="form row">
-        <div class="col-6">
-            <div class="form-group">
-                <label for="">Articulo:</label>
-                <select  [attr.disabled]="esTipo == true ? true : null" (change)="seleccionArticulo($event.target.value)" class="form-control">
-                    <option value="vacio">Seleccione una opcion.....</option>
-                    <option value="algo">el articulo viene de base de datos</option>       
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="">Tipo:</label>
-                <select [attr.disabled]="esArticulo == true ? true : null" (change)="seleccionTipo($event.target.value)"  name="" id=""  class="form-control">
-                    <option value="vacio">Seleccione una opcion.....</option>
-                    <option value="algo">el tipo de articulo viene de base de datos</option>       
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="">Sector:</label>
-                <select  name="" id=""  class="form-control">
-                    <option value="">el sector viene de base de datos</option>       
-                </select>
-            </div>
-            <div class="form-group ">
-                <label for="">Fecha:</label>
-                <input type="date" class="form-control" >
-            </div>
-            
-            <button class="btn btn-primary mt-5 col-2">Listar</button>
-        </div>
-       
-        <div class="col-6 mt-4">
-            <div class="list-group custom-checkbox group">
-         
-                <div class="list-group-item list-group-item-info"><label><input [attr.checked]="esTipo == true ? true : null" type="checkbox"><span class="list-group-item-text"><i class="fab fa-fw"></i> Todos los Articulos</span></label></div>
-                <br>
-                <div class="list-group-item list-group-item-info"><label><input type="checkbox"><span class="list-group-item-text"><i class="fab fa-fw"></i> Con detalles</span></label></div>
-            </div>
-        </div>
-      
+<div class="recuadro">
+    <div class="container mt-5 justify-content-center">
+        <h1>Lista de Articulos</h1>
+        <div  class="table-responsive table-striped">
+            <table class="table">
+                <thead  class="thead-dark">
+                    <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Tipo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let art of articulos">
+                    <th scope="row">{{art.Detalle}}</th>
+                    <td>{{art.marcaDetalle}}</td>
+                    <td>{{art.segDetalle}}</td>
+                    </tr>
+                </tbody>
+                </table>
+        </div> 
     </div>
-       
 </div>
+
