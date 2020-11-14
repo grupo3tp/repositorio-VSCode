@@ -1,0 +1,37 @@
+<div class="recuadro">
+    <div class="container mt-5 justify-content-center">
+        <h1>Lista de Sectores</h1>
+        <div  class="table-responsive table-striped">
+            <table class="table">
+                <thead  class="thead-dark">
+                    <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Gerencia</th>
+                    <th scope="col">Stock Propio</th>
+                    <th scope="col">Activo</th>
+                    <th scope="col">Personal Propio</th>
+                    <th scope="col">Ubicacion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let sec of sectores">
+                    <th scope="row">{{sec.Detalle}}</th>
+                    <td>{{sec.telefonos}}</td>
+                    <td>{{sec.Tipo}}</td>
+                    <td>{{sec.Descripcion}}</td>
+                    <td *ngIf="sec.StockPropio == 1">Si</td>
+                    <td *ngIf="sec.StockPropio == 0">No</td>
+                    <td *ngIf="sec.Activo == 1">Si</td>
+                    <td *ngIf="sec.Activo == 0">No</td>
+                    <td *ngIf="sec.PersonalPropio == 1">Si</td>
+                    <td *ngIf="sec.PersonalPropio == 0">No</td>
+                    <td>{{sec.diredif}}</td>
+                    </tr>
+                </tbody>
+                </table>
+        </div> 
+    </div>
+</div>
+

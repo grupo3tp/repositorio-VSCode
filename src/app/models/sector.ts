@@ -16,4 +16,5 @@ export class Sector {
       Id_Ubicacion : number;
       nInventario : string;
       serial : string;
+      diredif : string;
 }

@@ -60,6 +60,13 @@ export class DataBaseService {
   }
   //----------fin login
 
+  listArticulos():Observable<Articulos[]>
+  {
+      return this.http.get<Articulos[]>(this.URL+'/artList')
+  }
+
+  //-----------------listas de articulos
+
   leerArticulos():Observable<Articulos[]>
   {
       return this.http.get<Articulos[]>(this.URL+'/articulos')
@@ -136,6 +143,13 @@ export class DataBaseService {
     return this.http.delete<Marca>(this.URL+'/tipo/'+id)
   }
   //------------------ fin Tipo
+
+  leerSectores():Observable<Sector[]>
+  {
+    return this.http.get<[]>(this.URL+'/sectores')
+  };
+
+  //--------------------- listado de sectores
 
   leerSector():Observable<Sector[]>
   {

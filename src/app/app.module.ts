@@ -23,7 +23,6 @@ import { HomeComponent } from './home/home.component';
 import { ReservaComponent } from './reserva/reserva.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { ComprasComponent } from './compras/compras.component';
-import { ArticulosRotosComponent } from './listados/articulos-rotos/articulos-rotos.component';
 import { HistorialArticulosComponent } from './historial-articulos/historial-articulos.component';
 import { Error404Component } from './error404/error404.component';
 import { ActasComponent } from './actas/actas.component';
@@ -32,6 +31,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import { PerfilComponent } from './perfil/perfil.component';
 import { UbicacionEdifComponent } from './abm/ubicacion-edif/ubicacion-edif.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { SectoresComponent } from './listados/sectores/sectores.component';
 
 @NgModule({
   declarations: [
@@ -51,13 +51,13 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     ReservaComponent,
     UsuariosComponent,
     ComprasComponent,
-    ArticulosRotosComponent,
     HistorialArticulosComponent,
     Error404Component,
     ActasComponent,
     CargaGranelComponent,
     PerfilComponent,
     UbicacionEdifComponent,
+    SectoresComponent,
     
     
   ],

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Articulos } from 'src/app/models/articulos.model';
+import { DataBaseService } from 'src/app/servicios/data-base.service';
+import {NgxSpinnerService} from 'ngx-spinner';
+
 
 @Component({
   selector: 'app-por-articulo',
@@ -6,33 +10,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./por-articulo.component.scss']
 })
 export class PorArticuloComponent implements OnInit {
-  esArticulo:boolean = false;
-  esTipo:boolean = false;
-  constructor() { }
+
+  articulos : Array<Articulos> = new Array<Articulos>();
+
+  constructor(private service : DataBaseService, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
-  }
+    this.spinner.show()
+    this.service.listArticulos().subscribe((SectorDesdeApi)=>{
+      console.log(SectorDesdeApi)
+      this.articulos = SectorDesdeApi;
+      this.spinner.hide();
+    }, error =>{
+      this.spinner.hide();
+    })
 
-  seleccionArticulo(id){
-    
-    if(id!="vacio"){
-      this.esArticulo = true;
-    }
-    if(id=="vacio"){
-      this.esArticulo = false;
-    }
-    
-  }
-
-  seleccionTipo(id){
-
-    if(id!="vacio"){
-      this.esTipo = true;
-    }
-    if(id=="vacio"){
-      this.esTipo = false;
-    }
-    
   }
 
 }
