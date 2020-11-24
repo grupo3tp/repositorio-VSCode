@@ -6,6 +6,7 @@ import { TipoPuesto } from 'src/app/models/tipo-puesto';
 import { Gerencia } from 'src/app/models/gerencia';
 import { UbicacionEdif } from 'src/app/models/ubicacion-edif';
 import Swal from 'sweetalert2';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-sector',
@@ -22,8 +23,9 @@ export class SectorComponent implements OnInit {
   esModificar : boolean;
   sectorId : number;
   nameSector : string;
+  idNivel : number;
 
-  constructor(private fb:FormBuilder, private service : DataBaseService) { }
+  constructor(private fb:FormBuilder, private service : DataBaseService,  public router: Router) { }
 
 
   ngOnInit(): void {
@@ -37,8 +39,16 @@ export class SectorComponent implements OnInit {
       personal : [''],
       activo :['']
     })
-    this.leerSector();
+    this.leerId();
   }
+
+  leerId(){
+    this.idNivel = JSON.parse(sessionStorage.getItem("idNivel"))
+    if (this.idNivel == 3) {
+      this.router.navigateByUrl("/")
+    }
+    this.leerSector();
+   }
 
   leerSector(){
     this.service.leerSector().subscribe((SectorDesdeApi)=>{
@@ -75,6 +85,19 @@ export class SectorComponent implements OnInit {
     carga.StockPropio = formValue.stock
     carga.PersonalPropio = formValue.personal
     carga.Activo = formValue.activo
+
+    let pattern = /^[A-Za-z0-9]{0,50}$/
+          
+    if (!pattern.test(carga.Detalle) ) {
+      Swal.fire({
+        title: 'Error',
+        text: 'no se reconocen caracteres especiales',
+        icon: 'warning',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Ok',
+      })
+      return
+    }
 
     if(carga.StockPropio){
       carga.StockPropio = 1

@@ -5,6 +5,7 @@ import { Tipo } from 'src/app/models/tipo';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Articulos } from 'src/app/models/articulos.model';
 import Swal from 'sweetalert2';
+import {Router} from '@angular/router'
 
 
 @Component({
@@ -27,8 +28,9 @@ export class ArticulosComponent implements OnInit {
   articulo = new Articulos;
   esModificar : boolean;
   artName : string
+  idNivel : number;
  
-  constructor(private servicio : DataBaseService, private fbgenerator:FormBuilder) { }
+  constructor(private servicio : DataBaseService, private fbgenerator:FormBuilder,  public router: Router) { }
 
   ngOnInit(): void {
     this.formularioArticulos = this.fbgenerator.group({
@@ -43,8 +45,16 @@ export class ArticulosComponent implements OnInit {
 
 
     this.nuevoArticulo();
-    this.leerMarca();
+   this.leerId();
   }
+
+  leerId(){
+    this.idNivel = JSON.parse(sessionStorage.getItem("idNivel"))
+    if (this.idNivel == 3) {
+      this.router.navigateByUrl("/")
+    }
+    this.leerMarca();
+   }
 
   nuevoArticulo(){
     this.formularioArticulos.reset()
@@ -104,6 +114,19 @@ export class ArticulosComponent implements OnInit {
     this.articulo.id_Marca = this.marcaId
     this.articulo.id_Segmento = this.tipoId
 
+    let pattern = /^[A-Za-z0-9]{0,50}$/
+          
+    if (!pattern.test(this.articulo.Detalle)) {
+      Swal.fire({
+        title: 'Error',
+        text: 'no se reconocen caracteres especiales',
+        icon: 'warning',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Ok',
+      })
+      return
+    }
+
     this.servicio.GuardarArticulos(this.articulo).subscribe((artDesdeApi)=>{
       this.formularioArticulos.reset();
       Swal.fire({
@@ -141,6 +164,19 @@ export class ArticulosComponent implements OnInit {
     this.articulo.Detalle = this.nombre
     this.articulo.id_Marca = this.marcaId
     this.articulo.id_Segmento = this.tipoId
+
+    let pattern = /^[A-Za-z0-9]{0,50}$/
+          
+    if (!pattern.test(this.articulo.Detalle) ) {
+      Swal.fire({
+        title: 'Error',
+        text: 'no se reconocen caracteres especiales',
+        icon: 'warning',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Ok',
+      })
+      return
+    }
     this.servicio.ActualizarArticulos(this.articulo, this.articulo.id_Art).subscribe((item)=>{
       this.formularioArticulos.reset();
       Swal.fire({

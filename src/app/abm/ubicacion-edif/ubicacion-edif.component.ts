@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { S_IFREG } from 'constants';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Provincias } from 'src/app/models/provincias';
 import { UbicacionEdif } from 'src/app/models/ubicacion-edif';
 import { DataBaseService } from 'src/app/servicios/data-base.service';
 import Swal from 'sweetalert2';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-ubicacion-edif',
@@ -24,8 +24,9 @@ export class UbicacionEdifComponent implements OnInit {
   cp : string
   controlaStock : number
   boolStock : boolean
+  idNivel : number;
 
-  constructor(private fb:FormBuilder, private service : DataBaseService,  private spinner: NgxSpinnerService) { }
+  constructor(private fb:FormBuilder, private service : DataBaseService,  private spinner: NgxSpinnerService,  public router: Router) { }
 
   ngOnInit(): void {
     this.formEdificios = this.fb.group({
@@ -36,8 +37,16 @@ export class UbicacionEdifComponent implements OnInit {
       provincia : ['', Validators.required],
       codPostal :  [''],
    })
-   this.leerEdificios();
+  this.leerId();
   }
+
+  leerId(){
+    this.idNivel = JSON.parse(sessionStorage.getItem("idNivel"))
+    if (this.idNivel == 3) {
+      this.router.navigateByUrl("/")
+    }
+    this.leerEdificios();
+   }
   leerEdificios(){
     this.service.leerUbicacionEdif().subscribe((item)=>{
       this.edificios = item;
@@ -64,6 +73,21 @@ export class UbicacionEdifComponent implements OnInit {
     carga.Localidad = formValue.localidad;
     carga.id_Prov = formValue.provincia;
     carga.CodigoPostal = formValue.codPostal;
+
+    let pattern = /^[A-Za-z0-9]{0,50}$/
+          
+    if (!pattern.test(carga.Ubicacion)
+    || !pattern.test(carga.Direccion)
+    || !pattern.test(carga.Detalle) ) {
+      Swal.fire({
+        title: 'Error',
+        text: 'no se reconocen caracteres especiales',
+        icon: 'warning',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Ok',
+      })
+      return
+    }
     
     if (carga.ControlaStock) {
       carga.ControlaStock = 1;

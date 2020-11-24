@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { TipoComponent } from '../abm/tipo/tipo.component';
 import { TipoPuesto } from '../models/tipo-puesto';
 import { Sector } from '../models/sector';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-compras',
@@ -23,8 +24,9 @@ export class ComprasComponent implements OnInit {
   proveedor : number;
   observaciones : string;
   compra = new OrdenCompra;
+  idNivel : number
 
-  constructor( private service : DataBaseService, private fb:FormBuilder) {
+  constructor( private service : DataBaseService, private fb:FormBuilder,  public router: Router) {
     this.formularioCompra = fb.group({
       orden : ['', Validators.required],
       proveedor : ['', Validators.required],
@@ -36,8 +38,16 @@ export class ComprasComponent implements OnInit {
 
   ngOnInit(): void {
     this.formularioCompra.reset()
-    this.leerOrden()
+   this.leerId();
   };
+
+  leerId(){
+    this.idNivel = JSON.parse(sessionStorage.getItem("idNivel"))
+    if (this.idNivel == 3) {
+      this.router.navigateByUrl("/")
+    }
+    this.leerOrden()
+   }
 
   leerOrden(){
     this.service.leerOrdenCompra().subscribe((ordenDesdeApi)=>{
@@ -85,6 +95,20 @@ export class ComprasComponent implements OnInit {
     this.compra.Proveedor = this.proveedor
     //console.log(this.compra)
     
+    let pattern = /^[A-Za-z0-9]{0,50}$/
+          
+    if (!pattern.test(this.compra.Obvservaciones)
+    || !pattern.test(this.compra.OdeCompra) ) {
+      Swal.fire({
+        title: 'Error',
+        text: 'no se reconocen caracteres especiales',
+        icon: 'warning',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Ok',
+      })
+      return
+    }
+
     this.service.GuardarOrdenCompra(this.compra).subscribe((result)=>{
       Swal.fire({
         title: 'orden de compra agregada',

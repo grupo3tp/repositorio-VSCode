@@ -3,6 +3,7 @@ import { Tipo } from 'src/app/models/tipo';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DataBaseService } from 'src/app/servicios/data-base.service';
 import Swal from 'sweetalert2';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-tipo',
@@ -18,8 +19,9 @@ export class TipoComponent implements OnInit {
   tipo : Tipo = new Tipo();
   nombreTipo :  string;
   tipoId : number
+  idNivel : number;
 
-  constructor(public service:DataBaseService, private fbGenerador:FormBuilder) { }
+  constructor(public service:DataBaseService, private fbGenerador:FormBuilder,  public router: Router) { }
 
   ngOnInit(): void {
 
@@ -31,7 +33,16 @@ export class TipoComponent implements OnInit {
       this.tipos= articulosDesdeApi;
       
      })
+     this.leerId();
   }
+
+  leerId(){
+    this.idNivel = JSON.parse(sessionStorage.getItem("idNivel"))
+    if (this.idNivel == 3) {
+      this.router.navigateByUrl("/")
+    }
+   
+   }
 
   agregar(){
     this.tipo = this.formularioTipos.value as Tipo

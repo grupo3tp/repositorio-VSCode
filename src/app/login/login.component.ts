@@ -5,6 +5,7 @@ import { Usuarios } from '../models/usuarios';
 import {Router} from '@angular/router'
 import {NgxSpinnerService} from 'ngx-spinner';
 import { Valor } from '../models/valor';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
   @Output() datos = new EventEmitter();
   @Output() nivel : EventEmitter<number> =  new EventEmitter<number>();
   @Output() nombre : EventEmitter<string> = new EventEmitter<string>();
+  @Output() usuario : EventEmitter<string> = new EventEmitter<string>();
   users : Array<Usuarios> = new Array<Usuarios>();
   user = new Usuarios();
   textoError:string="";
@@ -30,7 +32,8 @@ export class LoginComponent implements OnInit {
         private creadorFormulario: FormBuilder,
         public service: DataBaseService,
         public router: Router,
-        private spinner: NgxSpinnerService
+        private spinner: NgxSpinnerService,
+        
          ) { }
 
   ngOnInit(): void {
@@ -43,12 +46,26 @@ export class LoginComponent implements OnInit {
   }
 
   login() 
-  {
+  { 
+    let pattern = /^[A-Za-z0-9]{0,12}$/
+
+    if (!pattern.test(this.Pass) || !pattern.test(this.Usuario)) {
+    Swal.fire({
+      title: 'Error',
+      text: 'no se aceptan simbolos especiales',
+      icon: 'warning',
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Ok',
+    })
+    return
+  }
+  
     this.spinner.show();
     const user = {Usuario: this.Usuario, Pass: this.Pass};
     this.service.login(user).subscribe( data => {
      setTimeout(() => {
       this.service.guardarLocalStorageId(data.nivel);
+      this.usuario.emit(data.signed_user); 
       this.nombre.emit(data.nombre);
       this.tipoNivel = data.nivel;
       this.nivel.emit(this.tipoNivel);
@@ -88,6 +105,7 @@ export class LoginComponent implements OnInit {
      
      
       this.spinner.hide()
+      console.clear()
     }
     );
   }

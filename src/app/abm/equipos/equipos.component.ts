@@ -9,6 +9,7 @@ import { Articulos } from 'src/app/models/articulos.model';
 import { Sector } from 'src/app/models/sector';
 import Swal from 'sweetalert2';
 import { NgxSpinnerService } from 'ngx-spinner';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-equipos',
@@ -25,8 +26,9 @@ export class EquiposComponent implements OnInit {
   sector : Array<Sector> = new Array<Sector>();
   sonIguales : boolean = false
   estaVacio : boolean = false
+  idNivel : number;
 
-  constructor(private fb:FormBuilder, private service : DataBaseService, private spinner: NgxSpinnerService) {}
+  constructor(private fb:FormBuilder, private service : DataBaseService, private spinner: NgxSpinnerService,  public router: Router) {}
 
   ngOnInit(): void {
     this.formCargaGranel = this.fb.group({
@@ -41,8 +43,16 @@ export class EquiposComponent implements OnInit {
       nsInventarios : this.fb.array([this.fb.group({nInventario : ['']})])
     })
     
-    this.leerEstados();
+    this.leerId();
   }
+
+  leerId(){
+    this.idNivel = JSON.parse(sessionStorage.getItem("idNivel"))
+    if (this.idNivel == 3) {
+      this.router.navigateByUrl("/")
+    }
+    this.leerEstados();
+   }
 
   leerEstados(){
     this.service.leerEstado().subscribe((item)=>{
@@ -122,6 +132,20 @@ export class EquiposComponent implements OnInit {
     carga.nsInventarios = formValue.nsInventarios
     carga.Cantidad = 1
 
+    let pattern = /^[A-Za-z0-9]{0,50}$/
+          
+    if (!pattern.test(carga.Remito_Factura)
+     || !pattern.test(carga.Obvs) ) {
+      Swal.fire({
+        title: 'Error',
+        text: 'no se reconocen caracteres especiales',
+        icon: 'warning',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Ok',
+      })
+      return
+    }
+
     for (let i = 0; i < carga.seriales.length; i++) {
       let serial1 = Object.values(carga.seriales[i]).toString();
       if(serial1 == ""){
@@ -173,6 +197,20 @@ export class EquiposComponent implements OnInit {
         carga.serial = Object.values(carga.seriales[i]).toString();
         carga.nInventario =  Object.values(carga.nsInventarios[i]).toString();
         //console.log(carga)
+
+        this.service.guardarCargaGranel(carga).subscribe((cargaApi)=>{ 
+        
+        },error =>{
+          this.spinner.hide()
+          Swal.fire({
+            title: 'Error',
+            text: error.name,
+            icon: 'warning',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Ok',
+          })
+        })
+      } 
         
            this.spinner.hide()
            Swal.fire({
@@ -182,24 +220,13 @@ export class EquiposComponent implements OnInit {
              confirmButtonText: 'Ok',
            }) .then((result) =>{
             if(result.value){
-              this.service.guardarCargaGranel(carga).subscribe((cargaApi)=>{ 
               location.reload();
               this.formCargaGranel.reset();
-            },error =>{
-              this.spinner.hide()
-              Swal.fire({
-                title: 'Error',
-                text: error.name,
-                icon: 'warning',
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'Ok',
-              })
-            })
             }
           })
   
   
-      } 
+     
     }
   } 
 }

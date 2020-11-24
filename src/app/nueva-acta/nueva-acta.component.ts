@@ -9,6 +9,7 @@ import { Equipo } from '../models/equipo';
 import { Remito } from '../models/remito';
 import { NuevaActa } from '../models/nueva-acta';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {Router} from '@angular/router'
 
 
 @Component({
@@ -34,7 +35,7 @@ export class NuevaActaComponent implements OnInit {
   serialEncontradoModal : string;
   find : boolean = true;
   generoError : boolean
-
+  idNivel : number;
 
  
 
@@ -50,7 +51,8 @@ export class NuevaActaComponent implements OnInit {
  
 
 
-  constructor (public service : DataBaseService, private creadorFormulario: FormBuilder, private spinner: NgxSpinnerService) {   
+  constructor (public service : DataBaseService, private creadorFormulario: FormBuilder,
+     private spinner: NgxSpinnerService,  public router: Router) {   
     this.formularioActa=this.creadorFormulario.group({
       transporte: ['',Validators.required],
       origen: ['',Validators.required],
@@ -63,10 +65,16 @@ export class NuevaActaComponent implements OnInit {
   ngOnInit(): void {  
    
     this.nuevaActa();
-    this.leerSector();
+    this.leerId();
    }
 
-  
+   leerId(){
+    this.idNivel = JSON.parse(sessionStorage.getItem("idNivel"))
+    if (this.idNivel == 3) {
+      this.router.navigateByUrl("/")
+    }
+    this.leerSector();
+   }
 
   leerSector(){
     this.service.leerSector().subscribe((sectorApi) =>{
@@ -87,6 +95,7 @@ export class NuevaActaComponent implements OnInit {
       this.leerRemito();
     })
   };
+
   leerEquipos(id_Sec:number){
     this.spinner.show()
     this.service.leerEquipoPorSector(id_Sec).subscribe((equiposApi) =>{
@@ -290,6 +299,20 @@ export class NuevaActaComponent implements OnInit {
           this.actaNueva.Id_Transporte = this.idTransporte;
           this.actaNueva.Observaciones = this.txtObs;
           this.actaNueva.token = token;
+
+          let pattern = /^[A-Za-z0-9]{0,50}$/
+          
+          if (!pattern.test(this.actaNueva.Contacto)
+           || !pattern.test(this.actaNueva.Observaciones) ) {
+            Swal.fire({
+              title: 'Error',
+              text: 'no se reconocen caracteres especiales',
+              icon: 'warning',
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Ok',
+            })
+            return
+          }
   
           this.service.guardarNuevaActa(this.actaNueva).subscribe(data=>{ })
   
