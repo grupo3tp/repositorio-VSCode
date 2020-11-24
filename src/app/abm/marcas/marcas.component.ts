@@ -3,6 +3,7 @@ import { Marca } from 'src/app/models/marca';
 import { DataBaseService } from 'src/app/servicios/data-base.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-marcas',
@@ -18,8 +19,9 @@ export class MarcasComponent implements OnInit {
   marca : Marca = new Marca();
   nombreMarca :  string;
   marcaId : number
+  idNivel : number;
 
-  constructor(public service:DataBaseService, private fbGenerador:FormBuilder) { }
+  constructor(public service:DataBaseService, private fbGenerador:FormBuilder,  public router: Router) { }
 
   ngOnInit(): void {
 
@@ -31,7 +33,15 @@ export class MarcasComponent implements OnInit {
       this.marcas= articulosDesdeApi;
       
      })
+     this.leerId();
   }
+
+  leerId(){
+    this.idNivel = JSON.parse(sessionStorage.getItem("idNivel"))
+    if (this.idNivel == 3) {
+      this.router.navigateByUrl("/")
+    }
+   }
 
   agregar(){
     this.marca = this.formularioMarcas.value as Marca

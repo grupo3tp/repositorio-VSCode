@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, HostListener, Input, SimpleChanges} from '@angular/core';
+import { Usuarios } from '../models/usuarios';
 
 import { DataBaseService } from '../servicios/data-base.service';
 
@@ -11,6 +12,7 @@ export class EncabezadoComponent implements OnInit {
   @Output() cambio = new EventEmitter();
   @Input() nivel : number;
   @Input() userName : string
+  @Input() userId : string
   estado: boolean
   mostrarMenu : boolean
   scrHeight : number
@@ -19,6 +21,8 @@ export class EncabezadoComponent implements OnInit {
   icono : string
   noMostrar = false
   tipoNivel : number
+  users : Array<Usuarios> = new Array<Usuarios>()
+  usuario = new Usuarios()
   
   constructor(private service : DataBaseService) {  this.getScreenSize() }
   ngOnInit(): void {
@@ -70,11 +74,15 @@ export class EncabezadoComponent implements OnInit {
   
 
   cerrarSesion(){
+    debugger
+    let nombre = new Usuarios
+    nombre.Usuario = this.userId   
+    this.service.eliminarToken(nombre).subscribe()
     this.service.logout();
     this.service.borrarLocalStorage();
     this.estado = false
     this.cambio.emit(this.estado)
-
+    
   }
 
 }

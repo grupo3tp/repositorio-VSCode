@@ -26,8 +26,8 @@ import { Provincias } from '../models/provincias';
 })
 export class DataBaseService {
  
- //URL:string = "https://quiet-depths-07107.herokuapp.com/api" 
-  URL:string = "http://localhost:3300/api"
+ URL:string = "https://quiet-depths-07107.herokuapp.com/api" 
+ //URL:string = "http://localhost:3300/api"
 
   constructor(private http : HttpClient, private cookies: CookieService) { }
 
@@ -58,6 +58,10 @@ export class DataBaseService {
   logout() {
      this.cookies.delete('token');
   }
+  eliminarToken(Usuario : Usuarios)
+  {
+    return this.http.put<Usuarios>(this.URL+'/eliminarToken/', Usuario);
+  };
   //----------fin login
 
   listArticulos():Observable<Articulos[]>

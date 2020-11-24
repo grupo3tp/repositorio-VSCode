@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import {NgxSpinnerService} from 'ngx-spinner';
 import { Valor } from '../models/valor';
 import { error } from 'protractor';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-usuarios',
@@ -22,8 +23,9 @@ export class UsuariosComponent implements OnInit {
   activado : string
   desactivado :  string
   errorNombre : boolean = true
+  idNivel :number
 
-  constructor(private fb : FormBuilder, private service : DataBaseService, private spinner: NgxSpinnerService) { }
+  constructor(private fb : FormBuilder, private service : DataBaseService, private spinner: NgxSpinnerService,  public router: Router) { }
 
   ngOnInit(): void {
     this.formUser = this.fb.group({
@@ -32,8 +34,15 @@ export class UsuariosComponent implements OnInit {
       pass : ['', Validators.required],
       nivel : ['', Validators.required]
     })
-    this.cargaUsuarios()
+    this.leerId()
   }
+  leerId(){
+    this.idNivel = JSON.parse(sessionStorage.getItem("idNivel"))
+    if (this.idNivel == 3) {
+      this.router.navigateByUrl("/")
+    }
+    this.cargaUsuarios()
+   }
 
   cargaUsuarios(){
     this.service.leerUsuarios().subscribe((item)=>{
@@ -104,9 +113,9 @@ export class UsuariosComponent implements OnInit {
   agregar(formValue : any){
     this.spinner.show();
     const carga = new Usuarios
-    let pattern = /^[A-Z _]+$/i;
-    debugger
+   
     carga.Nombre_Usuario = formValue.nombre
+    let pattern = /^[A-Z _]+$/i;
     if (!pattern.test(carga.Nombre_Usuario)) {
       Swal.fire({
         title: 'Error',
@@ -117,8 +126,42 @@ export class UsuariosComponent implements OnInit {
       })
       return
     }
-    carga.Usuario = formValue.usuario
     carga.Pass = formValue.pass
+    let patternPass = /^[A-Za-z0-9]{6,10}$/
+    if (!patternPass.test(carga.Pass)) {
+      if (carga.Pass.length < 6 || carga.Pass.length > 10 ) {
+        Swal.fire({
+          title: 'Error',
+          text: 'el password debe ser entre 6 a 10 caracteres',
+          icon: 'warning',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Ok',
+        })
+        return
+      }
+    Swal.fire({
+      title: 'Error',
+      text: 'no se aceptan caracteres especiales',
+      icon: 'warning',
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Ok',
+    })
+    return
+  }
+    carga.Usuario = formValue.usuario
+    
+    let patternUser = /^[A-Za-z0-9]{2,12}$/
+    if (!patternUser.test(carga.Usuario)) {
+      Swal.fire({
+        title: 'Error',
+        text: 'solo se aceptan letras y numeros en el Usuario',
+        icon: 'warning',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Ok',
+      })
+      return
+    }
+
     carga.Nivel_Seguridad = formValue.nivel
     carga.Activo = 1
     

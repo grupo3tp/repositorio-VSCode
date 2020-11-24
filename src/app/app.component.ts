@@ -16,6 +16,7 @@ export class AppComponent {
   token: string
   nivelComponent : number;
   nombreUsuario : string;
+  usuario : string
   usuarios : Array<Usuarios> = new Array<Usuarios>();
 
 
@@ -51,6 +52,7 @@ export class AppComponent {
             this.usuarios.forEach(element => {
               if (element.Token == this.token) {
                 this.nombreUsuario = element.Nombre_Usuario;
+                this.usuario = element.Usuario;
               }
             });
           })
@@ -74,6 +76,9 @@ export class AppComponent {
 
   userName(event){
     this.nombreUsuario = event;
+  }
+  usuarioName(event){
+    this.usuario = event
   }
 
  
